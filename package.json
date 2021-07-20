@@ -1,0 +1,34 @@
+{
+  "name": "julienmarcel_6_19072021",
+  "version": "1.0.0",
+  "description": "FishEye, la plateforme photographique accessible",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass --watch ./sass/main.scss:.public/css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jujunantes/JulienMarcel_6_19072021.git"
+  },
+  "keywords": [
+    "photos",
+    "photographers",
+    "galleries",
+    "artists",
+    "accessible"
+  ],
+  "author": "Julien MARCEL",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jujunantes/JulienMarcel_6_19072021/issues"
+  },
+  "homepage": "https://github.com/jujunantes/JulienMarcel_6_19072021#readme",
+  "devDependencies": {
+    "eslint": "^7.31.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0"
+  }
+}
