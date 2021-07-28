@@ -1,3 +1,133 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
+* {
+  box-sizing: border-box;
+  cursor: default;
+}
 
+a {
+  color: black;
+  text-decoration: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  align-items: center;
+  font-family: "DM Sans", sans-serif;
+  margin: auto;
+  position: relative;
+  width: 1200px;
+}
+
+#retourMain {
+  color: black;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 18px;
+  position: fixed;
+  background-color: #d3573c;
+  padding: 5px 7px;
+  border-radius: 5px;
+  top: 5%;
+  left: 50%;
+  margin: auto;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  text-decoration: none;
+  z-index: 100;
+}
+
+header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5em;
+  width: 80%;
+  height: 10em;
+}
+
+#logoFisheye {
+  width: 15em;
+}
+
+#filtres {
+  width: 100%;
+  align-items: center;
+  text-align: center;
+}
+
+.spanFiltres {
+  border-radius: 1em;
+  padding: 0.5em;
+  background-color: white;
+  color: #901c1c;
+  border: 1px solid grey;
+  font-weight: bold;
+  font-size: x-small;
+  cursor: pointer;
+}
+
+#main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#titre {
+  font-size: 2em;
+  font-weight: 400;
+  color: #901c1c;
+  text-align: right;
+  position: absolute;
+  top: 2em;
+  right: 1%;
+}
+
+.cartePhotographe {
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3em;
+}
+
+figure {
+  align-items: center;
+  justify-content: center;
+}
+
+figcaption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h2 {
+  font-size: 36px;
+  color: #d3573c;
+  margin-bottom: 2px;
+}
+
+h3 {
+  font-size: 13px;
+  color: #901c1c;
+  margin-bottom: 4px;
+}
+
+.photoProfil {
+  border-radius: 50%;
+  box-shadow: 0px 5px 25px grey;
+  cursor: pointer;
+  width: 15em;
+  height: 15em;
+  object-fit: cover;
+  margin-bottom: 30px;
+}
+.photoProfil:hover {
+  transform: scale(1.1);
+  transition: 400ms;
+}
 
 /*# sourceMappingURL=style.css.map */
