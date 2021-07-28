@@ -10,7 +10,7 @@ fetch('js/FishEyeData.json')
   .then((reponse) => reponse.json())
   .then(function (donnees){
 
-    let monHTML = '';
+    let monHTML = ''; // le html que nous allons injecter
 
     for(let chaquePhotographe of donnees.photographers) {
         //console.log(chaquePhotographe.name);
