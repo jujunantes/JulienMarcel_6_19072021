@@ -25,7 +25,7 @@ fetch('js/FishEyeData.json')
                     <h3 tabindex="" aria-label="Le photographe viens de ${photographe.city}">${photographe.city}, ${photographe.country}</h3>
                     <blockquote tabindex="" aria-label="La devise du photographe est :${photographe.tagline}">${photographe.tagline}</blockquote>
                     <p  tabindex="" aria-label="Le prix de ce photographe est ${photographe.price}€ par jour">${photographe.price}€ /jour</p>
-                    <div id="filtresPhotographes">`;
+                    <div class="filtresPhotographes">`;
         for(let tag of chaquePhotographe.tags) monHTML += `<span class="spanFiltres">#${tag}</span>`;
         monHTML += `
                     </div>

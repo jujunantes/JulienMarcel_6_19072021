@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
 * {
   box-sizing: border-box;
@@ -13,6 +14,42 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Croix fermeture modale : début */
+#close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 32px;
+  height: 32px;
+  opacity: 1;
+  cursor: pointer;
+  transform: scale(0.7);
+}
+
+#close:hover {
+  background-color: red;
+  border-radius: 4px;
+}
+
+#close:before,
+#close:after {
+  position: absolute;
+  left: 15px;
+  content: " ";
+  height: 33px;
+  width: 3px;
+  background-color: blue;
+}
+
+#close:before {
+  transform: rotate(45deg);
+}
+
+#close:after {
+  transform: rotate(-45deg);
+}
+
+/* Croix fermeture modale : fin */
 body {
   align-items: center;
   font-family: "DM Sans", sans-serif;
@@ -43,13 +80,13 @@ header {
   align-items: center;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 5em;
+  margin-bottom: 6em;
   width: 80%;
-  height: 10em;
+  height: 5em;
 }
 
 #logoFisheye {
-  width: 15em;
+  width: 12em;
 }
 
 #filtres {
@@ -60,68 +97,77 @@ header {
 
 .spanFiltres {
   border-radius: 1em;
-  padding: 0.5em;
-  background-color: white;
+  padding: 0.3em;
   color: #901c1c;
-  border: 1px solid grey;
-  font-weight: bold;
-  font-size: x-small;
+  border: 1px solid lightgray;
+  font-weight: bolder;
+  font-size: 0.7rem;
   cursor: pointer;
 }
 
 #main {
-  display: flex;
-  flex-direction: row;
+  columns: 3;
+  column-gap: 12%;
   justify-content: center;
   flex-wrap: wrap;
 }
 
 #titre {
-  font-size: 2em;
+  font-size: 2.2em;
   font-weight: 400;
   color: #901c1c;
   text-align: right;
   position: absolute;
-  top: 2em;
+  top: 0.6em;
   right: 1%;
 }
 
 .cartePhotographe {
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 3em;
-}
-
-figure {
-  align-items: center;
-  justify-content: center;
+  text-align: center;
+  margin-bottom: 3rem;
 }
 
 figcaption {
-  display: flex;
+  /*display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;*/
+}
+figcaption blockquote {
+  font-weight: 800;
+  font-size: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+figcaption p {
+  color: gray;
+  font-size: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+figcaption .filtresPhotographes {
+  display: flex;
   justify-content: center;
+  gap: 0.4rem;
 }
 
 h2 {
-  font-size: 36px;
+  font-weight: 400;
+  font-size: 2.2rem;
   color: #d3573c;
-  margin-bottom: 2px;
+  margin-bottom: 0.5rem;
 }
 
 h3 {
-  font-size: 13px;
+  font-size: 0.8rem;
   color: #901c1c;
-  margin-bottom: 4px;
+  margin-bottom: 0.4rem;
 }
 
 .photoProfil {
   border-radius: 50%;
   box-shadow: 0px 5px 25px grey;
   cursor: pointer;
-  width: 15em;
-  height: 15em;
+  width: 12em;
+  height: 12em;
   object-fit: cover;
   margin-bottom: 30px;
 }
@@ -129,5 +175,29 @@ h3 {
   transform: scale(1.1);
   transition: 400ms;
 }
+
+/* Début modale */
+#modaleContact {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+}
+#modaleContact form {
+  height: auto;
+  width: 675px;
+  background-color: #D3573C;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  position: absolute;
+  top: 115px;
+  right: 160px;
+  border-radius: 5px;
+  box-shadow: 4px 17px 20px 1px black;
+}
+
+/* Fin modale */
 
 /*# sourceMappingURL=style.css.map */

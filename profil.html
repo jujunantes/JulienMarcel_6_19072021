@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="fr">
     <head>
-        <title>FishEye! - Profil</title>
+        <title id="titreOnglet">FishEye! - Profil</title> <!-- Changer le titre en fonction de l'ID -->
     
         <meta charset="utf-8" />
         <meta name='theme-color' content='#9356DC' />
@@ -11,8 +11,8 @@
         <meta name="keywords" content="photos, photographers, galleries, artists, accessible">
         <meta name="author" content="Julien Marcel" />
     
-        <link rel="stylesheet" type="text/css" href="/.public/css/reset.css" />
-        <link rel="stylesheet" type="text/css" href="/.public/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="./public/css/reset.css" />
+        <link rel="stylesheet" type="text/css" href="./public/css/style.css" />
     
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     </head>
@@ -20,13 +20,45 @@
     <body>
         <div id="conteneurPage">
 
+            <!-- Modale Contactez-moi -->
+            <div id="modaleContact">
+                <span id="close"></span>
+                <form id="formulaireContact" action="">
+                    <label for="prenom">Prénom </label><div id="erreurPrenom"></div>
+                    <input type="text" id="prenom" name="prenom">
+                    
+                    <label for="nom">Nom  </label><div id="erreurNom"></div>
+                    <input type="text" id="nom" name="nom">
+                    
+                    <label for="email">Email  </label><div id="erreurEmail"></div>
+                    <input type="email" id="email" name="email">
+
+                    <label for="texteMessage"> Votre message  </label><div id="erreurTexteMessage"></div>
+                    <textarea name="texteMessage" id="texteMessage"></textarea>
+
+                    <button class="btn-submit" type ="submit" >Envoyer</button>
+                </form>
+            </div>
+
+            <button class="modal-btn">
+                Contactez-moi
+            </button>
+
+            <header>
+                <a href="./index.html">
+                    <img id="logoFisheye" src="./img/fisheyeLogo.png" alt="Fish Eye Home page" aria-label="Aller à l'accueil" />
+                </a>
+            </header>
+
+            <main id="mainProfil">
+                <!-- généré dynamiquement en javascript -->
+            </main>
         </div>
         
-        <main id="mainProfil">
-            <h1></h1>
-            <!-- généré dynamiquement en javascript -->
-        </main>
+        
 
         <script type="module" src="js/profil.js"></script>
+        <script src="./js/modal.js"></script>
+        <script src="./js/verifications.js"></script>
     </body>
 </html>

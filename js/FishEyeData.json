@@ -9,7 +9,7 @@
       "tagline": "Voir le beau dans le quotidien",
       "price": 400,
       "portrait": "MimiKeel.jpg",
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "name": "Ellie-Rose Wilkens",
@@ -20,7 +20,7 @@
       "tagline": "Capturer des compositions complexes",
       "price": 250,
       "portrait": "EllieRoseWilkens.jpg",
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "name": "Tracy Galindo",
@@ -31,7 +31,7 @@
       "tagline": "Photographe freelance",
       "price": 500,
       "portrait": "TracyGalindo.jpg",
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "name": "Nabeel Bradford",
@@ -42,7 +42,7 @@
       "tagline": "Toujours aller de l'avant",
       "price": 350,
       "portrait": "NabeelBradford.jpg",
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "name": "Rhode Dubois",
@@ -53,7 +53,7 @@
       "tagline": "Je crée des souvenirs",
       "price": 275,
       "portrait": "RhodeDubois.jpg",
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "name": "Marcel Nikolic",
@@ -64,7 +64,7 @@
       "tagline": "Toujours à la recherche de LA photo",
       "price": 300,
       "portrait": "MarcelNikolic.jpg",
-      "alt-text": ""
+      "alt_text": ""
     }
   ],
   "media": [
@@ -77,7 +77,7 @@
       "likes": 62,
       "date": "2011-12-08",
       "price": 55,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 8520927,
@@ -88,7 +88,7 @@
       "likes": 11,
       "date": "2011-11-06",
       "price": 55,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 9025895,
@@ -99,7 +99,7 @@
       "likes": 72,
       "date": "2013-08-12",
       "price": 55,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 9275938,
@@ -110,7 +110,7 @@
       "likes": 69,
       "date": "2018-02-22",
       "price": 55,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 2053494,
@@ -121,7 +121,7 @@
       "likes": 2,
       "date": "2020-05-25",
       "price": 55,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 7324238,
@@ -132,7 +132,7 @@
       "likes": 33,
       "date": "2019-06-12",
       "price": 55,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 8328953,
@@ -143,7 +143,7 @@
       "likes": 24,
       "date": "2011-12-08",
       "price": 100,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 7502053,
@@ -154,7 +154,7 @@
       "likes": 88,
       "date": "2007-05-07",
       "price": 55,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 8523492,
@@ -165,7 +165,7 @@
       "likes": 24,
       "date": "2018-05-05",
       "price": 55,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 75902334,
@@ -176,7 +176,7 @@
       "likes": 75,
       "date": "2019-11-25",
       "price": 55,
-      "alt-text": ""
+      "alt_text": ""
     },
 
     {
@@ -188,7 +188,7 @@
       "likes": 52,
       "date": "2013-02-30",
       "price": 70,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 92758372,
@@ -199,7 +199,7 @@
       "likes": 58,
       "date": "2018-07-17",
       "price": 70,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 32958383,
@@ -210,7 +210,7 @@
       "likes": 11,
       "date": "2019-08-12",
       "price": 70,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 928587383,
@@ -221,7 +221,7 @@
       "likes": 2,
       "date": "2019-01-02",
       "price": 70,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 725639493,
@@ -232,7 +232,7 @@
       "likes": 3,
       "date": "2019-05-20",
       "price": 70,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 23394384,
@@ -243,7 +243,7 @@
       "likes": 52,
       "date": "2019-07-18",
       "price": 70,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 87367293,
@@ -254,7 +254,7 @@
       "likes": 23,
       "date": "2018-02-22",
       "price": 70,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 593834784,
@@ -265,7 +265,7 @@
       "likes": 52,
       "date": "2017-03-13",
       "price": 70,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 83958935,
@@ -276,7 +276,7 @@
       "likes": 52,
       "date": "2016-06-12",
       "price": 70,
-      "alt-text": ""
+      "alt_text": ""
     },
 
     {
@@ -288,7 +288,7 @@
       "likes": 23,
       "date": "2017-03-18",
       "price": 45,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 343423425,
@@ -299,7 +299,7 @@
       "likes": 101,
       "date": "2017-04-03",
       "price": 45,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 73434243,
@@ -310,7 +310,7 @@
       "likes": 99,
       "date": "2018-04-30",
       "price": 45,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 23425523,
@@ -321,7 +321,7 @@
       "likes": 34,
       "date": "2016-04-05",
       "price": 45,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 23134513,
@@ -332,7 +332,7 @@
       "likes": 23,
       "date": "2017-03-18",
       "price": 45,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 92352352,
@@ -343,7 +343,7 @@
       "likes": 66,
       "date": "2018-05-24",
       "price": 45,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 34513453,
@@ -354,7 +354,7 @@
       "likes": 52,
       "date": "2017-04-21",
       "price": 45,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 23523533,
@@ -365,7 +365,7 @@
       "likes": 95,
       "date": "2018-11-02",
       "price": 45,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 525834234,
@@ -376,7 +376,7 @@
       "likes": 25,
       "date": "2019-01-02",
       "price": 45,
-      "alt-text": ""
+      "alt_text": ""
     },
 
     {
@@ -388,7 +388,7 @@
       "likes": 88,
       "date": "2019-02-03",
       "price": 45,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 625025343,
@@ -399,7 +399,7 @@
       "likes": 85,
       "date": "2019-04-03",
       "price": 45,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 2525345343,
@@ -410,7 +410,7 @@
       "likes": 34,
       "date": "2019-04-07",
       "price": 45,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 2523434634,
@@ -421,7 +421,7 @@
       "likes": 63,
       "date": "2019-04-07",
       "price": 45,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 398847109,
@@ -432,7 +432,7 @@
       "likes": 55,
       "date": "2019-06-20",
       "price": 45,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 2534342,
@@ -443,7 +443,7 @@
       "likes": 25,
       "date": "2019-06-21",
       "price": 45,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 65235234,
@@ -454,7 +454,7 @@
       "likes": 52,
       "date": "2019-06-25",
       "price": 45,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 23523434,
@@ -465,7 +465,7 @@
       "likes": 77,
       "date": "2019-06-28",
       "price": 45,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 5234343,
@@ -476,7 +476,7 @@
       "likes": 142,
       "date": "2019-08-23",
       "price": 60,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 95234343,
@@ -487,7 +487,7 @@
       "likes": 59,
       "date": "2019-07-02",
       "price": 60,
-      "alt-text": ""
+      "alt_text": ""
     },
 
     {
@@ -499,7 +499,7 @@
       "likes": 25,
       "date": "2019-04-03",
       "price": 60,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 2523434,
@@ -510,7 +510,7 @@
       "likes": 53,
       "date": "2019-05-06",
       "price": 60,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 95293534,
@@ -521,7 +521,7 @@
       "likes": 33,
       "date": "2019-05-12",
       "price": 60,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 356234343,
@@ -532,7 +532,7 @@
       "likes": 53,
       "date": "2019-06-20",
       "price": 60,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 235234343,
@@ -543,7 +543,7 @@
       "likes": 63,
       "date": "2019-06-26",
       "price": 60,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 6234234343,
@@ -554,7 +554,7 @@
       "likes": 52,
       "date": "2019-06-30",
       "price": 60,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 6525666253,
@@ -565,7 +565,7 @@
       "likes": 63,
       "date": "2019-07-20",
       "price": 60,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 98252523433,
@@ -576,7 +576,7 @@
       "likes": 88,
       "date": "2020-01-05",
       "price": 60,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 9259398453,
@@ -587,7 +587,7 @@
       "likes": 57,
       "date": "2020-01-20",
       "price": 65,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 3523523534,
@@ -598,7 +598,7 @@
       "likes": 54,
       "date": "2020-05-05",
       "price": 60,
-      "alt-text": ""
+      "alt_text": ""
     },
 
     {
@@ -610,7 +610,7 @@
       "likes": 150,
       "date": "2018-02-30",
       "price": 70,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 235234343,
@@ -621,7 +621,7 @@
       "likes": 101,
       "date": "2018-03-05",
       "price": 65,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 235343222,
@@ -632,7 +632,7 @@
       "likes": 103,
       "date": "2018-03-10",
       "price": 70,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 7775342343,
@@ -643,7 +643,7 @@
       "likes": 77,
       "date": "2018-04-16",
       "price": 50,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 9253445784,
@@ -654,7 +654,7 @@
       "likes": 88,
       "date": "2018-04-22",
       "price": 65,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 22299394,
@@ -665,7 +665,7 @@
       "likes": 95,
       "date": "2018-04-27",
       "price": 70,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 3452342633,
@@ -676,7 +676,7 @@
       "likes": 52,
       "date": "2018-05-03",
       "price": 75,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 939234243,
@@ -687,7 +687,7 @@
       "likes": 55,
       "date": "2018-05-10",
       "price": 72,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 222959233,
@@ -698,7 +698,7 @@
       "likes": 85,
       "date": "2018-05-15",
       "price": 71,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 965933434,
@@ -709,7 +709,7 @@
       "likes": 66,
       "date": "2018-05-20",
       "price": 58,
-      "alt-text": ""
+      "alt_text": ""
     },
     {
       "id": 777723343,
@@ -720,7 +720,7 @@
       "likes": 79,
       "date": "2018-05-21",
       "price": 80,
-      "alt-text": ""
+      "alt_text": ""
     }
   ]
 }
