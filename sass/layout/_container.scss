@@ -29,7 +29,7 @@ header {
     align-items: center;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 6em;
+    //margin-bottom: 6em;
     width: 80%;
     height: 5em;
 }
@@ -72,6 +72,9 @@ header {
     position: absolute;
     top: .6em;
     right: 1%;
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .cartePhotographe {
@@ -80,6 +83,30 @@ header {
     text-align: center;
     margin-bottom: 3rem;
     //background-color: red;
+}
+
+.carteProfil {
+    display: flex;
+    //margin-top: 15rem;
+    #modal-btn{
+        border: none;
+        background-color: $couleurPrimaire;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        font-family: "DM sans";
+        font-size: 1rem;
+        font-weight: 400;
+        height: 3rem;
+        margin-left: 2rem;
+        text-align: center;
+        align-items: center;
+        &:hover {
+            background-color: $couleurSecondaire;
+            color: black;
+            font-weight: bold;
+        }
+    }
 }
 
 figure {
@@ -126,11 +153,11 @@ h3 {
 .photoProfil {
     border-radius: 50%;
     box-shadow: 0px 5px 25px grey;
-    cursor: pointer;  
-    width: 12em;
+    cursor: pointer;
     height: 12em;
+    width: 12em;
     object-fit: cover;
-    margin-bottom: 30px;
+    margin: 2rem;
     &:hover{
         transform: scale(1.1);
         transition: 400ms;

@@ -80,7 +80,6 @@ header {
   align-items: center;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 6em;
   width: 80%;
   height: 5em;
 }
@@ -121,10 +120,36 @@ header {
   top: 0.6em;
   right: 1%;
 }
+#titre:hover {
+  cursor: pointer;
+}
 
 .cartePhotographe {
   text-align: center;
   margin-bottom: 3rem;
+}
+
+.carteProfil {
+  display: flex;
+}
+.carteProfil #modal-btn {
+  border: none;
+  background-color: #901c1c;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-family: "DM sans";
+  font-size: 1rem;
+  font-weight: 400;
+  height: 3rem;
+  margin-left: 2rem;
+  text-align: center;
+  align-items: center;
+}
+.carteProfil #modal-btn:hover {
+  background-color: #d3573c;
+  color: black;
+  font-weight: bold;
 }
 
 figcaption {
@@ -166,10 +191,10 @@ h3 {
   border-radius: 50%;
   box-shadow: 0px 5px 25px grey;
   cursor: pointer;
-  width: 12em;
   height: 12em;
+  width: 12em;
   object-fit: cover;
-  margin-bottom: 30px;
+  margin: 2rem;
 }
 .photoProfil:hover {
   transform: scale(1.1);

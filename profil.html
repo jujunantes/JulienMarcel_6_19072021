@@ -23,7 +23,7 @@
             <!-- Modale Contactez-moi -->
             <div id="modaleContact">
                 <span id="close"></span>
-                <form id="formulaireContact" action="">
+                <form id="formulaireContact" action="index.html">
                     <label for="prenom">Prénom </label><div id="erreurPrenom"></div>
                     <input type="text" id="prenom" name="prenom">
                     
@@ -40,25 +40,32 @@
                 </form>
             </div>
 
-            <button class="modal-btn">
-                Contactez-moi
-            </button>
-
             <header>
                 <a href="./index.html">
                     <img id="logoFisheye" src="./img/fisheyeLogo.png" alt="Fish Eye Home page" aria-label="Aller à l'accueil" />
                 </a>
+                
             </header>
 
             <main id="mainProfil">
-                <!-- généré dynamiquement en javascript -->
+                <!-- complété dynamiquement en javascript -->
+                <section id="biographie">
+
+                </section>
+                <section id="photos">
+                    <div id="trier">
+
+                    </div>
+
+                    <div id="planchePhotos">
+
+                    </div>
+                </section>
             </main>
         </div>
         
         
 
         <script type="module" src="js/profil.js"></script>
-        <script src="./js/modal.js"></script>
-        <script src="./js/verifications.js"></script>
     </body>
 </html>

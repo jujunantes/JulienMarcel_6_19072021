@@ -32,15 +32,15 @@
 class Media {
     constructor(attributs) {
         this.id = attributs.id || 0;
-        this.photographerId = photographerId || 0;
-        this.title = title || "";
-        this.image = image || "";
-        this.video = video || "";
+        this.photographerId = attributs.photographerId || 0;
+        this.title = attributs.title || "";
+        this.image = attributs.image || "";
+        this.video = attributs.video || "";
         this.tags = attributs.tags || "";
-        this.likes = likes || 0;
-        this.date = date || "";
-        this.price = price || 0;
-        this.alt_text = alt_text || "";
+        this.likes = attributs.likes || 0;
+        this.date = attributs.date || "";
+        this.price = attributs.price || 0;
+        this.alt_text = attributs.alt_text || "";
     }
 }
 
