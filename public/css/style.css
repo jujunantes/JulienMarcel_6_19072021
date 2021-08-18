@@ -151,27 +151,27 @@ header {
   color: black;
   font-weight: bold;
 }
-
-figcaption {
-  /*display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;*/
-}
-figcaption blockquote {
+.carteProfil figcaption blockquote {
   font-weight: 800;
   font-size: 0.6rem;
   margin-bottom: 0.5rem;
 }
-figcaption p {
+.carteProfil figcaption p {
   color: gray;
   font-size: 0.5rem;
   margin-bottom: 0.5rem;
 }
-figcaption .filtresPhotographes {
+.carteProfil figcaption .filtresPhotographes {
   display: flex;
   justify-content: center;
   gap: 0.4rem;
+}
+
+#carteBiographie {
+  background-color: #fafafa;
+}
+#carteBiographie figure {
+  display: flex;
 }
 
 h2 {
@@ -199,6 +199,28 @@ h3 {
 .photoProfil:hover {
   transform: scale(1.1);
   transition: 400ms;
+}
+
+#planchePhotos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.cartePhoto {
+  margin: 0.1px;
+  margin-top: 1rem;
+}
+.cartePhoto p {
+  color: #901C1C;
+}
+
+.photoPlanche {
+  border-radius: 5px;
+  cursor: pointer;
+  object-fit: cover;
+  height: 300px;
+  width: 300px;
 }
 
 /* Début modale */

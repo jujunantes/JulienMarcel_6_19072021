@@ -107,33 +107,31 @@ header {
             font-weight: bold;
         }
     }
+    figcaption {
+        blockquote {
+            font-weight: 800;
+            font-size: .6rem;
+            margin-bottom: .5rem;
+        }
+        p { // Prix
+            color: gray;
+            font-size: .5rem;
+            margin-bottom: .5rem;
+        }
+    
+        .filtresPhotographes {
+            display: flex;
+            justify-content: center;
+            gap: .4rem;
+        }
+    }
 }
 
-figure {
-    //align-items: center;
-    //justify-content: center;
-}
-
-figcaption {
-    /*display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;*/
-    blockquote {
-        font-weight: 800;
-        font-size: .6rem;
-        margin-bottom: .5rem;
-    }
-    p { // Prix
-        color: gray;
-        font-size: .5rem;
-        margin-bottom: .5rem;
-    }
-
-    .filtresPhotographes {
+#carteBiographie {
+    background-color: #fafafa;
+    //display: flex;
+    figure {
         display: flex;
-        justify-content: center;
-        gap: .4rem;
     }
 }
 
@@ -162,6 +160,29 @@ h3 {
         transform: scale(1.1);
         transition: 400ms;
     }
+}
+
+#planchePhotos { // Contient toutes les .cartePhoto
+    display: flex;
+    flex-wrap: wrap;
+    //align-content: space-around;
+    justify-content: space-between;
+}
+
+.cartePhoto {
+    margin: .1px;
+    margin-top: 1rem;
+    p{
+        color: #901C1C;
+    }
+}
+
+.photoPlanche {
+    border-radius: 5px;
+    cursor: pointer;
+    object-fit: cover;
+    height: 300px;
+    width: 300px;
 }
 
 /* Début modale */

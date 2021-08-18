@@ -1,6 +1,6 @@
-import { creePhotographe } from "./photographeFactory.js";
 import { creeMedia } from "./mediaFactory.js";
-import { tableauHTMLPhotographes, tableauPhotographes, tableauPhotos } from "./variables.js";
+
+var tableauPhotos = []; 
 
 // On récupère l'URL pour obtenir l'ID
 const url = new URL(window.location);
@@ -15,13 +15,13 @@ fetch('js/FishEyeData.json')
       
     let monHTMLProfil = ''; // le html que nous allons injecter
 
-    // On récupère d'abord l'index du photographe actuel
+    // On récupère d'abord le photographe actuel, par son index
     let monPhotographe =  donnees.photographers.findIndex(el => el.id === parseInt(id));
-    //console.log(donnees.photographers[monPhotographe]);
+
     // On remplit la section "biographie" du header
 
     monHTMLProfil += `
-        <figure class="carteProfil" tabindex="">
+        <figure class="carteBiographie" tabindex="">
             <figcaption>
                 <h2 tabindex="" aria-label="Ce photographe s'appelle ${donnees.photographers[monPhotographe].name} ">${donnees.photographers[monPhotographe].name}</h2>
                 <h3 tabindex="" aria-label="Ce photographe habite à ${donnees.photographers[monPhotographe].city}">${donnees.photographers[monPhotographe].city}, ${donnees.photographers[monPhotographe].country}</h3>
@@ -38,8 +38,32 @@ fetch('js/FishEyeData.json')
             <img class="photoProfil" tabindex="" src="img/Sample_Photos/Photographers_ID_Photos/${donnees.photographers[monPhotographe].portrait}" alt="" />
         </figure>`;
 
-    document.getElementById('biographie').innerHTML = monHTMLProfil;
+    document.getElementById("carteBiographie").innerHTML = monHTMLProfil;
     document.querySelector("#modal-btn").addEventListener("click", launchModal); // Evenemeent modale -> ouverture
+
+    // On profite de ce fetch pour récupérer aussi toutes les donnees médias
+    let monHTML = '';
+    for(let chaqueMedia of donnees.media)
+      if (chaqueMedia.photographerId === parseInt(id)) {
+        let monMedia = creeMedia(chaqueMedia);
+
+        tableauPhotos.push(creeMedia(chaqueMedia));
+        
+        monHTML += `
+        <a href="" aria-label="">
+            <figure class="cartePhoto" tabindex="">`;
+        if (monMedia.image !== "")
+          monHTML += `<img class="photoPlanche" tabindex="" src="img/Sample_Photos/${id}/${chaqueMedia.image}" alt="${chaqueMedia.alt_text}" />`;
+        else
+          monHTML += `<video controls class="photoPlanche" tabindex="" src="img/Sample_Photos/${id}/${chaqueMedia.video}" alt="${chaqueMedia.alt_text}"></video>`;
+        monHTML += 
+                `<figcaption>
+                    <p  tabindex="" aria-label="">${chaqueMedia.title} ${chaqueMedia.price}€ ${chaqueMedia.likes} ❤</p>
+                </figcaption>
+            </figure>
+        </a>`;
+      }
+      document.getElementById('planchePhotos').innerHTML = monHTML;
 });
 
 /*
@@ -116,11 +140,12 @@ function validate() {
         }
 	}
 
-    // Validation du ptexte du message
+    // Validation du texte du message
     let messageEntre = texteMessage.value.trim();
     if (messageEntre === "") {
 		document.getElementById("erreurTexteMessage").innerHTML = "Merci d'entrer un message";
 		validiteFormulaire = false;
+
 	}
 
     return validiteFormulaire;

@@ -49,12 +49,17 @@
 
             <main id="mainProfil">
                 <!-- complété dynamiquement en javascript -->
-                <section id="biographie">
+                <section id="carteBiographie">
 
                 </section>
                 <section id="photos">
                     <div id="trier">
-
+                        <label for="triPhotos" >Trier par  : </label>
+                        <select tabindex="" id="triPhotos" aria-label="ouvrir les choix de tris">
+                            <option value="popularite">Popularité</option>
+                            <option value="date">Date</option>
+                            <option value="titre">Titre</option>
+                        </select>
                     </div>
 
                     <div id="planchePhotos">

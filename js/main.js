@@ -1,6 +1,7 @@
 import { creePhotographe } from "./photographeFactory.js";
-import { creeMedia } from "./mediaFactory.js";
-import { tableauHTMLPhotographes, tableauPhotographes, tableauPhotos } from "./variables.js";
+
+var tableauHTMLPhotographes = [];   // On stocke le html de chaque photographe, car il sera réutilisé avec les filtres
+var tableauPhotographes = [];       // Ce tableau contient les données des photographes, pour ne pas avoir à recharger le fichier json
 
 /*
     On affiche, depuis le fichier JSON, les photographes :
@@ -47,8 +48,6 @@ fetch('js/FishEyeData.json')
         tableauPhotographes.push(photographe);
     }
     afficheTousPhotographes();
-    // On profite de ce fetch pour récupérer aussi toutes les donnees médias
-    for(let chaqueMedia of donnees.media) tableauPhotos.push(creeMedia(chaqueMedia));
 });
 
 /*
@@ -74,3 +73,40 @@ window.onscroll = () => {
         scrollTop.style.opacity = 0;
     }
 };
+
+// Gestion des filtres
+document.getElementById("filtres").onclick = (event)=> {
+    if(event.target !== event.currentTarget) {
+        /*
+            Fonctionnement :
+                - dans main.js on a stocké le html de chaque carte de photographe dans tableauHTMLPhotographes[]
+                - maintenant :
+                    - on récupère le filtre qui a déclenché l'appel
+                    - on construit le span de filtre recherché
+                    - on cycle dans le tableau pour retrouver toutes les occurences de ce span
+                    - auquel cas, on ajoute la carte au html à injecter ensuite
+        */
+        let monHTML = '';
+        let filtreCherche = `<span class="spanFiltres">#`+ event.target.id.substring(3).toLowerCase() +`</span>`;
+        let occurences = 0;
+        for(let i=0; i<tableauHTMLPhotographes.length; i++)
+            if (tableauHTMLPhotographes[i].includes(filtreCherche)) {
+                monHTML += tableauHTMLPhotographes[i];
+                occurences++;
+            }
+        // On modifie le nombre de colonnes de notre "main" en fonction du nombre d'occurences
+        switch(occurences) {
+            case 1:
+                document.getElementById("main").style.columns = 1;
+                break;
+            case 2:
+                document.getElementById("main").style.columns = 2;
+                break;
+            default:
+                document.getElementById("main").style.columns = 3;
+        }
+        document.getElementById('nosPhotographes').innerHTML = monHTML;
+    } else {
+        event.preventDefault();
+    }
+}
