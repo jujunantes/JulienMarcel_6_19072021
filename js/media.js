@@ -38,9 +38,11 @@ class Media {
         this.video = attributs.video || "";
         this.tags = attributs.tags || "";
         this.likes = attributs.likes || 0;
+        this.dejaLike = 0;
         this.date = attributs.date || "";
         this.price = attributs.price || 0;
         this.alt_text = attributs.alt_text || "";
+        this.html = ""; // Servira à stocker le HTML de la carte
     }
 }
 

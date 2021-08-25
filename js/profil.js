@@ -1,6 +1,13 @@
 import { creeMedia } from "./mediaFactory.js";
 
-var tableauPhotos = []; 
+var tableauPhotos = [];
+let totalLikes = 0;
+let prixPhotographe = 0;
+
+// Gestion du tri
+const select = document.getElementById('triPhotos');
+let selectionPrecedente = select.options[select.selectedIndex].value;
+let directionTri = [1,0,0]; // popularité, date, titre (0 : du moins au plus, 1 : du plus au moins)
 
 // On récupère l'URL pour obtenir l'ID
 const url = new URL(window.location);
@@ -8,7 +15,6 @@ const id = url.searchParams.get('id');
 
 const mainProfil = document.getElementById('mainProfil');
 
-//mainProfil.innerHTML = "ID : " + id; // Pour test
 fetch('js/FishEyeData.json')
   .then((reponse) => reponse.json())
   .then(function (donnees){
@@ -17,6 +23,7 @@ fetch('js/FishEyeData.json')
 
     // On récupère d'abord le photographe actuel, par son index
     let monPhotographe =  donnees.photographers.findIndex(el => el.id === parseInt(id));
+    prixPhotographe = donnees.photographers[monPhotographe].price;
 
     // On remplit la section "biographie" du header
 
@@ -42,29 +49,133 @@ fetch('js/FishEyeData.json')
     document.querySelector("#modal-btn").addEventListener("click", launchModal); // Evenemeent modale -> ouverture
 
     // On profite de ce fetch pour récupérer aussi toutes les donnees médias
-    let monHTML = '';
     for(let chaqueMedia of donnees.media)
       if (chaqueMedia.photographerId === parseInt(id)) {
         let monMedia = creeMedia(chaqueMedia);
-
-        tableauPhotos.push(creeMedia(chaqueMedia));
         
-        monHTML += `
-        <a href="" aria-label="">
+        let htmlCarte = '';
+        htmlCarte += `
             <figure class="cartePhoto" tabindex="">`;
         if (monMedia.image !== "")
-          monHTML += `<img class="photoPlanche" tabindex="" src="img/Sample_Photos/${id}/${chaqueMedia.image}" alt="${chaqueMedia.alt_text}" />`;
+        htmlCarte += `<img class="photoPlanche" tabindex="" src="img/Sample_Photos/${id}/${chaqueMedia.image}" alt="${chaqueMedia.alt_text}" />`;
         else
-          monHTML += `<video controls class="photoPlanche" tabindex="" src="img/Sample_Photos/${id}/${chaqueMedia.video}" alt="${chaqueMedia.alt_text}"></video>`;
-        monHTML += 
-                `<figcaption>
-                    <p  tabindex="" aria-label="">${chaqueMedia.title} ${chaqueMedia.price}€ ${chaqueMedia.likes} ❤</p>
+          htmlCarte += `<img class="photoPlanche" tabindex="" src="img/Sample_Photos/${id}/${chaqueMedia.image}" alt="${chaqueMedia.alt_text}" />`;
+          htmlCarte += 
+                `<figcaption class="legendePhoto">
+                    <div class="titrePhoto">${chaqueMedia.title}</div>
+                    <div class="blocPrixLikes>
+                      <p class="spanPrix">${chaqueMedia.price} €</p>
+                      <div class="likes">
+                        <p id="nombreLikes-${chaqueMedia.id}">${chaqueMedia.likes} </p>
+                        <p id="iconeLikes-${chaqueMedia.id}">❤</p>
+                      </div>
+                    </div>
                 </figcaption>
-            </figure>
-        </a>`;
+            </figure>`;
+        monMedia.html = htmlCarte;
+        tableauPhotos.push(monMedia);
+        totalLikes += chaqueMedia.likes;
       }
+      triPhotos(); // Tri initial du tableau
+      // Maintenant, on crée le HTML que l'on va injecter dans la page
+      let monHTML = '';
+      for(var i=0; i<tableauPhotos.length; i++) monHTML += tableauPhotos[i].html;
       document.getElementById('planchePhotos').innerHTML = monHTML;
 });
+
+/*
+  Gestion des likes
+*/
+document.getElementById("planchePhotos").onclick = (event)=> {
+  let monElement = event.target.id;
+  if (monElement.includes("iconeLikes-")){
+    monElement = monElement.slice(11);
+    // Cette photo a-t-elle déjà été likée ?
+    let indexPhoto = tableauPhotos.findIndex(el => el.id === parseInt(monElement));
+    if (tableauPhotos[indexPhoto].dejaLike > 0) {
+      alert('Vous avez déjà liké cette photo.');
+    }
+    else {
+      tableauPhotos[indexPhoto].likes += 1;
+      document.getElementById("nombreLikes-" + monElement).innerHTML = tableauPhotos[indexPhoto].likes;
+      tableauPhotos[indexPhoto].dejaLike = 1;
+      totalLikes += 1;
+      document.getElementById("affTotalLikes").innerHTML = totalLikes; // Affiche nb total de likes
+    }
+  }
+}
+
+// Fin de la gestion des likes
+
+/*
+  Fonction de tri
+*/
+function triPhotos() {
+  // On récupère l'ordre de tri
+  let ordreTri = select.options[select.selectedIndex].value;
+  switch(ordreTri) {
+    case "popularite": // Nombre de likes : tableauPhotos.likes
+      if (directionTri[0] == 1)
+        tableauPhotos.sort((a,b) => b.likes - a.likes);
+      else
+        tableauPhotos.sort((a,b) => a.likes - b.likes);
+        break;
+    case "date": // tableauPhotos.date
+      if (directionTri[1] == 1)
+        tableauPhotos.sort(function (a,b) {
+          if(a.date > b.date) {return -1;} else {return 1;}
+        })
+      else
+        tableauPhotos.sort(function (a,b) {
+          if(a.date < b.date) {return -1;} else {return 1;}
+        })
+        break;
+    case "titre": // tableauPhotos.title
+      if (directionTri[2] == 1)
+        tableauPhotos.sort(function (a,b) {
+          if(a.title > b.title) {return -1;} else {return 1;}
+        })
+      else
+        tableauPhotos.sort(function (a,b) {
+          if(a.title < b.title) {return -1;} else {return 1;}
+        })
+  }
+}
+
+/*
+  gestion du sélecteur de tri
+*/
+
+document.getElementById("triPhotos").onclick = (event)=> {
+  let ordreTri = select.options[select.selectedIndex].value;
+  if (ordreTri == selectionPrecedente) { // On alterne la direction du tri pour cet ordre de tri (le but est de permettre à l'utilisateur de trier du plus grand au plus petit et inversement)
+    switch(ordreTri) {
+      case "popularite": // Nombre de likes : tableauPhotos.likes
+        if (directionTri[0] == 1)
+          directionTri[0] = 0;
+        else
+          directionTri[0] = 1;
+        break;
+      case "date": // tableauPhotos.date
+        if (directionTri[1] == 1)
+          directionTri[1] = 0;
+        else
+          directionTri[1] = 1;
+        break;
+      case "titre": // tableauPhotos.title
+        if (directionTri[2] == 1)
+          directionTri[2] = 0;
+        else
+         directionTri[2] = 1;
+    }
+  }
+  selectionPrecedente = ordreTri; // On met à jour cette variable pour le prochain clic de l'utilisateur sur le tri
+  triPhotos(); // On appelle le tri
+  let monHTML = '';
+  for(var i=0; i<tableauPhotos.length; i++) monHTML += tableauPhotos[i].html;
+  document.getElementById('planchePhotos').innerHTML = monHTML;
+}
+// Fin gestion du sélecteur de tri
 
 /*
   gestion de la modale
@@ -74,9 +185,7 @@ const maModale = document.getElementById("modaleContact");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const fermeModalBtn = document.querySelectorAll("#close");
 
-document.addEventListener("click",
-  function(event) {
-    // ferme la modale si l'utilisateur clique sur sa croix de fermeture
+fermeModalBtn[0].addEventListener("click", function(event) { // ferme la modale si l'utilisateur clique sur sa croix de fermeture
     if (event.target.matches("#close")) maModale.style.display = "none";
   },
   false
@@ -175,3 +284,18 @@ function validerFormulaire(event) {
 
 // On crée le gestionnaire d'événement interceptant le clic du bouton de soumission
 document.querySelector(".btn-submit").addEventListener("click", validerFormulaire);
+
+/*
+  fenêtre flottante avec le nombre de likes
+*/
+
+function afficheFooter() {
+  const footer = document.querySelector('footer');
+  footer.innerHTML += `
+    <div id="compteurLikes">
+      <span id="affTotalLikes">${totalLikes} ❤</span>
+    </div>
+    <p>${prixPhotographe} €/jour</p>`;
+}
+
+window.onload = function(e) {afficheFooter(); };
