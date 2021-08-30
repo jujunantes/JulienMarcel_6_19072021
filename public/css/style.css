@@ -124,8 +124,12 @@ header {
   font-size: 0.7rem;
   cursor: pointer;
 }
+.spanFiltres:hover {
+  border: 1px solid #555;
+}
 
 #main {
+  margin-top: 2rem;
   columns: 3;
   column-gap: 12%;
   justify-content: center;
@@ -230,17 +234,32 @@ h3 {
 
 .cartePhoto {
   margin-top: 1rem;
+  position: relative;
   width: 33.3%;
 }
 .cartePhoto p {
   color: #901c1c;
 }
 
+.play-icon {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  background-image: url("/img/icones/video-solid.svg");
+  background: white;
+  border-radius: 5px;
+  border: 1px solid black;
+  opacity: 0.7;
+  padding: 0.4rem;
+  z-index: 1;
+  width: 10%;
+}
+
 .photoPlanche {
   border-radius: 5px;
   cursor: pointer;
   object-fit: cover;
-  display: inline-block;
+  display: block;
   height: 350px;
   width: 350px;
 }
@@ -269,7 +288,7 @@ footer {
   width: 26%;
 }
 
-/* Début modale */
+/* Début modale contact */
 #modaleContact {
   display: none;
   position: absolute;
@@ -291,6 +310,64 @@ footer {
   box-shadow: 4px 17px 20px 1px black;
 }
 
-/* Fin modale */
+/* Fin modale contact */
+/* Début modale Lightbox */
+.icone {
+  height: 2rem;
+  width: 2rem;
+  transition: transform 0.2s;
+}
+.icone:hover {
+  transform: scale(1.2);
+}
+
+#modaleLightBox {
+  display: none;
+  background-color: white;
+  position: absolute;
+  width: 1253px;
+}
+#modaleLightBox #lbxFermeture {
+  cursor: pointer;
+  position: absolute;
+  top: 120px;
+  right: 2rem;
+}
+#modaleLightBox #lbxFermeture img {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+#modaleLightBox #lbxPrecedent {
+  cursor: pointer;
+  position: absolute;
+  top: 550px;
+  left: 2rem;
+}
+#modaleLightBox #lbxSuivant {
+  cursor: pointer;
+  position: absolute;
+  top: 550px;
+  right: 2rem;
+}
+#modaleLightBox p {
+  color: #901c1c;
+  margin-left: 100px;
+  margin-top: 1rem;
+  font-size: 1.45rem;
+  font-weight: 500;
+  width: 30rem;
+}
+
+.diapo {
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.15) 5px 0 2.6px;
+  margin-top: 100px;
+  margin-left: 100px;
+  object-fit: cover;
+  width: 1050px;
+  height: 900px;
+}
+
+/* Fin modale lightbox */
 
 /*# sourceMappingURL=style.css.map */

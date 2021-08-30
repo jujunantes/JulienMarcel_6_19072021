@@ -42,7 +42,7 @@ fetch('js/FishEyeData.json')
             <button id="modal-btn">
                 Contactez-moi
             </button>
-            <img class="photoProfil" tabindex="" src="img/Sample_Photos/Photographers_ID_Photos/${donnees.photographers[monPhotographe].portrait}" alt="" />
+            <img class="photoProfil" tabindex="" src="img/vignettes400/Photographers_ID_Photos/${donnees.photographers[monPhotographe].portrait}" alt="" />
         </figure>`;
 
     document.getElementById("carteBiographie").innerHTML = monHTMLProfil;
@@ -57,9 +57,13 @@ fetch('js/FishEyeData.json')
         htmlCarte += `
             <figure class="cartePhoto" tabindex="">`;
         if (monMedia.image !== "")
-        htmlCarte += `<img class="photoPlanche" tabindex="" src="img/Sample_Photos/${id}/${chaqueMedia.image}" alt="${chaqueMedia.alt_text}" />`;
-        else
-          htmlCarte += `<img class="photoPlanche" tabindex="" src="img/Sample_Photos/${id}/${chaqueMedia.image}" alt="${chaqueMedia.alt_text}" />`;
+          htmlCarte += `<img class="photoPlanche" tabindex="" src="img/vignettes400/${id}/${chaqueMedia.image}" alt="${chaqueMedia.alt_text}" />`;
+        else {
+          let nomCapture = chaqueMedia.video.slice(0,-4) +  ".jpg";
+          htmlCarte += `<img class="photoPlanche" tabindex="" src="img/vignettes400/${id}/${nomCapture}" alt="${chaqueMedia.alt_text}" />
+              <img class="play-icon" src="img/icones/video-solid.svg" alt="ce fichier est une vidéo" />`;
+        }
+          
           htmlCarte += 
                 `<figcaption class="legendePhoto">
                     <div class="titrePhoto">${chaqueMedia.title}</div>
@@ -92,10 +96,14 @@ document.getElementById("planchePhotos").onclick = (event)=> {
     monElement = monElement.slice(11);
     // Cette photo a-t-elle déjà été likée ?
     let indexPhoto = tableauPhotos.findIndex(el => el.id === parseInt(monElement));
-    if (tableauPhotos[indexPhoto].dejaLike > 0) {
-      alert('Vous avez déjà liké cette photo.');
+    if (tableauPhotos[indexPhoto].dejaLike > 0) { // Oui : on délike
+      tableauPhotos[indexPhoto].likes -= 1;
+      document.getElementById("nombreLikes-" + monElement).innerHTML = tableauPhotos[indexPhoto].likes;
+      tableauPhotos[indexPhoto].dejaLike = 0;
+      totalLikes -= 1;
+      document.getElementById("affTotalLikes").innerHTML = totalLikes; // Affiche nb total de likes
     }
-    else {
+    else { // non : on like
       tableauPhotos[indexPhoto].likes += 1;
       document.getElementById("nombreLikes-" + monElement).innerHTML = tableauPhotos[indexPhoto].likes;
       tableauPhotos[indexPhoto].dejaLike = 1;
@@ -171,14 +179,25 @@ document.getElementById("triPhotos").onclick = (event)=> {
   }
   selectionPrecedente = ordreTri; // On met à jour cette variable pour le prochain clic de l'utilisateur sur le tri
   triPhotos(); // On appelle le tri
+  // on détruit les écouteurs d'événement en place
+  var cartesMedia = document.querySelectorAll("figure img");
+  cartesMedia.forEach(function (maCarteMedia) {
+    maCarteMedia.removeEventListener("click", ouvertureDiaporama);
+  });
+
   let monHTML = '';
   for(var i=0; i<tableauPhotos.length; i++) monHTML += tableauPhotos[i].html;
   document.getElementById('planchePhotos').innerHTML = monHTML;
+  // On ajoute les nouveaux écouteurs dévénements
+  var cartesMedia = document.querySelectorAll("figure img");
+  cartesMedia.forEach(function (maCarteMedia) {
+    maCarteMedia.addEventListener("click", ouvertureDiaporama);
+  });
 }
 // Fin gestion du sélecteur de tri
 
 /*
-  gestion de la modale
+  gestion de la modale de contact
 */
 // DOM Elements
 const maModale = document.getElementById("modaleContact");
@@ -298,4 +317,105 @@ function afficheFooter() {
     <p>${prixPhotographe} €/jour</p>`;
 }
 
-window.onload = function(e) {afficheFooter(); };
+/*
+  === Gestion de la lightbox ===
+*/
+
+const maLightbox = document.getElementById("modaleLightBox");
+const monDiaporama = document.getElementById("diaporama");
+const lbxFermeture = document.getElementById("lbxFermeture");
+const lbxPrecedent = document.getElementById("lbxPrecedent");
+const lbxSuivant = document.getElementById("lbxSuivant");
+let indexPhoto = 0;
+
+// Création des gestionnaires d'événements pour le pilotage de la lightbox
+lbxFermeture.addEventListener('click', fermeLightBox);
+window.addEventListener('keydown', (event) => {if (event.key === 'Escape') fermeLightBox();});
+lbxPrecedent.addEventListener('click', diapoPrecedente);
+window.addEventListener('keydown', (event) => {if (event.key === 'ArrowLeft') diapoPrecedente();});
+lbxSuivant.addEventListener('click', diapoSuivante);
+window.addEventListener('keydown', (event) => {if (event.key === 'ArrowRight') diapoSuivante();});
+window.addEventListener('keydown', (event) => {if (event.code === 'Space') joueVideo();});
+
+function fermeLightBox() {
+  maLightbox.style.display = "none";
+  monDiaporama.innerHTML = "";
+  document.getElementById("conteneurPage").style.display = "block";
+  document.querySelector("footer").style.display = "flex";
+}
+
+function joueVideo() { // Permet de jouer ou de pauser la vidéo à la pression de la barre "espace"
+  var maVideo = document.getElementById("maVideo");
+  if(maVideo != null) {
+    if (maVideo.paused)
+      maVideo.play();
+    else
+      maVideo.pause();
+  }
+}
+
+function ouvertureDiaporama(e) {
+  document.getElementById("conteneurPage").style.display = "none";
+  document.querySelector("footer").style.display = "none";
+  // On récupère le nom de l'image sur laquelle l'utilisateur a cliqué
+  const sousChaine = "/img/vignettes400/" + id +"/";
+  let nomImage = new URL(e.path[0].currentSrc).pathname.substring(sousChaine.length);
+  // Puis son index dans le tableau des médias
+  indexPhoto = tableauPhotos.findIndex(imageCherchee => imageCherchee.image == nomImage);
+  // on génère le HTML à injecter
+  let htmlDiapo = "";
+  if(indexPhoto == -1) { // pas d'image répondant à ce nom : c'est donc une vidéo
+    // on remplace "jpg" par "mp4"
+    nomImage = new URL(e.path[0].currentSrc).pathname.substring(sousChaine.length).replace(/jpg/g, "mp4");
+    indexPhoto = tableauPhotos.findIndex(imageCherchee => imageCherchee.video == nomImage);
+    htmlDiapo = `<video controls class='diapo' id="maVideo" src='img/Sample_Photos/${id}/${nomImage.replace(/jpg/g, "mp4")}' alt=''></video>`;
+  } else {
+    htmlDiapo = `<img class="diapo" src='img/vignettesLightbox/${id}/${nomImage}' alt='${tableauPhotos[indexPhoto].alt_text}'/>`;
+  }
+  htmlDiapo += `<p>${tableauPhotos[indexPhoto].title}</p>`;
+  document.getElementById("diaporama").innerHTML = htmlDiapo;
+        
+  maLightbox.style.display = "block";
+
+}
+
+function diapoPrecedente() {
+  indexPhoto -=1;
+  if (indexPhoto<0) indexPhoto = tableauPhotos.length-1;
+  let mediaPrecedent = tableauPhotos[indexPhoto].image;
+  let htmlDiapo = "";
+  if (mediaPrecedent == "") { // c'est une vidéo
+    mediaPrecedent = tableauPhotos[indexPhoto].video;
+    htmlDiapo = `<video controls class='diapo' id="maVideo" src='img/Sample_Photos/${id}/${mediaPrecedent}' alt='${tableauPhotos[indexPhoto].alt_text}'></video>`;
+  } else {
+    htmlDiapo = `<img class="diapo" src='img/vignettesLightbox/${id}/${mediaPrecedent}' alt='${tableauPhotos[indexPhoto].alt_text}'/>`;
+  }
+  htmlDiapo += `<p>${tableauPhotos[indexPhoto].title}</p>`;
+  document.getElementById("diaporama").innerHTML = htmlDiapo;
+}
+
+function diapoSuivante() {
+  indexPhoto +=1;
+  if (indexPhoto>=tableauPhotos.length) indexPhoto = 0;
+  let mediaSuivant = tableauPhotos[indexPhoto].image;
+  let htmlDiapo = "";
+  if (mediaSuivant == "") { // c'est une vidéo
+    mediaSuivant = tableauPhotos[indexPhoto].video;
+    htmlDiapo = `<video controls class='diapo' id="maVideo" src='img/Sample_Photos/${id}/${mediaSuivant}' alt='${tableauPhotos[indexPhoto].alt_text}'></video>`;
+  } else {
+    htmlDiapo = `<img class="diapo" src='img/vignettesLightbox/${id}/${mediaSuivant}' alt='${tableauPhotos[indexPhoto].alt_text}'/>`;
+  }
+  htmlDiapo += `<p>${tableauPhotos[indexPhoto].title}</p>`;
+  document.getElementById("diaporama").innerHTML = htmlDiapo;
+}
+
+// Fin de la gestion de la lightbox
+
+window.onload = function(e) {
+  afficheFooter();
+
+  var cartesMedia = document.querySelectorAll("figure img");
+  cartesMedia.forEach(function (maCarteMedia) {
+    maCarteMedia.addEventListener("click", ouvertureDiaporama);
+  });
+};

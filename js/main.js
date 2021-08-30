@@ -31,7 +31,7 @@ fetch('js/FishEyeData.json')
         monHTML += `
         <a href="profil.html?id=${photographe.id}" aria-label="Affichez le profil de ${photographe.name}">
             <figure class="cartePhotographe" tabindex="">
-                <img class="photoProfil" tabindex="" src="img/Sample_Photos/Photographers_ID_Photos/${photographe.portrait}" alt="" />
+                <img class="photoProfil" tabindex="" src="img/vignettes400/Photographers_ID_Photos/${photographe.portrait}" alt="" />
                 <figcaption>
                     <h2 tabindex="" aria-label="Ce photographe s'appelle ${photographe.name} ">${photographe.name}</h2>
                     <h3 tabindex="" aria-label="Ce photographe habite à ${photographe.city}">${photographe.city}, ${photographe.country}</h3>
