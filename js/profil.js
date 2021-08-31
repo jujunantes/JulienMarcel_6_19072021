@@ -340,8 +340,8 @@ function ouvertureDiaporama (e) {
   // On récupère le nom de l'image sur laquelle l'utilisateur a cliqué
   const sousChaine = '/img/vignettes400/' + id + '/'
   console.log('sousChaine : ' + sousChaine) // debug
-  console.log('e.path[0].currentSrc : ' + URL(e.path[0].currentSrc)) // Debug
-  console.log('(e.path[0].currentSrc).pathname : ' + URL((e.path[0].currentSrc).pathname)) // Debug
+  console.log('e.path[0].currentSrc : ' + new URL(e.path[0].currentSrc)) // Debug
+  console.log('(e.path[0].currentSrc).pathname : ' + new URL((e.path[0].currentSrc).pathname)) // Debug
   let nomImage = new URL(e.path[0].currentSrc).pathname.substring(sousChaine.length)
   console.log('nom image 1 : ' + nomImage) // debug
   // Puis son index dans le tableau des médias
