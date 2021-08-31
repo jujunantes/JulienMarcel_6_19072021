@@ -9,7 +9,6 @@ body {
 #retourMain {
     color: black;
     cursor: pointer;
-    //display: none;
     font-weight: 700;
     font-size: 18px;
     position: fixed;
@@ -29,7 +28,7 @@ header {
     align-items: center;
     display: flex;
     justify-content: space-between;
-    //margin-bottom: 6em;
+    margin-bottom: 4em;
     width: 80%;
     height: 5em;
 }
@@ -47,7 +46,6 @@ header {
 .spanFiltres {
     border-radius: 1em;
     padding: .3em;
-    //background-color: white;
     color: $couleurPrimaire;
     border: 1px solid lightgray;
     font-weight: bolder;
@@ -62,8 +60,6 @@ header {
     margin-top: 2rem;
     columns: 3;
     column-gap: 12%;
-    //display: flex;
-    //flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
 }
@@ -81,47 +77,53 @@ header {
     }
 }
 
-.cartePhotographe {
-    //align-items: center;
-    //justify-content: center;
-    text-align: center;
-    margin-bottom: 3rem;
-    //background-color: red;
-}
+#trier {
+    font-size: 1.1rem;
+    font-weight: bold;
 
-.carteProfil {
-    display: flex;
-    //margin-top: 15rem;
-    #modal-btn{
-        border: none;
+    #triPhotos {
         background-color: $couleurPrimaire;
+        border: none;
         border-radius: 5px;
         color: white;
-        cursor: pointer;
-        font-family: "DM sans";
-        font-size: 1rem;
-        font-weight: 400;
-        height: 3rem;
-        margin-left: 2rem;
-        text-align: center;
+        font-family: "DM Sans", sans-serif;
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin-left: 1.5rem;
         align-items: center;
-        &:hover {
-            background-color: $couleurSecondaire;
-            color: black;
-            font-weight: bold;
-        }
+        text-align: center;
+        align-self: center;
+        justify-content: center;
+        height: 50px;
+        padding-left: 5px;
     }
-    figcaption {
-        blockquote {
-            font-weight: 800;
-            font-size: .6rem;
-            margin-bottom: .5rem;
-        }
-        p { // Prix
-            color: gray;
-            font-size: .5rem;
-            margin-bottom: .5rem;
-        }
+    
+}
+
+.cartePhotographe {
+    text-align: center;
+    margin-bottom: 3rem;
+    h2 { // Nom
+        font-weight: 400;
+        font-size: 2.2rem;
+        color: $couleurSecondaire;
+        margin-bottom: .5rem;
+    }
+    h3 { // lieu
+        font-family: "DM sans";
+        font-size: .77rem;
+        font-weight: 500;
+        color: $couleurPrimaire;
+        margin-bottom: .4rem;
+    }
+    blockquote { // slogan
+        font-size: .65em;
+        margin-bottom: .4rem;
+    }
+    p{ // prix
+        font-size: .6rem;
+        color: gray;
+        margin-bottom: .5rem;
     }
 }
 
@@ -133,33 +135,53 @@ header {
 
 #carteBiographie {
     background-color: #fafafa;
-    //display: flex;
-    figure {
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding: 4rem 3rem;
+    padding-bottom: 3rem;
+    #blocBioContact {
         display: flex;
+        flex-direction: row;
+        h2{ // Nom
+            font-weight: 400;
+            font-size: 4rem;
+            color: $couleurSecondaire;
+            margin-bottom: .8rem;
+        }
+        h3 { // lieu
+            font-family: "DM sans";
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: $couleurPrimaire;
+            margin-bottom: 1.2rem;
+        }
+        blockquote { // slogan
+            font-size: 1.15em;
+            color: #525252;
+            margin-bottom: 1.5rem;
+        }
+        #filtresProfil {
+            .spanFiltres {
+                margin-right: .5rem;
+                font-size: 1.1rem;
+                padding:  0 .4rem;
+            }
+        }  
     }
 }
 
-h2 {
-    font-weight: 400;
-    font-size: 2.2rem;
-    color: $couleurSecondaire;
-    margin-bottom: .5rem;
-}
-
-h3 {
-    font-size: .8rem;
-    color: $couleurPrimaire;
-    margin-bottom: .4rem;
-}
-
 .photoProfil {
+    margin-top: 1rem;
     border-radius: 50%;
-    box-shadow: 0px 5px 25px grey;
+    box-shadow: 0px 5px 10px grey;
     cursor: pointer;
     height: 12em;
     width: 12em;
     object-fit: cover;
-    margin: 2rem;
+    transition: 400ms;
     &:hover{
         transform: scale(1.1);
         transition: 400ms;
@@ -167,20 +189,31 @@ h3 {
 }
 
 #planchePhotos { // Contient toutes les .cartePhoto
-    display: flex;
+    display: inline-flex;
     flex-wrap: wrap;
-    //gap: 50px;
-    //align-content: space-around;
-    //justify-content: space-between;
+    gap: 75px;
+    margin-top: 2rem;
 }
 
 .cartePhoto {
-    margin-top: 1rem;
-    position: relative;
-    width: 33.3%;
-    p{
-        color: $couleurPrimaire;
+    position: relative; // Nécessaire pour l'ajout d'une caméra sur les vidéos
+    //width: 33.3%;
+    figcaption {
+        margin-top: 1rem;
+        margin-bottom: -2rem;
+        p{
+            color: $couleurPrimaire;
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+        .coeurLikes {
+            margin-left: .3rem;
+            &:hover {
+                color: red;
+            }
+        }
     }
+    
 }
 
 .play-icon {
@@ -208,9 +241,11 @@ h3 {
 
 .legendePhoto {
     color: $couleurPrimaire;
-    /*display: flex;
-    flex-direction: row;*/
-    //display: inline-block;
+    display: flex;
+    justify-content: space-between;
+    .likes {
+        display: flex;
+    }
 }
 
 /* fenêtre flottante compteur likes */
@@ -242,16 +277,43 @@ footer {
 
     form {
         height: auto;
-        width: 675px;
-        background-color: #D3573C;
+        width: 669px;
+        height: 900px;
+        background-color: #DB8876;
         display: flex;
         flex-direction: column;
-        padding: 20px;
+        padding: 2.2rem;
+        padding-top: 1.5rem;
         position: absolute;
         top: 115px;
         right: 160px;
         border-radius: 5px;
         box-shadow: 4px 17px 20px 1px black;
+        .titreContact {
+            font-size: 4rem;
+            margin-bottom: .7rem;
+        }
+        div {
+            color: white;
+        }
+        label {
+            font-size: 2.2rem;
+            margin-bottom: .5rem;
+        }
+        #nomContact {
+            margin-bottom: 2rem;
+        }
+
+        input, textarea {
+            border: none;
+            border-radius: 5px;
+            font-size: 2rem;
+            padding: .9rem;
+            margin-bottom: .5rem;
+        }
+        textarea{
+            resize: none;
+        }
     }
 }
 

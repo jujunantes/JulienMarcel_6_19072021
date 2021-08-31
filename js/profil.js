@@ -3,6 +3,7 @@ import { creeMedia } from './mediaFactory.js'
 const tableauPhotos = []
 let totalLikes = 0
 let prixPhotographe = 0
+let nomPhotographe = ''
 
 // Gestion du tri
 const select = document.getElementById('triPhotos')
@@ -21,28 +22,30 @@ fetch('js/FishEyeData.json')
     // On récupère d'abord le photographe actuel, par son index
     const monPhotographe = donnees.photographers.findIndex(el => el.id === parseInt(id))
     prixPhotographe = donnees.photographers[monPhotographe].price
+    nomPhotographe = donnees.photographers[monPhotographe].name
 
     // On remplit la section "biographie" du header
 
     monHTMLProfil += `
-        <figure class="carteBiographie" tabindex="">
-            <figcaption>
+        <div id="carteBiographie" tabindex="">
+          <div id="blocBioContact">
+            <div>
                 <h2 tabindex="" aria-label="Ce photographe s'appelle ${donnees.photographers[monPhotographe].name} ">${donnees.photographers[monPhotographe].name}</h2>
                 <h3 tabindex="" aria-label="Ce photographe habite à ${donnees.photographers[monPhotographe].city}">${donnees.photographers[monPhotographe].city}, ${donnees.photographers[monPhotographe].country}</h3>
                 <blockquote tabindex="" aria-label="Sa devise est :${donnees.photographers[monPhotographe].tagline}">${donnees.photographers[monPhotographe].tagline}</blockquote>
-                <p tabindex="" aria-label="Son tarif est ${donnees.photographers[monPhotographe].price}€ par jour">${donnees.photographers[monPhotographe].price}€ /jour</p>
-                <div class="filtresPhotographes">`
+                <div id="filtresProfil">`
     for (const tag of donnees.photographers[monPhotographe].tags) monHTMLProfil += `<span class="spanFiltres">#${tag}</span>`
     monHTMLProfil += `
                 </div>
-            </figcaption>
+            </div>
             <button id="modal-btn">
                 Contactez-moi
             </button>
-            <img class="photoProfil" tabindex="" src="img/vignettes400/Photographers_ID_Photos/${donnees.photographers[monPhotographe].portrait}" alt="" />
-        </figure>`
+          </div>
+          <img class="photoProfil" tabindex="" src="img/vignettes400/Photographers_ID_Photos/${donnees.photographers[monPhotographe].portrait}" alt="" />
+        </div>`
 
-    document.getElementById('carteBiographie').innerHTML = monHTMLProfil
+    document.getElementById('banniereBiographie').innerHTML = monHTMLProfil
     document.querySelector('#modal-btn').addEventListener('click', launchModal) // Evenemeent modale -> ouverture
 
     // On profite de ce fetch pour récupérer aussi toutes les donnees médias
@@ -61,13 +64,10 @@ fetch('js/FishEyeData.json')
 
         htmlCarte +=
                 `<figcaption class="legendePhoto">
-                    <div class="titrePhoto">${chaqueMedia.title}</div>
-                    <div class="blocPrixLikes>
-                      <p class="spanPrix">${chaqueMedia.price} €</p>
-                      <div class="likes">
-                        <p id="nombreLikes-${chaqueMedia.id}">${chaqueMedia.likes} </p>
-                        <p id="iconeLikes-${chaqueMedia.id}">❤</p>
-                      </div>
+                    <p class="titrePhoto">${chaqueMedia.title}</p>
+                    <div class="likes">
+                      <p class="pLikes" id="nombreLikes-${chaqueMedia.id}">${chaqueMedia.likes}</p>
+                      <p class="coeurLikes" id="iconeLikes-${chaqueMedia.id}">❤</p>
                     </div>
                 </figcaption>
             </figure>`
@@ -97,13 +97,13 @@ document.getElementById('planchePhotos').onclick = (event) => {
       document.getElementById('nombreLikes-' + monElement).innerHTML = tableauPhotos[indexPhoto].likes
       tableauPhotos[indexPhoto].dejaLike = 0
       totalLikes -= 1
-      document.getElementById('affTotalLikes').innerHTML = totalLikes // Affiche nb total de likes
+      document.getElementById('affTotalLikes').innerHTML = totalLikes + ' ❤' // Affiche nb total de likes
     } else { // non : on like
       tableauPhotos[indexPhoto].likes += 1
       document.getElementById('nombreLikes-' + monElement).innerHTML = tableauPhotos[indexPhoto].likes
       tableauPhotos[indexPhoto].dejaLike = 1
       totalLikes += 1
-      document.getElementById('affTotalLikes').innerHTML = totalLikes // Affiche nb total de likes
+      document.getElementById('affTotalLikes').innerHTML = totalLikes + ' ❤' // Affiche nb total de likes
     }
   }
 }
@@ -265,8 +265,6 @@ function validate () {
 function validerFormulaire (event) {
   if (validate()) {
     formulaire.style.minHeight = formulaire.clientHeight + 'px' // Pour que la modale conserve la même hauteur
-
-    // formulaire.className = "centrage centrageVertical";
     formulaire.innerText = 'Merci, votre message a été envoyé !'
     // Ajoutons un bouton de fermeture
     const monBr = document.createElement('br')
@@ -275,6 +273,7 @@ function validerFormulaire (event) {
     formulaire.appendChild(monBr2)
     const monBouton = document.createElement('button')
     monBouton.innerHTML = 'Fermer'
+    monBouton.style.cssText = 'background-color: #901c1c; border: none; border-radius: 5px; color: white; font-family: "DM sans"; font-size: 1.2rem; width: 170px; height: 69px; margin-top: 1rem; &:hover {color: black; background-color: $couleurSecondaire;}'
     // monBouton.className = "btn-signup modal-btn centrage margeBouton";
     formulaire.appendChild(monBouton)
   } else {
@@ -338,7 +337,7 @@ function ouvertureDiaporama (e) {
   document.querySelector('footer').style.display = 'none'
   // On récupère le nom de l'image sur laquelle l'utilisateur a cliqué
   const URLFichier = new URL(e.path[0].currentSrc).pathname
-  let nomImage = URLFichier.split('/').pop()
+  let nomImage = URLFichier.split('/').pop() // https://stackoverflow.com/questions/511761/js-function-to-get-filename-from-url/2480287
   // Puis son index dans le tableau des médias
   indexPhoto = tableauPhotos.findIndex(imageCherchee => imageCherchee.image === nomImage)
   // on génère le HTML à injecter
@@ -391,6 +390,7 @@ function diapoSuivante () {
 
 window.onload = function (e) {
   afficheFooter()
+  document.getElementById('nomContact').innerHTML = nomPhotographe
 
   const cartesMedia = document.querySelectorAll('figure img')
   cartesMedia.forEach(function (maCarteMedia) {

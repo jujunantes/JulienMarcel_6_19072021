@@ -22,8 +22,10 @@
 
             <!-- Modale Contactez-moi -->
             <div id="modaleContact">
-                <span id="close"></span>
                 <form id="formulaireContact" action="index.html">
+                    <span id="close"></span>
+                    <p class="titreContact">Contactez-moi</p>
+                    <p class="titreContact" id="nomContact"></p>
                     <label for="prenom">Prénom </label><div id="erreurPrenom"></div>
                     <input type="text" id="prenom" name="prenom">
                     
@@ -34,7 +36,7 @@
                     <input type="email" id="email" name="email">
 
                     <label for="texteMessage"> Votre message  </label><div id="erreurTexteMessage"></div>
-                    <textarea name="texteMessage" id="texteMessage"></textarea>
+                    <textarea name="texteMessage" id="texteMessage" rows=4></textarea>
 
                     <button class="btn-submit" type ="submit" >Envoyer</button>
                 </form>
@@ -49,14 +51,14 @@
 
             <main id="mainProfil">
                 <!-- complété dynamiquement en javascript -->
-                <section id="carteBiographie">
+                <section id="banniereBiographie">
 
                 </section>
                 <section id="photos">
                     <div id="trier">
-                        <label for="triPhotos" >Trier par  : </label>
+                        <label for="triPhotos" >Trier par</label>
                         <select tabindex="" id="triPhotos" aria-label="ouvrir les choix de tris">
-                            <option value="popularite">Popularité</option>
+                            <option id="selPopularite" value="popularite">Popularité</option>
                             <option value="date">Date</option>
                             <option value="titre">Titre</option>
                         </select>

@@ -15,51 +15,63 @@ html {
 }
 
 #modal-btn {
+  background-color: #901c1c;
+  border: none;
+  border-radius: 5px;
+  color: white;
   display: flex;
   align-items: center;
   cursor: pointer;
   text-align: center;
-  margin: 5px;
+  margin-left: 2rem;
   height: 2rem;
-  background-color: #901c1c;
-  border-radius: 5px;
-  color: white;
-  border: none;
   font-family: "DM sans";
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: bold;
-  padding: 28px 10px 28px 10px;
+  padding: 2rem 1rem;
 }
 #modal-btn:hover {
   background-color: #d3573c;
   color: black;
 }
 
+.btn-submit {
+  background-color: #901c1c;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-family: "DM sans";
+  font-size: 1.2rem;
+  width: 170px;
+  height: 69px;
+  margin-top: 1rem;
+}
+.btn-submit:hover {
+  color: black;
+  background-color: #d3573c;
+}
+
 /* Croix fermeture modale : début */
 #close {
+  color: white;
   position: absolute;
-  right: 15px;
-  top: 15px;
-  width: 32px;
-  height: 32px;
+  right: 2.5rem;
+  top: 1.5rem;
+  width: 2rem;
+  height: 2rem;
   opacity: 1;
   cursor: pointer;
   transform: scale(0.7);
-}
-
-#close:hover {
-  background-color: red;
-  border-radius: 4px;
 }
 
 #close:before,
 #close:after {
   position: absolute;
   left: 15px;
-  content: " ";
-  height: 33px;
-  width: 3px;
-  background-color: blue;
+  content: "";
+  height: 5rem;
+  width: 8px;
+  background-color: white;
 }
 
 #close:before {
@@ -101,6 +113,7 @@ header {
   align-items: center;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 4em;
   width: 80%;
   height: 5em;
 }
@@ -149,41 +162,51 @@ header {
   cursor: pointer;
 }
 
+#trier {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+#trier #triPhotos {
+  background-color: #901c1c;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-family: "DM Sans", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-left: 1.5rem;
+  align-items: center;
+  text-align: center;
+  align-self: center;
+  justify-content: center;
+  height: 50px;
+  padding-left: 5px;
+}
+
 .cartePhotographe {
   text-align: center;
   margin-bottom: 3rem;
 }
-
-.carteProfil {
-  display: flex;
-}
-.carteProfil #modal-btn {
-  border: none;
-  background-color: #901c1c;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  font-family: "DM sans";
-  font-size: 1rem;
+.cartePhotographe h2 {
   font-weight: 400;
-  height: 3rem;
-  margin-left: 2rem;
-  text-align: center;
-  align-items: center;
-}
-.carteProfil #modal-btn:hover {
-  background-color: #d3573c;
-  color: black;
-  font-weight: bold;
-}
-.carteProfil figcaption blockquote {
-  font-weight: 800;
-  font-size: 0.6rem;
+  font-size: 2.2rem;
+  color: #d3573c;
   margin-bottom: 0.5rem;
 }
-.carteProfil figcaption p {
+.cartePhotographe h3 {
+  font-family: "DM sans";
+  font-size: 0.77rem;
+  font-weight: 500;
+  color: #901c1c;
+  margin-bottom: 0.4rem;
+}
+.cartePhotographe blockquote {
+  font-size: 0.65em;
+  margin-bottom: 0.4rem;
+}
+.cartePhotographe p {
+  font-size: 0.6rem;
   color: gray;
-  font-size: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
@@ -195,32 +218,51 @@ header {
 
 #carteBiographie {
   background-color: #fafafa;
-}
-#carteBiographie figure {
+  border-radius: 5px;
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding: 4rem 3rem;
+  padding-bottom: 3rem;
 }
-
-h2 {
+#carteBiographie #blocBioContact {
+  display: flex;
+  flex-direction: row;
+}
+#carteBiographie #blocBioContact h2 {
   font-weight: 400;
-  font-size: 2.2rem;
+  font-size: 4rem;
   color: #d3573c;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
 }
-
-h3 {
-  font-size: 0.8rem;
+#carteBiographie #blocBioContact h3 {
+  font-family: "DM sans";
+  font-size: 1.5rem;
+  font-weight: 500;
   color: #901c1c;
-  margin-bottom: 0.4rem;
+  margin-bottom: 1.2rem;
+}
+#carteBiographie #blocBioContact blockquote {
+  font-size: 1.15em;
+  color: #525252;
+  margin-bottom: 1.5rem;
+}
+#carteBiographie #blocBioContact #filtresProfil .spanFiltres {
+  margin-right: 0.5rem;
+  font-size: 1.1rem;
+  padding: 0 0.4rem;
 }
 
 .photoProfil {
+  margin-top: 1rem;
   border-radius: 50%;
-  box-shadow: 0px 5px 25px grey;
+  box-shadow: 0px 5px 10px grey;
   cursor: pointer;
   height: 12em;
   width: 12em;
   object-fit: cover;
-  margin: 2rem;
+  transition: 400ms;
 }
 .photoProfil:hover {
   transform: scale(1.1);
@@ -228,17 +270,29 @@ h3 {
 }
 
 #planchePhotos {
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
+  gap: 75px;
+  margin-top: 2rem;
 }
 
 .cartePhoto {
-  margin-top: 1rem;
   position: relative;
-  width: 33.3%;
 }
-.cartePhoto p {
+.cartePhoto figcaption {
+  margin-top: 1rem;
+  margin-bottom: -2rem;
+}
+.cartePhoto figcaption p {
   color: #901c1c;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+.cartePhoto figcaption .coeurLikes {
+  margin-left: 0.3rem;
+}
+.cartePhoto figcaption .coeurLikes:hover {
+  color: red;
 }
 
 .play-icon {
@@ -266,8 +320,11 @@ h3 {
 
 .legendePhoto {
   color: #901c1c;
-  /*display: flex;
-  flex-direction: row;*/
+  display: flex;
+  justify-content: space-between;
+}
+.legendePhoto .likes {
+  display: flex;
 }
 
 /* fenêtre flottante compteur likes */
@@ -298,16 +355,42 @@ footer {
 }
 #modaleContact form {
   height: auto;
-  width: 675px;
-  background-color: #D3573C;
+  width: 669px;
+  height: 900px;
+  background-color: #DB8876;
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 2.2rem;
+  padding-top: 1.5rem;
   position: absolute;
   top: 115px;
   right: 160px;
   border-radius: 5px;
   box-shadow: 4px 17px 20px 1px black;
+}
+#modaleContact form .titreContact {
+  font-size: 4rem;
+  margin-bottom: 0.7rem;
+}
+#modaleContact form div {
+  color: white;
+}
+#modaleContact form label {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+#modaleContact form #nomContact {
+  margin-bottom: 2rem;
+}
+#modaleContact form input, #modaleContact form textarea {
+  border: none;
+  border-radius: 5px;
+  font-size: 2rem;
+  padding: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+#modaleContact form textarea {
+  resize: none;
 }
 
 /* Fin modale contact */

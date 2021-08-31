@@ -1,18 +1,18 @@
 #modal-btn {
+  background-color: $couleurPrimaire;
+  border: none;
+  border-radius: 5px;
+  color: white;
   display: flex;
   align-items: center;
   cursor: pointer;
   text-align: center;
-  margin: 5px;
+  margin-left: 2rem;
   height: 2rem;
-  background-color: $couleurPrimaire;
-  border-radius: 5px;
-  color: white;
-  border: none;
   font-family: "DM sans";
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: bold;
-  padding: 28px 10px 28px 10px;
+  padding: 2rem 1rem;
 
   &:hover {
     background-color: $couleurSecondaire;
@@ -20,29 +20,42 @@
   }
 }
 
+.btn-submit {
+  background-color: $couleurPrimaire;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-family: "DM sans";
+  font-size: 1.2rem;
+  width: 170px;
+  height: 69px;
+  margin-top: 1rem;
+  &:hover {
+    color: black;
+    background-color: $couleurSecondaire;
+  }
+}
+
 /* Croix fermeture modale : début */
 #close {
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    width: 32px;
-    height: 32px;
-    opacity: 1;
-    cursor: pointer;
-    transform: scale(.7);
-  }
-  #close:hover {
-    background-color: red;
-    border-radius: 4px;
-  }
+  color: white;
+  position: absolute;
+  right: 2.5rem;
+  top: 1.5rem;
+  width: 2rem;
+  height: 2rem;
+  opacity: 1;
+  cursor: pointer;
+  transform: scale(.7);
+}
   #close:before,
   #close:after {
     position: absolute;
     left: 15px;
-    content: " ";
-    height: 33px;
-    width: 3px;
-    background-color: blue;
+    content: "";
+    height: 5rem;
+    width: 8px;
+    background-color: white;
   }
   #close:before {
     transform: rotate(45deg);
