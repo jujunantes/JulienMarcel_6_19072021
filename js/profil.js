@@ -372,6 +372,8 @@ function ouvertureDiaporama(e) {
   } else {
     htmlDiapo = `<img class="diapo" src='img/vignettesLightbox/${id}/${nomImage}' alt='${tableauPhotos[indexPhoto].alt_text}'/>`;
   }
+  console.log("index : " + indexPhoto);
+  console.log("{tableauPhotos[indexPhoto] : " + tableauPhotos[indexPhoto]);
   htmlDiapo += `<p>${tableauPhotos[indexPhoto].title}</p>`;
   document.getElementById("diaporama").innerHTML = htmlDiapo;
         
