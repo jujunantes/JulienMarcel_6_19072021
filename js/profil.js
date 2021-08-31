@@ -334,25 +334,30 @@ function joueVideo () { // Permet de jouer ou de pauser la vidéo à la pression
 }
 
 function ouvertureDiaporama (e) {
+  console.log('début. indexPhoto : ' + indexPhoto) // debug
   document.getElementById('conteneurPage').style.display = 'none'
   document.querySelector('footer').style.display = 'none'
   // On récupère le nom de l'image sur laquelle l'utilisateur a cliqué
   const sousChaine = '/img/vignettes400/' + id + '/'
   let nomImage = new URL(e.path[0].currentSrc).pathname.substring(sousChaine.length)
+  console.log('nom image 1 : ' + nomImage) // debug
   // Puis son index dans le tableau des médias
   indexPhoto = tableauPhotos.findIndex(imageCherchee => imageCherchee.image === nomImage)
+  console.log('indexPhoto 1 : ' + indexPhoto) // debug
   // on génère le HTML à injecter
   let htmlDiapo = ''
   if (indexPhoto === -1) { // pas d'image répondant à ce nom : c'est donc une vidéo
     // on remplace "jpg" par "mp4"
     nomImage = new URL(e.path[0].currentSrc).pathname.substring(sousChaine.length).replace(/jpg/g, 'mp4')
+    console.log('nom image 2 : ' + nomImage) // debug
     indexPhoto = tableauPhotos.findIndex(imageCherchee => imageCherchee.video === nomImage)
+    console.log('indexPhoto 2 : ' + indexPhoto) // debug
     htmlDiapo = `<video controls class='diapo' id="maVideo" src='img/Sample_Photos/${id}/${nomImage.replace(/jpg/g, 'mp4')}' alt=''></video>`
   } else {
     htmlDiapo = `<img class="diapo" src='img/vignettesLightbox/${id}/${nomImage}' alt='${tableauPhotos[indexPhoto].alt_text}'/>`
   }
-  console.log('index : ' + indexPhoto)
-  console.log('{tableauPhotos[indexPhoto] : ' + tableauPhotos[indexPhoto])
+  console.log('index : ' + indexPhoto) // debug
+  console.log('{tableauPhotos[indexPhoto] : ' + tableauPhotos[indexPhoto]) // debug
   htmlDiapo += `<p>${tableauPhotos[indexPhoto].title}</p>`
   document.getElementById('diaporama').innerHTML = htmlDiapo
 
