@@ -74,6 +74,7 @@ window.onscroll = () => {
 }
 
 // Gestion des filtres
+let filtrePrecedent = ''
 document.getElementById('filtres').onclick = (event) => {
   if (event.target !== event.currentTarget) {
     /*
@@ -87,6 +88,9 @@ document.getElementById('filtres').onclick = (event) => {
         */
     let monHTML = ''
     const filtreCherche = '<span class="spanFiltres">#' + event.target.id.substring(3).toLowerCase() + '</span>'
+    // Les deux lignes suivantes permettent de ne pas refaire tout le calcul si l'utilisateur re-clique sur le filtre déjà actif
+    if (filtreCherche === filtrePrecedent) return 0
+    filtrePrecedent = filtreCherche
     let occurences = 0
     for (let i = 0; i < tableauHTMLPhotographes.length; i++) {
       if (tableauHTMLPhotographes[i].includes(filtreCherche)) {

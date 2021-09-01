@@ -51,6 +51,11 @@ html {
   background-color: #d3573c;
 }
 
+.centrageBouton {
+  margin: auto;
+  text-align: center;
+}
+
 /* Croix fermeture modale : début */
 #close {
   color: white;
@@ -290,9 +295,11 @@ header {
 }
 .cartePhoto figcaption .coeurLikes {
   margin-left: 0.3rem;
+  transition: transform 0.2s;
 }
 .cartePhoto figcaption .coeurLikes:hover {
-  color: red;
+  color: deeppink;
+  transform: scale(1.2);
 }
 
 .play-icon {
@@ -391,6 +398,17 @@ footer {
 }
 #modaleContact form textarea {
   resize: none;
+}
+
+.centrage {
+  margin: auto;
+  text-align: center;
+  padding-top: 50%;
+}
+
+#pFinal {
+  font-size: 2.2rem;
+  margin-top: 50%;
 }
 
 /* Fin modale contact */

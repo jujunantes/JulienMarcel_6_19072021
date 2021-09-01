@@ -1,3 +1,15 @@
+/*
+  profil.js : contient toute la logique de contrôle des profils individuels des photographes
+
+  l.029 : Récupération des données du photographe et de ses médias (fetch)
+  l.101 : gestion des likes
+  l.130 : gestion du tri
+  l.202 : modale de contact
+  l.306 : fenêtre flottante avec le nombre de likes
+  l.319 : lightbox
+  l.405 : window.onload
+*/
+
 import { creeMedia } from './mediaFactory.js'
 
 const tableauPhotos = []
@@ -95,12 +107,14 @@ document.getElementById('planchePhotos').onclick = (event) => {
     if (tableauPhotos[indexPhoto].dejaLike > 0) { // Oui : on délike
       tableauPhotos[indexPhoto].likes -= 1
       document.getElementById('nombreLikes-' + monElement).innerHTML = tableauPhotos[indexPhoto].likes
+      event.target.style.color = '#901c1c'
       tableauPhotos[indexPhoto].dejaLike = 0
       totalLikes -= 1
       document.getElementById('affTotalLikes').innerHTML = totalLikes + ' ❤' // Affiche nb total de likes
     } else { // non : on like
       tableauPhotos[indexPhoto].likes += 1
       document.getElementById('nombreLikes-' + monElement).innerHTML = tableauPhotos[indexPhoto].likes
+      event.target.style.color = 'deeppink'
       tableauPhotos[indexPhoto].dejaLike = 1
       totalLikes += 1
       document.getElementById('affTotalLikes').innerHTML = totalLikes + ' ❤' // Affiche nb total de likes
@@ -265,7 +279,8 @@ function validate () {
 function validerFormulaire (event) {
   if (validate()) {
     formulaire.style.minHeight = formulaire.clientHeight + 'px' // Pour que la modale conserve la même hauteur
-    formulaire.innerText = 'Merci, votre message a été envoyé !'
+    formulaire.className = 'centrage'
+    formulaire.innerHTML = '<p id="pFinal">Merci, votre message a été envoyé !</p>'
     // Ajoutons un bouton de fermeture
     const monBr = document.createElement('br')
     formulaire.appendChild(monBr)
@@ -273,8 +288,7 @@ function validerFormulaire (event) {
     formulaire.appendChild(monBr2)
     const monBouton = document.createElement('button')
     monBouton.innerHTML = 'Fermer'
-    monBouton.style.cssText = 'background-color: #901c1c; border: none; border-radius: 5px; color: white; font-family: "DM sans"; font-size: 1.2rem; width: 170px; height: 69px; margin-top: 1rem; &:hover {color: black; background-color: $couleurSecondaire;}'
-    // monBouton.className = "btn-signup modal-btn centrage margeBouton";
+    monBouton.className = 'btn-submit centrageBouton'
     formulaire.appendChild(monBouton)
   } else {
     event.preventDefault()

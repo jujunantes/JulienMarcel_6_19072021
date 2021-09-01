@@ -208,8 +208,10 @@ header {
         }
         .coeurLikes {
             margin-left: .3rem;
+            transition: transform .2s;
             &:hover {
-                color: red;
+                color: deeppink;
+                transform: scale(1.2);
             }
         }
     }
@@ -315,6 +317,17 @@ footer {
             resize: none;
         }
     }
+}
+
+.centrage {
+    margin: auto;
+    text-align: center;
+    padding-top: 50%;
+}
+
+#pFinal {
+    font-size: 2.2rem;
+    margin-top: 50%;
 }
 
 /* Fin modale contact */
