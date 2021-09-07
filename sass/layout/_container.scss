@@ -1,3 +1,9 @@
+:root{
+    --ajoutRem: 3.9rem; // date, titre : 6.76, popularité : 3.9
+    --couleurChevron: #fff;
+    --couleurFondChevron: #901c1c;
+}
+
 body {
     align-items: center;
     font-family: "DM Sans", sans-serif;
@@ -51,6 +57,7 @@ header {
     font-weight: bolder;
     font-size: .7rem;
     cursor: pointer;
+
     &:hover {
         border: 1px solid #555;
     }
@@ -72,55 +79,193 @@ header {
     position: absolute;
     top: .6em;
     right: 1%;
+
     &:hover {
         cursor: pointer;
     }
 }
 
+// Faux-Select : début
 #trier {
     font-size: 1.1rem;
     font-weight: bold;
-
-    #triPhotos {
+    
+    label {
+        position: relative;
+        bottom: 1.5rem;
+    }
+    .faux-select {
+        list-style-type: none;
+        padding: 1.5rem 0;
+        padding-bottom: 1.5rem;
         background-color: $couleurPrimaire;
-        border: none;
-        border-radius: 5px;
         color: white;
+        text-align: left;
+        border-radius: 5px;
+        cursor: pointer;
         font-family: "DM Sans", sans-serif;
         font-size: 1.1rem;
         font-weight: 500;
         margin-left: 1.5rem;
-        align-items: center;
-        text-align: center;
-        align-self: center;
-        justify-content: center;
-        height: 50px;
-        padding-left: 5px;
+        width: 10.5rem;
+        display: inline-block;
+        position: relative;
+        user-select: none;
+        z-index: 1;
+
+        li {
+            padding: 0;
+            text-indent: 1em;
+            position: relative;
+            z-index: 3;
+
+            .options {
+                display: block;
+                box-shadow: 0px 5px 10px grey;
+                border-radius: 0 0 5px 5px;
+                list-style-type: none;
+                padding: 0;
+                margin: .8rem 0 0 0.2rem;
+                background: transparent;
+                position: absolute;
+                width: 100%;
+                max-height: 0px;
+                overflow: hidden;
+                top: 1.2em;
+                left: -0.17em; // Hmmm... nombre magique à l'équilibre entre chrome et Firefox...
+                transition: all ease 0.25s;
+
+                li {
+                    padding: 1.4rem 0;
+                    &:hover {
+                        background: $couleurSecondaire;
+                    }
+                }
+
+                &.open {
+                    background: $couleurPrimaire;
+                    max-height: 800%;
+                }
+            }
+        }
+        .testDiv {
+            height: 2rem;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            padding-left: 1rem;
+            position: absolute;
+            top: -1rem;
+            border-radius: 5px 5px 0px 0px;
+            z-index: -1; // Sinon la oculeur de fond recouvre le chevron
+            :hover {
+                background: $couleurSecondaire;
+            }
+            
+            span {
+                padding: 1.3rem;
+                padding-bottom: 1.25rem;
+                margin-left: -2.1rem;
+                padding-right: calc(var(--ajoutRem));
+                border-radius: 5px 5px 5px 5px;
+            }
+        }
+
     }
-    
+
+    .borderBottom:before {
+        content: "";
+        position: absolute;
+        left: 10px;
+        bottom: 0;
+        height: 15px;
+        width: 87%;
+        border-bottom: 1px solid white;
+    }
+
+    .borderTop:after {
+        content: "";
+        position: absolute;
+        left: 10px;
+        top: 0;
+        height: 15px;
+        width: 87%;
+        border-top: 1px solid white;
+    }
+
+    .chevron,
+    .chevronOpen {
+        // inspiration : https://stackoverflow.com/questions/15938933/creating-a-chevron-in-css
+        display: block;
+        height: 15px;
+        /* hauteur ~2x l'épaisseur */
+    }
+
+    .chevron::before,
+    .chevron::after,
+    .chevronOpen::before,
+    .chevronOpen::after {
+        width: 0;   // Nécessaire ...
+        height: 0;  // ... pour Firefox
+        position: absolute;
+        float: right;
+        right: 1rem;
+        display: block;
+        content: "";
+        border: 10px solid transparent;
+        /* Taille du chevron */
+    }
+
+    .chevron::before {
+        top: 0;
+        border-top-color: var(--couleurChevron);
+    }
+
+    .chevron::after {
+        top: -4px; // épaisseur
+        border-top-color: var(--couleurFondChevron);
+    }
+
+    .chevronOpen::before {
+        top: -10px;
+        border-bottom-color: var(--couleurChevron);
+    }
+
+    .chevronOpen::after {
+        top: -6px; // épaisseur
+        border-bottom-color: var(--couleurFondChevron);
+    }
 }
+// Faux-select : fin
 
 .cartePhotographe {
     text-align: center;
     margin-bottom: 3rem;
-    h2 { // Nom
+
+    h2 {
+        // Nom
         font-weight: 400;
         font-size: 2.2rem;
         color: $couleurSecondaire;
         margin-bottom: .5rem;
     }
-    h3 { // lieu
+
+    h3 {
+        // lieu
         font-family: "DM sans";
         font-size: .77rem;
         font-weight: 500;
         color: $couleurPrimaire;
         margin-bottom: .4rem;
     }
-    blockquote { // slogan
+
+    blockquote {
+        // slogan
         font-size: .65em;
         margin-bottom: .4rem;
     }
-    p{ // prix
+
+    p {
+        // prix
         font-size: .6rem;
         color: gray;
         margin-bottom: .5rem;
@@ -142,34 +287,42 @@ header {
     margin-bottom: 1rem;
     padding: 4rem 3rem;
     padding-bottom: 3rem;
+
     #blocBioContact {
         display: flex;
         flex-direction: row;
-        h2{ // Nom
+
+        h2 {
+            // Nom
             font-weight: 400;
             font-size: 4rem;
             color: $couleurSecondaire;
             margin-bottom: .8rem;
         }
-        h3 { // lieu
+
+        h3 {
+            // lieu
             font-family: "DM sans";
             font-size: 1.5rem;
             font-weight: 500;
             color: $couleurPrimaire;
             margin-bottom: 1.2rem;
         }
-        blockquote { // slogan
+
+        blockquote {
+            // slogan
             font-size: 1.15em;
             color: #525252;
             margin-bottom: 1.5rem;
         }
+
         #filtresProfil {
             .spanFiltres {
                 margin-right: .5rem;
                 font-size: 1.1rem;
-                padding:  0 .4rem;
+                padding: 0 .4rem;
             }
-        }  
+        }
     }
 }
 
@@ -182,13 +335,15 @@ header {
     width: 12em;
     object-fit: cover;
     transition: 400ms;
-    &:hover{
+
+    &:hover {
         transform: scale(1.1);
         transition: 400ms;
     }
 }
 
-#planchePhotos { // Contient toutes les .cartePhoto
+#planchePhotos {
+    // Contient toutes les .cartePhoto
     display: inline-flex;
     flex-wrap: wrap;
     gap: 75px;
@@ -197,25 +352,29 @@ header {
 
 .cartePhoto {
     position: relative; // Nécessaire pour l'ajout d'une caméra sur les vidéos
+
     //width: 33.3%;
     figcaption {
         margin-top: 1rem;
         margin-bottom: -2rem;
-        p{
+
+        p {
             color: $couleurPrimaire;
             font-size: 1.3rem;
             font-weight: 500;
         }
+
         .coeurLikes {
             margin-left: .3rem;
             transition: transform .2s;
+
             &:hover {
                 color: deeppink;
                 transform: scale(1.2);
             }
         }
     }
-    
+
 }
 
 .play-icon {
@@ -245,6 +404,7 @@ header {
     color: $couleurPrimaire;
     display: flex;
     justify-content: space-between;
+
     .likes {
         display: flex;
     }
@@ -291,29 +451,35 @@ footer {
         right: 160px;
         border-radius: 5px;
         box-shadow: 4px 17px 20px 1px black;
+
         .titreContact {
             font-size: 4rem;
             margin-bottom: .7rem;
         }
+
         div {
             color: white;
         }
+
         label {
             font-size: 2.2rem;
             margin-bottom: .5rem;
         }
+
         #nomContact {
             margin-bottom: 2rem;
         }
 
-        input, textarea {
+        input,
+        textarea {
             border: none;
             border-radius: 5px;
             font-size: 2rem;
             padding: .9rem;
             margin-bottom: .5rem;
         }
-        textarea{
+
+        textarea {
             resize: none;
         }
     }
@@ -338,6 +504,7 @@ footer {
     height: 2rem;
     width: 2rem;
     transition: transform .2s;
+
     &:hover {
         transform: scale(1.2);
     }
@@ -348,28 +515,33 @@ footer {
     background-color: white;
     position: absolute;
     width: 1253px;
+
     #lbxFermeture {
         cursor: pointer;
         position: absolute;
         top: 120px;
         right: 2rem;
+
         img {
             height: 2.5rem;
             width: 2.5rem;
         }
     }
+
     #lbxPrecedent {
         cursor: pointer;
         position: absolute;
         top: 550px;
         left: 2rem;
     }
+
     #lbxSuivant {
         cursor: pointer;
         position: absolute;
         top: 550px;
         right: 2rem;
     }
+
     p {
         color: $couleurPrimaire;
         margin-left: 100px;
@@ -389,4 +561,5 @@ footer {
     width: 1050px;
     height: 900px;
 }
+
 /* Fin modale lightbox */

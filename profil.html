@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="fr">
+<html lang="fr" id="html">
     <head>
         <title id="titreOnglet">FishEye! - Profil</title> <!-- Changer le titre en fonction de l'ID -->
     
@@ -17,7 +17,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     </head>
 
-    <body>
+    <body id="body">
         <div id="conteneurPage">
 
             <!-- Modale Contactez-moi -->
@@ -55,13 +55,26 @@
 
                 </section>
                 <section id="photos">
+                    <!--
+                        Nous créons notre propre faux select car le select du HTML5 ne permet pas de réagir à
+                        un nouveau clic sur le même élément : le onclick ne se déclenche que si l'utilisateur
+                        choisit une option différente. Même problème avec onchange.
+                        Or, nous voulons que ce soit le cas, car un clic sur la même option permettra de
+                        trier les médias en sens inverse (toggle : du plus grand au plus petit puis du plus
+                        petit au plus grand)
+
+                        Inspiration : https://wow.techbrood.com/fiddle/7074
+                    -->
                     <div id="trier">
                         <label for="triPhotos" >Trier par</label>
-                        <select tabindex="" id="triPhotos" aria-label="ouvrir les choix de tris">
-                            <option id="selPopularite" value="popularite">Popularité</option>
-                            <option value="date">Date</option>
-                            <option value="titre">Titre</option>
-                        </select>
+                        <ul class="faux-select" id="monFauxSelect" data-selected-value="Popularité">
+                            <li class="chevron" id="enTeteChevron"><div class="testDiv" id="monTestDiv"><span id="premierChoix">Popularité</span></div>
+                                <ul class="options" id="mesOptions">
+                                    <li class="choixOptions borderBottom borderTop" id="deuxiemeChoix" data-value="Date">Date</li>
+                                    <li class="choixOptions" id="troisiemeChoix" data-value="titre">Titre</li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
 
                     <div id="planchePhotos">

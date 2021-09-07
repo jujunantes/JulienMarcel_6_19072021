@@ -18,9 +18,9 @@ let prixPhotographe = 0
 let nomPhotographe = ''
 
 // Gestion du tri
-const select = document.getElementById('triPhotos')
-let selectionPrecedente = select.options[select.selectedIndex].value
-const directionTri = [1, 0, 0] // popularité, date, titre (0 : du moins au plus, 1 : du plus au moins)
+let selectionPrecedente = 'Popularité'
+let togglePremierChoix = 0
+let directionTri = [1, 0, 0] // popularité, date, titre (0 : du moins au plus, 1 : du plus au moins)
 
 // On récupère l'URL pour obtenir l'ID
 const url = new URL(window.location)
@@ -88,7 +88,7 @@ fetch('js/FishEyeData.json')
         totalLikes += chaqueMedia.likes
       }
     }
-    triPhotos() // Tri initial du tableau
+    triPhotos('Popularité') // Tri initial du tableau
     // Maintenant, on crée le HTML que l'on va injecter dans la page
     let monHTML = ''
     for (let i = 0; i < tableauPhotos.length; i++) monHTML += tableauPhotos[i].html
@@ -127,14 +127,36 @@ document.getElementById('planchePhotos').onclick = (event) => {
 /*
   Fonction de tri
 */
-function triPhotos () {
+let toggleFauxSelect = 0
+const monHTML = document.getElementById('html')
+monHTML.addEventListener('click', function (e) {
+  if ((e.target.id === 'monFauxSelect') || (e.target.id === 'premierChoix') || (e.target.id === 'enTeteChevron')) {
+    document.getElementById('monFauxSelect').classList.toggle('open')
+    document.getElementById('mesOptions').classList.toggle('open')
+    document.getElementById('enTeteChevron').classList.toggle('chevronOpen')
+    document.getElementById('enTeteChevron').classList.toggle('chevron')
+    if (toggleFauxSelect === 1) {
+      toggleFauxSelect = 0
+    } else {
+      toggleFauxSelect = 1
+    }
+  } else if (toggleFauxSelect === 1) {
+    document.getElementById('monFauxSelect').classList.toggle('open')
+    document.getElementById('mesOptions').classList.toggle('open')
+    document.getElementById('enTeteChevron').classList.toggle('chevronOpen')
+    document.getElementById('enTeteChevron').classList.toggle('chevron')
+    toggleFauxSelect = 0
+    togglePremierChoix = 0
+  }
+})
+
+function triPhotos (ordreTri) {
   // On récupère l'ordre de tri
-  const ordreTri = select.options[select.selectedIndex].value
   switch (ordreTri) {
-    case 'popularite': // Nombre de likes : tableauPhotos.likes
+    case 'Popularité': // Nombre de likes : tableauPhotos.likes
       if (directionTri[0] === 1) { tableauPhotos.sort((a, b) => b.likes - a.likes) } else { tableauPhotos.sort((a, b) => a.likes - b.likes) }
       break
-    case 'date': // tableauPhotos.date
+    case 'Date': // tableauPhotos.date
       if (directionTri[1] === 1) {
         tableauPhotos.sort(function (a, b) {
           if (a.date > b.date) { return -1 } else { return 1 }
@@ -145,7 +167,7 @@ function triPhotos () {
         })
       }
       break
-    case 'titre': // tableauPhotos.title
+    case 'Titre': // tableauPhotos.title
       if (directionTri[2] === 1) {
         tableauPhotos.sort(function (a, b) {
           if (a.title > b.title) { return -1 } else { return 1 }
@@ -157,27 +179,27 @@ function triPhotos () {
       }
   }
 }
-
 /*
   gestion du sélecteur de tri
 */
-
-document.getElementById('triPhotos').onclick = (event) => {
-  const ordreTri = select.options[select.selectedIndex].value
+function lanceTri (ordreTri) {
+  togglePremierChoix = 0
   if (ordreTri === selectionPrecedente) { // On alterne la direction du tri pour cet ordre de tri (le but est de permettre à l'utilisateur de trier du plus grand au plus petit et inversement)
     switch (ordreTri) {
-      case 'popularite': // Nombre de likes : tableauPhotos.likes
+      case 'Popularité': // Nombre de likes : tableauPhotos.likes
         if (directionTri[0] === 1) { directionTri[0] = 0 } else { directionTri[0] = 1 }
         break
-      case 'date': // tableauPhotos.date
+      case 'Date': // tableauPhotos.date
         if (directionTri[1] === 1) { directionTri[1] = 0 } else { directionTri[1] = 1 }
         break
-      case 'titre': // tableauPhotos.title
+      case 'Titre': // tableauPhotos.title
         if (directionTri[2] === 1) { directionTri[2] = 0 } else { directionTri[2] = 1 }
     }
+  } else {
+    directionTri = [1, 0, 0]
   }
   selectionPrecedente = ordreTri // On met à jour cette variable pour le prochain clic de l'utilisateur sur le tri
-  triPhotos() // On appelle le tri
+  triPhotos(ordreTri) // On appelle le tri
   // on détruit les écouteurs d'événement en place
   let cartesMedia = document.querySelectorAll('figure img')
   cartesMedia.forEach(function (maCarteMedia) {
@@ -192,6 +214,57 @@ document.getElementById('triPhotos').onclick = (event) => {
   cartesMedia.forEach(function (maCarteMedia) {
     maCarteMedia.addEventListener('click', ouvertureDiaporama)
   })
+}
+
+// Les deux événements suivants permettent de changer la couleur de fond du chevron si le premier li est survolé
+document.getElementById('monTestDiv').addEventListener('mouseover', function (event) {
+  const r = document.querySelector(':root')
+  r.style.setProperty('--couleurFondChevron', '#d3573c')
+})
+document.getElementById('monTestDiv').addEventListener('mouseout', function (event) {
+  const r = document.querySelector(':root')
+  r.style.setProperty('--couleurFondChevron', '#901c1c')
+})
+
+document.getElementById('monFauxSelect').onclick = (event) => {
+  if (togglePremierChoix > 0) lanceTri(document.getElementById('premierChoix').innerHTML)
+  else togglePremierChoix = 1
+}
+
+document.getElementById('deuxiemeChoix').onclick = (event) => {
+  lanceTri(document.getElementById('deuxiemeChoix').innerHTML)
+  const tempString = document.getElementById('premierChoix').innerHTML
+  document.getElementById('premierChoix').innerHTML = document.getElementById('deuxiemeChoix').innerHTML
+  document.getElementById('deuxiemeChoix').innerHTML = tempString
+  const r = document.querySelector(':root')
+  switch (document.getElementById('premierChoix').innerHTML) {
+    case 'Date':
+      r.style.setProperty('--ajoutRem', '6.76rem')
+      break
+    case 'Titre':
+      r.style.setProperty('--ajoutRem', '6.76rem')
+      break
+    default: // Popularité
+      r.style.setProperty('--ajoutRem', '3.9rem')
+  }
+}
+
+document.getElementById('troisiemeChoix').onclick = (event) => {
+  lanceTri(document.getElementById('troisiemeChoix').innerHTML)
+  const tempString = document.getElementById('premierChoix').innerHTML
+  document.getElementById('premierChoix').innerHTML = document.getElementById('troisiemeChoix').innerHTML
+  document.getElementById('troisiemeChoix').innerHTML = tempString
+  const r = document.querySelector(':root')
+  switch (document.getElementById('premierChoix').innerHTML) {
+    case 'Date':
+      r.style.setProperty('--ajoutRem', '6.76rem')
+      break
+    case 'Titre':
+      r.style.setProperty('--ajoutRem', '6.76rem')
+      break
+    default: // Popularité
+      r.style.setProperty('--ajoutRem', '3.9rem')
+  }
 }
 // Fin gestion du sélecteur de tri
 
