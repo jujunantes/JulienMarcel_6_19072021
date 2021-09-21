@@ -13,6 +13,9 @@
   font-size: 1.2rem;
   font-weight: bold;
   padding: 2rem 1rem;
+  position: absolute;
+  top: 13rem;
+  left: 40%;
 
   &:hover {
     background-color: $couleurSecondaire;

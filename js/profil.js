@@ -50,9 +50,6 @@ fetch('js/FishEyeData.json')
     monHTMLProfil += `
                 </div>
             </div>
-            <button tabindex="4" aria-label="Cliquez sur ce bouton pour ouvrir le formulaire de contact" id="modal-btn">
-                Contactez-moi
-            </button>
           </div>
           <img class="photoProfil" tabindex="5" src="img/vignettes400/Photographers_ID_Photos/${donnees.photographers[monPhotographe].portrait}" alt="${donnees.photographers[monPhotographe].alt_text}" />
         </div>`
@@ -618,6 +615,10 @@ function fermeLightBox () {
   document.getElementById('conteneurPage').style.display = 'block'
   document.querySelector('footer').style.display = 'flex'
   document.getElementById('modaleLightBox').setAttribute('aria-hidden', 'true')
+  document.getElementById('modal-btn').style.visibility = 'visible'
+  if (window.screen.width > 375) {
+    document.getElementById('monFooter').style.visibility = 'visible'
+  }
 }
 
 function joueVideo () { // Permet de jouer ou de pauser la vidéo à la pression de la barre "espace"
@@ -628,6 +629,12 @@ function joueVideo () { // Permet de jouer ou de pauser la vidéo à la pression
 }
 
 function ouvertureDiaporama (e) {
+  if (window.screen.width < 400) {
+    // Sinon le footer réapparaît...
+    document.getElementById('monFooter').style.visibility = 'hidden'
+    document.getElementById('monFooter').style.width = '0px'
+  }
+  document.getElementById('modal-btn').style.visibility = 'hidden'
   document.getElementById('conteneurPage').style.display = 'none'
   document.querySelector('footer').style.display = 'none'
   // On récupère le nom de l'image sur laquelle l'utilisateur a cliqué
@@ -685,7 +692,9 @@ function diapoSuivante () {
 // Fin de la gestion de la lightbox
 
 window.onload = function (e) {
-  afficheFooter()
+  if (window.screen.width > 375) {
+    afficheFooter()
+  }
   document.getElementById('nomContact').innerHTML = nomPhotographe
 
   const cartesMedia = document.querySelectorAll('.photoPlanche')

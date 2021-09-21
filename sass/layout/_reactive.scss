@@ -1,0 +1,332 @@
+@media screen and (max-width: 375px) { // 375px prise sur le figma du projet
+    body {
+        width: 100%;
+        margin: auto;
+        box-sizing: border-box;
+    }
+
+    header {
+        margin-bottom: 2rem;
+    }
+
+    #logoFisheye {
+        margin-left: 1em;
+        margin-top: 2.5em;
+        width: 9.5em;
+    }
+
+    #titre {
+        font-size: .85em;
+        text-align: right;
+        position: absolute;
+        top: 4em;
+        right: 1em;
+    }
+
+    #filtres {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        position: absolute;
+        margin-top: 10em;
+        padding: 3em;
+    }
+
+    .spanFiltres {
+        margin-top: 1em;
+    }
+
+    #main {
+        margin-top: 6.5em;
+        justify-content: center;
+        flex-wrap: wrap;
+        display: flex;
+    }
+
+    #conteneurPage {
+        padding-bottom: 5rem;
+    }
+
+    #modal-btn {
+        display: flex;
+        justify-content: center;
+        width: 12rem;
+        height: 2.5rem;
+        margin-bottom: 10%;
+        padding: 5px 10px 5px 10px;
+        position: fixed;
+        top: unset;
+        bottom: 0;
+        left: 15%;
+        z-index: 1;
+    }
+
+    .cartePhotographe {
+        margin-bottom: 1em;
+    }
+
+    #carteBiographie {
+        background-color: white;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        padding: 0 1rem;
+        padding-bottom: 0rem;
+
+        #blocBioContact {
+            display: flex;
+            flex-direction: row;
+    
+            h2 {
+                // Nom
+                font-weight: 400;
+                font-size: 2.2rem;
+                color: $couleurSecondaire;
+                margin-bottom: .4rem;
+            }
+    
+            h3 {
+                // lieu
+                font-family: "DM sans";
+                font-size: 1.1rem;
+                font-weight: 500;
+                color: $couleurPrimaire;
+                margin-bottom: .6rem;
+            }
+    
+            blockquote {
+                // slogan
+                font-size: .8em;
+                color: #525252;
+                margin-bottom: .8rem;
+            }
+    
+            #filtresProfil {
+                .spanFiltres {
+                    margin-right: .5rem;
+                    font-size: .75rem;
+                    padding: 0 .2rem;
+                }
+            }
+        }
+        .photoProfil {
+            position: absolute;
+            right: 1rem;
+            top: 5rem;
+            height: 6.5rem;
+            width: 6.5rem;
+        }
+    }
+
+    #planchePhotos {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .cartePhoto {
+        figcaption {
+            //margin-top: 1rem;
+            margin-bottom: -3.5rem;
+    
+            p {
+                color: $couleurPrimaire;
+                font-size: .9rem;
+                font-weight: 400;
+            }
+    
+            .coeurLikes {
+                margin-left: .3rem;
+                transition: transform .2s;
+    
+                &:hover {
+                    color: deeppink !important;
+                    transform: scale(1.2);
+                }
+            }
+        }
+        
+        transition:all .4s;
+        .photoPlanche {
+            width: 21.4rem;
+            height: 11.8rem;
+            &:hover,
+            &:focus {
+                filter: drop-shadow(8px 8px 10px grey);
+            }
+        }
+    }
+
+    #trier,
+    footer {
+        display: none;
+    }
+
+    /* Début modale contact */
+    #modaleContact {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+
+    form {
+        height: auto;
+        width: 375px;
+        height: 812px;
+        background-color: #DB8876;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        padding-top: 2rem;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        border-radius: 5px;
+        box-shadow: 4px 17px 20px 1px black;
+
+        .titreContact {
+            font-size: 2.2rem;
+            margin-bottom: .7rem;
+        }
+
+        div {
+            color: white;
+        }
+
+        label {
+            font-size: 1.5rem;
+            margin-bottom: .5rem;
+        }
+
+        #nomContact {
+            margin-bottom: 2rem;
+        }
+
+        input,
+        textarea {
+            border: none;
+            border-radius: 5px;
+            font-size: 2rem;
+            padding: .9rem;
+            margin-bottom: .5rem;
+        }
+
+        textarea {
+            resize: none;
+        }
+    }
+
+    .btn-submit {
+        background-color: $couleurPrimaire;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-family: "DM sans";
+        font-size: 1.2rem;
+        width: 50%;
+        height: 2.5rem;
+        margin-top: 1rem;
+        margin-left: 25%;
+      }
+
+      /* Croix fermeture modale : début */
+    #close {
+    color: white;
+    position: absolute;
+    right: 1.5rem;
+    top: 2rem;
+    width: 1rem;
+    height: 1rem;
+    opacity: 1;
+    cursor: pointer;
+    transform: scale(.7);
+  }
+    #close:before,
+    #close:after {
+      position: absolute;
+      left: 15px;
+      content: "";
+      height: 2rem;
+      width: 4px;
+      background-color: white;
+    }
+    #close:before {
+      transform: rotate(45deg);
+    }
+    #close:after {
+      transform: rotate(-45deg);
+    }
+    /* Croix fermeture modale : fin */
+}
+
+.centrage {
+    margin: auto;
+    text-align: center;
+    padding-top: 50%;
+}
+
+#pFinal {
+    font-size: 2.2rem;
+    margin-top: 50%;
+}
+
+/* Fin modale contact */
+
+/* Début modale Lightbox */
+
+.icone {
+    height: .5rem;
+    width: .5rem;
+}
+
+    #modaleLightBox {
+    display: none;
+    background-color: white;
+    width: 375px;
+
+    #lbxFermeture {
+        cursor: pointer;
+        top: 230px;
+        right: 1.8rem;
+
+        img {
+            height: .7rem;
+            width: .7rem;
+        }
+    }
+
+    #lbxPrecedent {
+        cursor: pointer;
+        top: 350px;
+        left: 1.8rem;
+    }
+
+    #lbxSuivant {
+        cursor: pointer;
+        top: 350px;
+        right: 1.8rem;
+    }
+
+    p {
+        color: $couleurPrimaire;
+        margin-left: 12%;
+        margin-top: .5rem;
+        font-size: .8rem;
+        font-weight: 500;
+        width: 20rem;
+    }
+}
+
+.diapo {
+    border-radius: 5px;
+    box-shadow: unset;
+    margin-top: 60%;
+    margin-left: 12%;
+    object-fit: cover;
+    width: 289px;
+    height: 248px;
+}
+/* Fin modale lightbox */
+}
