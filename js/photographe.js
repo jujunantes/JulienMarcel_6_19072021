@@ -23,7 +23,7 @@ class Photographe {
     this.tagline = attributs.tagline || ''
     this.price = attributs.price || 0
     this.portrait = attributs.portrait || ''
-    this.description = attributs.description || ''
+    this.alt_text = attributs.alt_text || ''
   }
 }
 

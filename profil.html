@@ -21,30 +21,30 @@
         <div id="conteneurPage">
 
             <!-- Modale Contactez-moi -->
-            <div id="modaleContact">
-                <form id="formulaireContact" action="index.html">
-                    <span id="close"></span>
+            <div id="modaleContact" aria-hidden="true">
+                <form tabindex="31" id="formulaireContact" action="index.html" role="dialog" aria-label="formulaire permettant de contacter le photographe" aria-labelledby="formulaireContact" aria-describedby="formulaireContact">
+                    <span tabindex="32" id="close" aria-label="cliquez ici pour fermer le dialogue"></span>
                     <p class="titreContact">Contactez-moi</p>
                     <p class="titreContact" id="nomContact"></p>
-                    <label for="prenom">Prénom </label><div id="erreurPrenom"></div>
-                    <input type="text" id="prenom" name="prenom">
+                    <label for="prenom">Prénom </label><div class="erreur" id="erreurPrenom" role="alert" tabindex="33" aria-hidden="true"></div>
+                    <input tabindex="34" required="required" aria-required="true" type="text" id="prenom" name="prenom" aria-label="Entrez votre prénom">
                     
-                    <label for="nom">Nom  </label><div id="erreurNom"></div>
-                    <input type="text" id="nom" name="nom">
+                    <label for="nom">Nom  </label><div class="erreur" id="erreurNom" role="alert" tabindex="35" aria-hidden="true"></div>                                                                                    
+                    <input tabindex="36" required="required" aria-required="true" type="text" id="nom" name="nom" aria-label="Entrez votre nom">
                     
-                    <label for="email">Email  </label><div id="erreurEmail"></div>
-                    <input type="email" id="email" name="email">
+                    <label for="email">Email  </label><div class="erreur" id="erreurEmail" role="alert" tabindex="37" aria-hidden="true"></div>
+                    <input tabindex="38" required="required" aria-required="true" type="email" id="email" name="email" aria-label="Entrez votre email">
 
-                    <label for="texteMessage"> Votre message  </label><div id="erreurTexteMessage"></div>
-                    <textarea name="texteMessage" id="texteMessage" rows=4></textarea>
+                    <label for="texteMessage"> Votre message  </label><div class="erreur" id="erreurTexteMessage" role="alert" tabindex="39" aria-hidden="true"></div>
+                    <textarea tabindex="40" required="required" aria-required="true" name="texteMessage" id="texteMessage" rows=4 aria-label="Entrez votre message"></textarea>
 
-                    <button class="btn-submit" type ="submit" >Envoyer</button>
+                    <button tabindex="41" class="btn-submit" type ="submit" aria-label="Envoyez votre message">Envoyer</button>
                 </form>
             </div>
 
             <header>
-                <a href="./index.html">
-                    <img id="logoFisheye" src="./img/fisheyeLogo.png" alt="Fish Eye Home page" aria-label="Aller à l'accueil" />
+                <a href="./index.html" tabindex="1">
+                    <img id="logoFisheye" src="./img/fisheyeLogo.png" alt="Logo de FishEye" aria-label="Revenir à l'accueil" />
                 </a>
                 
             </header>
@@ -67,11 +67,11 @@
                     -->
                     <div id="trier">
                         <label for="triPhotos" >Trier par</label>
-                        <ul class="faux-select" id="monFauxSelect" data-selected-value="Popularité">
-                            <li class="chevron" id="enTeteChevron"><div class="testDiv" id="monTestDiv"><span id="premierChoix">Popularité</span></div>
+                        <ul tabindex="6" class="faux-select" id="monFauxSelect" data-selected-value="Popularité" aria-expanded="false" aria-label="cliquez pour dérouler le menu">
+                            <li class="chevron" id="enTeteChevron"><div class="testDiv" id="monTestDiv"><span tabindex="7" id="premierChoix">Popularité</span></div>
                                 <ul class="options" id="mesOptions">
-                                    <li class="choixOptions borderBottom borderTop" id="deuxiemeChoix" data-value="Date">Date</li>
-                                    <li class="choixOptions" id="troisiemeChoix" data-value="titre">Titre</li>
+                                    <li tabindex="8" class="choixOptions borderBottom borderTop" id="deuxiemeChoix">Date</li>
+                                    <li tabindex="9" class="choixOptions" id="troisiemeChoix">Titre</li>
                                 </ul>
                             </li>
                         </ul>
@@ -84,10 +84,10 @@
             </main>
         </div>
         
-        <div id="modaleLightBox">
-            <div id="lbxFermeture" class="icone"><img src="img/icones/close-cross.svg" alt="quitter le diaporama"/></div>
-            <div id="lbxPrecedent" class="icone"><img src="img/icones/chevron-left-solid.svg" alt="revenir à la photo précedente"/></div>
-            <div id="lbxSuivant" class="icone"><img src="img/icones/chevron-right-solid.svg" alt="passer à la photo suivante"/></div>
+        <div id="modaleLightBox" tabindex="50" aria-hidden="true">
+            <div id="lbxFermeture" class="icone" tabindex="51" aria-label="quittez le diaporama (entrée ou escape)"><img src="img/icones/close-cross.svg" alt="quitter le diaporama"/></div>
+            <div id="lbxPrecedent" class="icone" tabindex="52" aria-label="passer à la photo précédente (entrée ou flèche gauche)"><img src="img/icones/chevron-left-solid.svg" alt="revenir à la photo précedente"/></div>
+            <div id="lbxSuivant" class="icone" tabindex="53" aria-label="passez à la photo suivante (entrée ou flèche droite)"><img src="img/icones/chevron-right-solid.svg" alt="passer à la photo suivante"/></div>
             <div id="diaporama"></div>
         </div>
         

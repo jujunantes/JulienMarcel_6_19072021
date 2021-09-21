@@ -94,6 +94,12 @@ html {
   --couleurFondChevron: #901c1c;
 }
 
+*:focus {
+  outline-color: black;
+  outline-width: 1px;
+  outline-style: solid;
+}
+
 body {
   align-items: center;
   font-family: "DM Sans", sans-serif;
@@ -199,12 +205,20 @@ header {
   position: relative;
   user-select: none;
   z-index: 1;
+  outline-offset: 5px;
+}
+#trier .faux-select span {
+  outline-offset: -10px;
+}
+#trier .faux-select span:hover {
+  outline: none;
 }
 #trier .faux-select li {
   padding: 0;
   text-indent: 1em;
   position: relative;
   z-index: 3;
+  outline-offset: -10px;
 }
 #trier .faux-select li .options {
   display: block;
@@ -216,7 +230,7 @@ header {
   background: transparent;
   position: absolute;
   width: 100%;
-  max-height: 0px;
+  max-height: 0;
   overflow: hidden;
   top: 1.2em;
   left: -0.17em;
@@ -230,7 +244,7 @@ header {
 }
 #trier .faux-select li .options.open {
   background: #901c1c;
-  max-height: 800%;
+  max-height: 850%;
 }
 #trier .faux-select .testDiv {
   height: 2rem;
@@ -310,6 +324,7 @@ header {
 .cartePhotographe {
   text-align: center;
   margin-bottom: 3rem;
+  cursor: pointer;
 }
 .cartePhotographe h2 {
   font-weight: 400;
@@ -402,6 +417,7 @@ header {
 
 .cartePhoto {
   position: relative;
+  transition: all 0.4s;
 }
 .cartePhoto figcaption {
   margin-top: 1rem;
@@ -417,8 +433,11 @@ header {
   transition: transform 0.2s;
 }
 .cartePhoto figcaption .coeurLikes:hover {
-  color: deeppink;
+  color: deeppink !important;
   transform: scale(1.2);
+}
+.cartePhoto img:hover, .cartePhoto img:focus {
+  filter: drop-shadow(8px 8px 10px grey);
 }
 
 .play-icon {

@@ -1,13 +1,13 @@
 /*
   profil.js : contient toute la logique de contrôle des profils individuels des photographes
 
-  l.029 : Récupération des données du photographe et de ses médias (fetch)
-  l.101 : gestion des likes
-  l.130 : gestion du tri
-  l.202 : modale de contact
-  l.306 : fenêtre flottante avec le nombre de likes
-  l.319 : lightbox
-  l.405 : window.onload
+  ligne 029 : Récupération des données du photographe et de ses médias (fetch)
+  ligne 109 : gestion des likes
+  ligne 137 : gestion du tri et du faux select
+  ligne 414 : modale de contact
+  ligne 573 : fenêtre flottante avec le nombre de likes
+  ligne 586 : lightbox
+  ligne 687 : window.onload
 */
 
 import { creeMedia } from './mediaFactory.js'
@@ -42,23 +42,23 @@ fetch('js/FishEyeData.json')
         <div id="carteBiographie" tabindex="">
           <div id="blocBioContact">
             <div>
-                <h2 tabindex="" aria-label="Ce photographe s'appelle ${donnees.photographers[monPhotographe].name} ">${donnees.photographers[monPhotographe].name}</h2>
-                <h3 tabindex="" aria-label="Ce photographe habite à ${donnees.photographers[monPhotographe].city}">${donnees.photographers[monPhotographe].city}, ${donnees.photographers[monPhotographe].country}</h3>
-                <blockquote tabindex="" aria-label="Sa devise est :${donnees.photographers[monPhotographe].tagline}">${donnees.photographers[monPhotographe].tagline}</blockquote>
+                <h2 tabindex="2" aria-label="Ce photographe s'appelle ${donnees.photographers[monPhotographe].name} ">${donnees.photographers[monPhotographe].name}</h2>
+                <h3 tabindex="3" aria-label="Ce photographe habite à ${donnees.photographers[monPhotographe].city}, ${donnees.photographers[monPhotographe].country}">${donnees.photographers[monPhotographe].city}, ${donnees.photographers[monPhotographe].country}</h3>
+                <blockquote tabindex="4" aria-label="Sa devise est :${donnees.photographers[monPhotographe].tagline}">${donnees.photographers[monPhotographe].tagline}</blockquote>
                 <div id="filtresProfil">`
     for (const tag of donnees.photographers[monPhotographe].tags) monHTMLProfil += `<span class="spanFiltres">#${tag}</span>`
     monHTMLProfil += `
                 </div>
             </div>
-            <button id="modal-btn">
+            <button tabindex="4" aria-label="Cliquez sur ce bouton pour ouvrir le formulaire de contact" id="modal-btn">
                 Contactez-moi
             </button>
           </div>
-          <img class="photoProfil" tabindex="" src="img/vignettes400/Photographers_ID_Photos/${donnees.photographers[monPhotographe].portrait}" alt="" />
+          <img class="photoProfil" tabindex="5" src="img/vignettes400/Photographers_ID_Photos/${donnees.photographers[monPhotographe].portrait}" alt="${donnees.photographers[monPhotographe].alt_text}" />
         </div>`
 
     document.getElementById('banniereBiographie').innerHTML = monHTMLProfil
-    document.querySelector('#modal-btn').addEventListener('click', launchModal) // Evenemeent modale -> ouverture
+    document.querySelector('#modal-btn').addEventListener('click', launchModal) // Evenement modale -> ouverture
 
     // On profite de ce fetch pour récupérer aussi toutes les donnees médias
     for (const chaqueMedia of donnees.media) {
@@ -67,19 +67,19 @@ fetch('js/FishEyeData.json')
 
         let htmlCarte = ''
         htmlCarte += `
-            <figure class="cartePhoto" tabindex="">`
-        if (monMedia.image !== '') { htmlCarte += `<img class="photoPlanche" tabindex="" src="img/vignettes400/${id}/${chaqueMedia.image}" alt="${chaqueMedia.alt_text}" />` } else {
+            <figure class="cartePhoto">`
+        if (monMedia.image !== '') { htmlCarte += `<img class="photoPlanche" src="img/vignettes400/${id}/${chaqueMedia.image}" alt="${chaqueMedia.alt_text}" />` } else {
           const nomCapture = chaqueMedia.video.slice(0, -4) + '.jpg'
-          htmlCarte += `<img class="photoPlanche" tabindex="" src="img/vignettes400/${id}/${nomCapture}" alt="${chaqueMedia.alt_text}" />
-              <img class="play-icon" src="img/icones/video-solid.svg" alt="ce fichier est une vidéo" />`
+          htmlCarte += `<img tabindex="" class="photoPlanche" src="img/vignettes400/${id}/${nomCapture}" alt="${chaqueMedia.alt_text}" />
+              <img class="play-icon" src="img/icones/video-solid.svg" alt="${chaqueMedia.alt_text}" />`
         }
 
         htmlCarte +=
                 `<figcaption class="legendePhoto">
-                    <p class="titrePhoto">${chaqueMedia.title}</p>
+                    <p class="titrePhoto" aria-label="ce média est intitulé ${chaqueMedia.title}"">${chaqueMedia.title}</p>
                     <div class="likes">
-                      <p class="pLikes" id="nombreLikes-${chaqueMedia.id}">${chaqueMedia.likes}</p>
-                      <p class="coeurLikes" id="iconeLikes-${chaqueMedia.id}">❤</p>
+                      <p class="pLikes" id="nombreLikes-${chaqueMedia.id}" aria-label="Ce média a déjà été liké ${chaqueMedia.likes} fois">${chaqueMedia.likes}</p>
+                      <p class="coeurLikes" id="iconeLikes-${chaqueMedia.id}" aria-label="Cliquez pour liker ce média, déjà liké ${chaqueMedia.likes} fois">❤</p>
                     </div>
                 </figcaption>
             </figure>`
@@ -93,6 +93,17 @@ fetch('js/FishEyeData.json')
     let monHTML = ''
     for (let i = 0; i < tableauPhotos.length; i++) monHTML += tableauPhotos[i].html
     document.getElementById('planchePhotos').innerHTML = monHTML
+    // Et maintenant, on numérote correctement les tabindex
+    let tabIndexDepart = document.getElementById('troisiemeChoix').tabIndex
+    const mesPhotoPlanche = document.getElementsByClassName('photoPlanche')
+    for (let i = 0, max = mesPhotoPlanche.length; i < max; i++) {
+      mesPhotoPlanche[i].tabIndex = ++tabIndexDepart
+    }
+    document.getElementById('modaleLightBox').tabIndex = ++tabIndexDepart
+    document.getElementById('lbxFermeture').tabIndex = ++tabIndexDepart
+    document.getElementById('lbxPrecedent').tabIndex = ++tabIndexDepart
+    document.getElementById('lbxSuivant').tabIndex = ++tabIndexDepart
+    document.getElementById('diaporama').tabIndex = ++tabIndexDepart
   })
 
 /*
@@ -121,34 +132,94 @@ document.getElementById('planchePhotos').onclick = (event) => {
     }
   }
 }
-
 // Fin de la gestion des likes
 
 /*
-  Fonction de tri
+  Gestion du tri et du faux-select
 */
-let toggleFauxSelect = 0
 const monHTML = document.getElementById('html')
 monHTML.addEventListener('click', function (e) {
+  // Cette fonction permet de fermer le faux-select en cas de clic à l'extérieur ou de perte de focus
   if ((e.target.id === 'monFauxSelect') || (e.target.id === 'premierChoix') || (e.target.id === 'enTeteChevron')) {
     document.getElementById('monFauxSelect').classList.toggle('open')
     document.getElementById('mesOptions').classList.toggle('open')
     document.getElementById('enTeteChevron').classList.toggle('chevronOpen')
     document.getElementById('enTeteChevron').classList.toggle('chevron')
-    if (toggleFauxSelect === 1) {
-      toggleFauxSelect = 0
+    if (document.getElementById('monFauxSelect').getAttribute('aria-expanded') === 'true') {
+      document.getElementById('monFauxSelect').setAttribute('aria-expanded', 'false')
     } else {
-      toggleFauxSelect = 1
+      document.getElementById('monFauxSelect').setAttribute('aria-expanded', 'true')
     }
-  } else if (toggleFauxSelect === 1) {
+  } else if (document.getElementById('monFauxSelect').getAttribute('aria-expanded') === 'true') {
     document.getElementById('monFauxSelect').classList.toggle('open')
     document.getElementById('mesOptions').classList.toggle('open')
     document.getElementById('enTeteChevron').classList.toggle('chevronOpen')
     document.getElementById('enTeteChevron').classList.toggle('chevron')
-    toggleFauxSelect = 0
     togglePremierChoix = 0
+    document.getElementById('monFauxSelect').setAttribute('aria-expanded', 'false')
   }
 })
+
+document.getElementById('monFauxSelect').onfocus = (event) => {
+  if (document.getElementById('monFauxSelect').getAttribute('aria-expanded') === 'false') {
+    document.getElementById('monFauxSelect').classList.toggle('open')
+    document.getElementById('mesOptions').classList.toggle('open')
+    document.getElementById('enTeteChevron').classList.toggle('chevronOpen')
+    document.getElementById('enTeteChevron').classList.toggle('chevron')
+    document.getElementById('monFauxSelect').setAttribute('aria-expanded', 'true')
+  }
+}
+
+// permet de connaître l'état de la touche shift, même lors d'un événement onblur
+let shiftPresse = false
+document.onkeydown = function (e) {
+  if (e.location === KeyboardEvent.DOM_KEY_LOCATION_LEFT) {
+    shiftPresse = true
+  }
+}
+document.onkeyup = function (e) {
+  if (e.location === KeyboardEvent.DOM_KEY_LOCATION_LEFT) {
+    shiftPresse = false
+  }
+}
+
+// L'événement suivant permet de fermer le faux-select lorsque, au clavier, on quitte avec tab son dernier élément
+document.getElementById('troisiemeChoix').onblur = (event) => {
+  if (!shiftPresse) {
+    if (document.getElementById('monFauxSelect').getAttribute('aria-expanded') === 'true') {
+      document.getElementById('monFauxSelect').classList.toggle('open')
+      document.getElementById('mesOptions').classList.toggle('open')
+      document.getElementById('enTeteChevron').classList.toggle('chevronOpen')
+      document.getElementById('enTeteChevron').classList.toggle('chevron')
+      togglePremierChoix = 0
+      document.getElementById('monFauxSelect').setAttribute('aria-expanded', 'false')
+    }
+  }
+}
+// Idem en quittant le faux-select par le haut, avec un shift-tab
+document.getElementById('monFauxSelect').onblur = (event) => {
+  if (shiftPresse) {
+    if (document.getElementById('monFauxSelect').getAttribute('aria-expanded') === 'true') {
+      document.getElementById('monFauxSelect').classList.toggle('open')
+      document.getElementById('mesOptions').classList.toggle('open')
+      document.getElementById('enTeteChevron').classList.toggle('chevronOpen')
+      document.getElementById('enTeteChevron').classList.toggle('chevron')
+      togglePremierChoix = 0
+      document.getElementById('monFauxSelect').setAttribute('aria-expanded', 'false')
+    }
+  }
+}
+
+// L'événement suivant permet de rouvrir le faux-select lorsque, au clavier, on le rejoint avec un shift-tab sur son dernier élément
+document.getElementById('troisiemeChoix').onfocus = (event) => {
+  if (document.getElementById('monFauxSelect').getAttribute('aria-expanded') === 'false') {
+    document.getElementById('monFauxSelect').classList.toggle('open')
+    document.getElementById('mesOptions').classList.toggle('open')
+    document.getElementById('enTeteChevron').classList.toggle('chevronOpen')
+    document.getElementById('enTeteChevron').classList.toggle('chevron')
+    document.getElementById('monFauxSelect').setAttribute('aria-expanded', 'true')
+  }
+}
 
 function triPhotos (ordreTri) {
   // On récupère l'ordre de tri
@@ -201,19 +272,40 @@ function lanceTri (ordreTri) {
   selectionPrecedente = ordreTri // On met à jour cette variable pour le prochain clic de l'utilisateur sur le tri
   triPhotos(ordreTri) // On appelle le tri
   // on détruit les écouteurs d'événement en place
-  let cartesMedia = document.querySelectorAll('figure img')
+  let cartesMedia = document.querySelectorAll('.photoPlanche')
   cartesMedia.forEach(function (maCarteMedia) {
     maCarteMedia.removeEventListener('click', ouvertureDiaporama)
+    maCarteMedia.removeEventListener('keydown', ouvertureDiaporama)
   })
 
   let monHTML = ''
   for (let i = 0; i < tableauPhotos.length; i++) monHTML += tableauPhotos[i].html
   document.getElementById('planchePhotos').innerHTML = monHTML
   // On ajoute les nouveaux écouteurs dévénements
-  cartesMedia = document.querySelectorAll('figure img')
+  cartesMedia = document.querySelectorAll('.photoPlanche')
   cartesMedia.forEach(function (maCarteMedia) {
     maCarteMedia.addEventListener('click', ouvertureDiaporama)
+    maCarteMedia.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        ouvertureDiaporama(e)
+      }
+    })
   })
+  // Et maintenant, on numérote correctement les tabindex
+  let tabIndexDepart = document.getElementById('troisiemeChoix').tabIndex
+  const mesPhotoPlanche = document.getElementsByClassName('photoPlanche')
+  for (let i = 0, max = mesPhotoPlanche.length; i < max; i++) {
+    mesPhotoPlanche[i].tabIndex = ++tabIndexDepart
+  }
+  // Et, si il est encore ouvert (se produit lors d'un choix par clavier), on ferme le faux-select
+  if (document.getElementById('monFauxSelect').getAttribute('aria-expanded') === 'true') {
+    document.getElementById('monFauxSelect').classList.toggle('open')
+    document.getElementById('mesOptions').classList.toggle('open')
+    document.getElementById('enTeteChevron').classList.toggle('chevronOpen')
+    document.getElementById('enTeteChevron').classList.toggle('chevron')
+    togglePremierChoix = 0
+    document.getElementById('monFauxSelect').setAttribute('aria-expanded', 'false')
+  }
 }
 
 // Les deux événements suivants permettent de changer la couleur de fond du chevron si le premier li est survolé
@@ -231,6 +323,13 @@ document.getElementById('monFauxSelect').onclick = (event) => {
   else togglePremierChoix = 1
 }
 
+document.getElementById('monFauxSelect').onkeydown = (event) => {
+  if (event.key === 'Enter') {
+    if (togglePremierChoix > 0) lanceTri(document.getElementById('premierChoix').innerHTML)
+    else togglePremierChoix = 1
+  }
+}
+
 document.getElementById('deuxiemeChoix').onclick = (event) => {
   lanceTri(document.getElementById('deuxiemeChoix').innerHTML)
   const tempString = document.getElementById('premierChoix').innerHTML
@@ -246,6 +345,28 @@ document.getElementById('deuxiemeChoix').onclick = (event) => {
       break
     default: // Popularité
       r.style.setProperty('--ajoutRem', '3.9rem')
+  }
+  document.getElementById('monFauxSelect').setAttribute('data-selected-value', document.getElementById('premierChoix').innerHTML)
+}
+
+document.getElementById('deuxiemeChoix').onkeydown = (event) => {
+  if (event.key === 'Enter') {
+    lanceTri(document.getElementById('deuxiemeChoix').innerHTML)
+    const tempString = document.getElementById('premierChoix').innerHTML
+    document.getElementById('premierChoix').innerHTML = document.getElementById('deuxiemeChoix').innerHTML
+    document.getElementById('deuxiemeChoix').innerHTML = tempString
+    const r = document.querySelector(':root')
+    switch (document.getElementById('premierChoix').innerHTML) {
+      case 'Date':
+        r.style.setProperty('--ajoutRem', '6.76rem')
+        break
+      case 'Titre':
+        r.style.setProperty('--ajoutRem', '6.76rem')
+        break
+      default: // Popularité
+        r.style.setProperty('--ajoutRem', '3.9rem')
+    }
+    document.getElementById('monFauxSelect').setAttribute('data-selected-value', document.getElementById('premierChoix').innerHTML)
   }
 }
 
@@ -265,6 +386,28 @@ document.getElementById('troisiemeChoix').onclick = (event) => {
     default: // Popularité
       r.style.setProperty('--ajoutRem', '3.9rem')
   }
+  document.getElementById('monFauxSelect').setAttribute('data-selected-value', document.getElementById('premierChoix').innerHTML)
+}
+
+document.getElementById('troisiemeChoix').onkeydown = (event) => {
+  if (event.key === 'Enter') {
+    lanceTri(document.getElementById('troisiemeChoix').innerHTML)
+    const tempString = document.getElementById('premierChoix').innerHTML
+    document.getElementById('premierChoix').innerHTML = document.getElementById('troisiemeChoix').innerHTML
+    document.getElementById('troisiemeChoix').innerHTML = tempString
+    const r = document.querySelector(':root')
+    switch (document.getElementById('premierChoix').innerHTML) {
+      case 'Date':
+        r.style.setProperty('--ajoutRem', '6.76rem')
+        break
+      case 'Titre':
+        r.style.setProperty('--ajoutRem', '6.76rem')
+        break
+      default: // Popularité
+        r.style.setProperty('--ajoutRem', '3.9rem')
+    }
+    document.getElementById('monFauxSelect').setAttribute('data-selected-value', document.getElementById('premierChoix').innerHTML)
+  }
 }
 // Fin gestion du sélecteur de tri
 
@@ -276,14 +419,57 @@ const maModale = document.getElementById('modaleContact')
 const fermeModalBtn = document.querySelectorAll('#close')
 
 fermeModalBtn[0].addEventListener('click', function (event) { // ferme la modale si l'utilisateur clique sur sa croix de fermeture
+  document.getElementById('modaleContact').setAttribute('aria-hidden', 'true')
   if (event.target.matches('#close')) maModale.style.display = 'none'
+  window.removeEventListener('keydown', handleKey)
 },
 false
 )
 
+fermeModalBtn[0].addEventListener('keydown', function (event) { // ferme la modale si l'utilisateur active la croix au clavier
+  document.getElementById('modaleContact').setAttribute('aria-hidden', 'true')
+  if ((event.target.matches('#close')) && (event.key !== 'Tab')) maModale.style.display = 'none'
+  window.removeEventListener('keydown', handleKey)
+},
+false
+)
+maModale.addEventListener('keydown', function (event) { // ferme la modale si l'utilisateur appuie sur escape
+  document.getElementById('modaleContact').setAttribute('aria-hidden', 'true')
+  if (event.key === 'Escape') maModale.style.display = 'none'
+  window.removeEventListener('keydown', handleKey)
+},
+false)
+
+// Piège le focus sur la modale ouverte
+// Idée et code trouvés sur https://stackoverflow.com/questions/50178419/how-can-restrict-the-tab-key-press-only-within-the-modal-popup-when-its-open
+function handleKey (e) {
+  if (e.key === 'Tab') {
+    const focusable = document.querySelector('#formulaireContact').querySelectorAll('span, div,input,button,select,textarea')
+    if (focusable.length) {
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      const shift = e.shiftKey
+      if (shift) {
+        if (e.target === first) { // shift-tab pressed on first input in dialog
+          last.focus()
+          e.preventDefault()
+        }
+      } else {
+        if (e.target === last) { // tab pressed on last input in dialog
+          first.focus()
+          e.preventDefault()
+        }
+      }
+    }
+  }
+}
+
 // ouvre la modale
 function launchModal () {
+  document.getElementById('modaleContact').setAttribute('aria-hidden', 'false')
   maModale.style.display = 'block'
+  document.getElementById('formulaireContact').focus()
+  maModale.addEventListener('keydown', handleKey) // Piège le focus sur la modale ouverte
 }
 
 /*
@@ -304,37 +490,46 @@ function validate () {
   const prenomEntre = prenom.value.trim()
   if (prenomEntre === '') {
     document.getElementById('erreurPrenom').innerHTML = "Merci d'entrer un prénom"
+    document.getElementById('erreurPrenom').setAttribute('aria-hidden', 'false')
     validiteFormulaire = false
   } else if (prenomEntre.length < 2) {
     document.getElementById('erreurPrenom').innerHTML = 'Le prénom doit comporter au moins 2 lettres'
+    document.getElementById('erreurPrenom').setAttribute('aria-hidden', 'false')
     validiteFormulaire = false
   } else {
     document.getElementById('erreurPrenom').innerHTML = ''
+    document.getElementById('erreurPrenom').setAttribute('aria-hidden', 'true')
   }
 
   // Validation du Nom (min 2 chars, pas vide)
   const nomEntre = nom.value.trim()
   if (nomEntre === '') {
     document.getElementById('erreurNom').innerHTML = "Merci d'entrer un nom"
+    document.getElementById('erreurNom').setAttribute('aria-hidden', 'false')
     validiteFormulaire = false
   } else if (nomEntre.length < 2) {
     document.getElementById('erreurNom').innerHTML = 'Le nom doit comporter au moins 2 lettres'
+    document.getElementById('erreurNom').setAttribute('aria-hidden', 'false')
     validiteFormulaire = false
   } else {
     document.getElementById('erreurNom').innerHTML = ''
+    document.getElementById('erreurNom').setAttribute('aria-hidden', 'true')
   }
 
   // Validation de l'email
   const emailEntre = email.value.trim()
   if (emailEntre === '') {
     document.getElementById('erreurEmail').innerHTML = "Merci d'entrer une adresse email"
+    document.getElementById('erreurEmail').setAttribute('aria-hidden', 'false')
     validiteFormulaire = false
   } else {
     // source : https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
     if (/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/.test(emailEntre)) {
       document.getElementById('erreurEmail').innerHTML = ''
+      document.getElementById('erreurEmail').setAttribute('aria-hidden', 'true')
     } else {
       document.getElementById('erreurEmail').innerHTML = 'Veuillez entrer une adresse email valide'
+      document.getElementById('erreurEmail').setAttribute('aria-hidden', 'false')
       validiteFormulaire = false
     }
   }
@@ -343,7 +538,10 @@ function validate () {
   const messageEntre = texteMessage.value.trim()
   if (messageEntre === '') {
     document.getElementById('erreurTexteMessage').innerHTML = "Merci d'entrer un message"
+    document.getElementById('erreurTexteMessage').setAttribute('aria-hidden', 'false')
     validiteFormulaire = false
+  } else {
+    document.getElementById('erreurTexteMessage').setAttribute('aria-hidden', 'true')
   }
 
   return validiteFormulaire
@@ -380,9 +578,9 @@ function afficheFooter () {
   const footer = document.querySelector('footer')
   footer.innerHTML += `
     <div id="compteurLikes">
-      <span id="affTotalLikes">${totalLikes} ❤</span>
+      <span id="affTotalLikes" aria-label="Ce photographe a reçu ${totalLikes} likes">${totalLikes} ❤</span>
     </div>
-    <p>${prixPhotographe} €/jour</p>`
+    <p aria-label="Ce photographe loue ses services pour ${prixPhotographe} euros par jour">${prixPhotographe} €/jour</p>`
 }
 
 /*
@@ -398,10 +596,19 @@ let indexPhoto = 0
 
 // Création des gestionnaires d'événements pour le pilotage de la lightbox
 lbxFermeture.addEventListener('click', fermeLightBox)
+lbxFermeture.addEventListener('keydown', (event) => {
+  if ((event.key === 'Escape') || (event.key === 'Enter')) fermeLightBox()
+})
 window.addEventListener('keydown', (event) => { if (event.key === 'Escape') fermeLightBox() })
 lbxPrecedent.addEventListener('click', diapoPrecedente)
+lbxPrecedent.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') diapoPrecedente()
+})
 window.addEventListener('keydown', (event) => { if (event.key === 'ArrowLeft') diapoPrecedente() })
 lbxSuivant.addEventListener('click', diapoSuivante)
+lbxSuivant.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') diapoSuivante()
+})
 window.addEventListener('keydown', (event) => { if (event.key === 'ArrowRight') diapoSuivante() })
 window.addEventListener('keydown', (event) => { if (event.code === 'Space') joueVideo() })
 
@@ -410,6 +617,7 @@ function fermeLightBox () {
   monDiaporama.innerHTML = ''
   document.getElementById('conteneurPage').style.display = 'block'
   document.querySelector('footer').style.display = 'flex'
+  document.getElementById('modaleLightBox').setAttribute('aria-hidden', 'true')
 }
 
 function joueVideo () { // Permet de jouer ou de pauser la vidéo à la pression de la barre "espace"
@@ -437,10 +645,11 @@ function ouvertureDiaporama (e) {
   } else {
     htmlDiapo = `<img class="diapo" src='img/vignettesLightbox/${id}/${nomImage}' alt='${tableauPhotos[indexPhoto].alt_text}'/>`
   }
-  htmlDiapo += `<p>${tableauPhotos[indexPhoto].title}</p>`
+  htmlDiapo += `<p tabindex="54">${tableauPhotos[indexPhoto].title}</p>`
   document.getElementById('diaporama').innerHTML = htmlDiapo
 
   maLightbox.style.display = 'block'
+  document.getElementById('modaleLightBox').setAttribute('aria-hidden', 'false')
 }
 
 function diapoPrecedente () {
@@ -479,8 +688,13 @@ window.onload = function (e) {
   afficheFooter()
   document.getElementById('nomContact').innerHTML = nomPhotographe
 
-  const cartesMedia = document.querySelectorAll('figure img')
+  const cartesMedia = document.querySelectorAll('.photoPlanche')
   cartesMedia.forEach(function (maCarteMedia) {
     maCarteMedia.addEventListener('click', ouvertureDiaporama)
+    maCarteMedia.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        ouvertureDiaporama(e)
+      }
+    })
   })
 }

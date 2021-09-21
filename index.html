@@ -20,27 +20,27 @@
     <body>
         <div id="conteneurPage">
 
-            <a href="#conteneurPage" id="retourMain" aria-hidden="false">Passer au contenu</a>
+            <a href="#conteneurPage" id="retourMain" aria-hidden="false" tabindex="1" aria-label="revenir au début du contenu">Passer au contenu</a>
 
             <header>
                 <a href="./index.html">
-                    <img id="logoFisheye" src="./img/fisheyeLogo.png" alt="Fish Eye Home page" aria-label="Aller à l'accueil" />
+                    <img id="logoFisheye" src="./img/fisheyeLogo.png" alt="Logo de FishEye" aria-label="Aller à l'accueil" />
                 </a>
 
-                <div id="filtres" aria-label="photographer categories">
-                    <span class="spanFiltres" id="fltPortrait" tabindex="1" aria-label="">#Portrait</span>
-                    <span class="spanFiltres" id="fltArt" tabindex="2" aria-label="">#Art</span>
-                    <span class="spanFiltres" id="fltFashion" tabindex="3" aria-label=""> #Fashion</span>
-                    <span class="spanFiltres" id="fltArchitecture" tabindex="4" aria-label="">#Architecture</span>
-                    <span class="spanFiltres" id="fltTravel" tabindex="5" aria-label="">#Travel</span>
-                    <span class="spanFiltres" id="fltSport" tabindex="6" aria-label="">#Sport</span>
-                    <span class="spanFiltres" id="fltAnimals" tabindex="7" aria-label="">#Animals</span>
-                    <span class="spanFiltres" id="fltEvents" tabindex="8" aria-label="">#Events</span>
+                <div id="filtres" aria-label="catégories de photographes">
+                    <span class="spanFiltres" id="fltPortrait" tabindex="2" aria-label="affichez les photographes faisant du portrait">#Portrait</span>
+                    <span class="spanFiltres" id="fltArt" tabindex="3" aria-label="affichez les photographes faisant des photos d'art">#Art</span>
+                    <span class="spanFiltres" id="fltFashion" tabindex="4" aria-label="affichez les photographes faisant des photos de mode"> #Fashion</span>
+                    <span class="spanFiltres" id="fltArchitecture" tabindex="5" aria-label="affichez les photographes faisant des photos architecturales">#Architecture</span>
+                    <span class="spanFiltres" id="fltTravel" tabindex="6" aria-label="affichez les photographes faisant des photos de voyage">#Travel</span>
+                    <span class="spanFiltres" id="fltSport" tabindex="7" aria-label="affichez les photographes faisant des photos de sport">#Sport</span>
+                    <span class="spanFiltres" id="fltAnimals" tabindex="8" aria-label="affichez les photographes faisant des photos animalières">#Animals</span>
+                    <span class="spanFiltres" id="fltEvents" tabindex="9"  aria-label="affichez les photographes faisant des photos d'événements">#Events</span>
                 </div>
             </header>
 
             <main id="main">
-                <h1 id="titre">Nos photographes</h1>
+                <h1 id="titre" tabindex="10" aria-label="cliquez ici pour afficher tous les photographes">Nos photographes</h1>
                 <section id="nosPhotographes">
                     <!-- généré dynamiquement en javascript -->
                 </section>

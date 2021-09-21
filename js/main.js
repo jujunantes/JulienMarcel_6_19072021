@@ -17,6 +17,7 @@ function afficheTousPhotographes () {
 }
 
 document.getElementById('titre').addEventListener('click', afficheTousPhotographes)
+let tabIndexDepart = document.getElementById('titre').tabIndex
 
 fetch('js/FishEyeData.json')
   .then((reponse) => reponse.json())
@@ -28,21 +29,21 @@ fetch('js/FishEyeData.json')
       const photographe = creePhotographe(chaquePhotographe)
       // On peut maintenant ajouter la carte de chaque photographe
       monHTML += `
-        <a href="profil.html?id=${photographe.id}" aria-label="Affichez le profil de ${photographe.name}">
-            <figure class="cartePhotographe" tabindex="">
-                <img class="photoProfil" tabindex="" src="img/vignettes400/Photographers_ID_Photos/${photographe.portrait}" alt="" />
-                <figcaption>
-                    <h2 tabindex="" aria-label="Ce photographe s'appelle ${photographe.name} ">${photographe.name}</h2>
-                    <h3 tabindex="" aria-label="Ce photographe habite à ${photographe.city}">${photographe.city}, ${photographe.country}</h3>
-                    <blockquote tabindex="" aria-label="Sa devise est :${photographe.tagline}">${photographe.tagline}</blockquote>
-                    <p  tabindex="" aria-label="Son tarif est ${photographe.price}€ par jour">${photographe.price}€ /jour</p>
-                    <div class="filtresPhotographes">`
+          <figure class="cartePhotographe" tabindex="${++tabIndexDepart}">
+            <a href="profil.html?id=${photographe.id}" aria-label="Affichez le profil de ${photographe.name}">
+              <img class="photoProfil" src="img/vignettes400/Photographers_ID_Photos/${photographe.portrait}" alt="${photographe.alt_text}" />
+              <figcaption>
+                <h2 aria-label="Ce photographe s'appelle ${photographe.name} ">${photographe.name}</h2>
+                <h3 aria-label="Ce photographe habite à ${photographe.city}, ${photographe.country}">${photographe.city}, ${photographe.country}</h3>
+                <blockquote aria-label="Sa devise est :${photographe.tagline}">${photographe.tagline}</blockquote>
+                <p aria-label="Son tarif est de ${photographe.price}€ par jour">${photographe.price}€ /jour</p>
+                <div class="filtresPhotographes">`
       for (const tag of chaquePhotographe.tags) monHTML += `<span class="spanFiltres">#${tag}</span>`
       monHTML += `
-                    </div>
-                </figcaption>
-            </figure>
-        </a>`
+                  </div>
+              </figcaption>
+            </a>
+          </figure>`
       tableauHTMLPhotographes.push(monHTML)
       tableauPhotographes.push(photographe)
     }
