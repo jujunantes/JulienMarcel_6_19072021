@@ -7,7 +7,7 @@
   ligne 414 : modale de contact
   ligne 573 : fenêtre flottante avec le nombre de likes
   ligne 586 : lightbox
-  ligne 687 : window.onload
+  ligne 697 : window.onload
 */
 
 import { creeMedia } from './mediaFactory.js'
@@ -84,6 +84,9 @@ fetch('js/FishEyeData.json')
         tableauPhotos.push(monMedia)
         totalLikes += chaqueMedia.likes
       }
+    }
+    if (window.screen.width > 375) {
+      afficheFooter()
     }
     triPhotos('Popularité') // Tri initial du tableau
     // Maintenant, on crée le HTML que l'on va injecter dans la page
@@ -692,9 +695,6 @@ function diapoSuivante () {
 // Fin de la gestion de la lightbox
 
 window.onload = function (e) {
-  if (window.screen.width > 375) {
-    afficheFooter()
-  }
   document.getElementById('nomContact').innerHTML = nomPhotographe
 
   const cartesMedia = document.querySelectorAll('.photoPlanche')
