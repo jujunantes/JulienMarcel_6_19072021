@@ -104,6 +104,17 @@ fetch('js/FishEyeData.json')
     document.getElementById('lbxPrecedent').tabIndex = ++tabIndexDepart
     document.getElementById('lbxSuivant').tabIndex = ++tabIndexDepart
     document.getElementById('diaporama').tabIndex = ++tabIndexDepart
+    document.getElementById('nomContact').innerHTML = nomPhotographe
+
+    const cartesMedia = document.querySelectorAll('.photoPlanche')
+    cartesMedia.forEach(function (maCarteMedia) {
+      maCarteMedia.addEventListener('click', ouvertureDiaporama)
+      maCarteMedia.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          ouvertureDiaporama(e)
+        }
+      })
+    })
   })
 
 /*
@@ -641,7 +652,9 @@ function ouvertureDiaporama (e) {
   document.getElementById('conteneurPage').style.display = 'none'
   document.querySelector('footer').style.display = 'none'
   // On récupère le nom de l'image sur laquelle l'utilisateur a cliqué
-  const URLFichier = new URL(e.path[0].currentSrc).pathname
+  // const URLFichier = new URL(e.path[0].currentSrc).pathname
+  const URLFichier = new URL(e.target.src).pathname
+  console.log(e.target.src)
   let nomImage = URLFichier.split('/').pop() // https://stackoverflow.com/questions/511761/js-function-to-get-filename-from-url/2480287
   // Puis son index dans le tableau des médias
   indexPhoto = tableauPhotos.findIndex(imageCherchee => imageCherchee.image === nomImage)
@@ -693,17 +706,3 @@ function diapoSuivante () {
 }
 
 // Fin de la gestion de la lightbox
-
-window.onload = function (e) {
-  document.getElementById('nomContact').innerHTML = nomPhotographe
-
-  const cartesMedia = document.querySelectorAll('.photoPlanche')
-  cartesMedia.forEach(function (maCarteMedia) {
-    maCarteMedia.addEventListener('click', ouvertureDiaporama)
-    maCarteMedia.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter') {
-        ouvertureDiaporama(e)
-      }
-    })
-  })
-}
