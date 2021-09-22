@@ -1,13 +1,12 @@
 /*
   profil.js : contient toute la logique de contrôle des profils individuels des photographes
 
-  ligne 029 : Récupération des données du photographe et de ses médias (fetch)
-  ligne 109 : gestion des likes
-  ligne 137 : gestion du tri et du faux select
-  ligne 414 : modale de contact
-  ligne 573 : fenêtre flottante avec le nombre de likes
-  ligne 586 : lightbox
-  ligne 697 : window.onload
+  ligne 028 : Récupération des données du photographe et de ses médias (fetch)
+  ligne 119 : gestion des likes
+  ligne 147 : gestion du tri et du faux select
+  ligne 424 : modale de contact
+  ligne 583 : fenêtre flottante avec le nombre de likes
+  ligne 596 : lightbox
 */
 
 import { creeMedia } from './mediaFactory.js'

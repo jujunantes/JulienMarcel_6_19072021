@@ -434,18 +434,18 @@ header {
 footer {
     align-items: center;
     display: flex;
-    position: sticky;
+    position: fixed;
     bottom: 0px;
-    right: 0px;
+    right: -4rem;
     justify-content: space-around;
-    background-color: $couleurSecondaire;
+    background-color: #DB8876;
     color: black;
     font-weight: bold;
     border-radius: 5px 5px 0px 0px;
-    margin-left: 80%;
+    margin-right: 10%;
     padding: 1rem;
     z-index: 1;
-    width: 26%;
+    width: 30%;
 }
 
 

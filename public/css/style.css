@@ -479,18 +479,18 @@ header {
 footer {
   align-items: center;
   display: flex;
-  position: sticky;
+  position: fixed;
   bottom: 0px;
-  right: 0px;
+  right: -4rem;
   justify-content: space-around;
-  background-color: #d3573c;
+  background-color: #DB8876;
   color: black;
   font-weight: bold;
   border-radius: 5px 5px 0px 0px;
-  margin-left: 80%;
+  margin-right: 10%;
   padding: 1rem;
   z-index: 1;
-  width: 26%;
+  width: 30%;
 }
 
 /* Début modale contact */
@@ -612,17 +612,18 @@ footer {
 }
 
 /* Fin modale lightbox */
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 1200px) {
   body {
     width: 100%;
-    margin: auto;
+    margin: 0 auto;
     box-sizing: border-box;
   }
 
-  header {
-    margin-bottom: 2rem;
+  #trier {
+    margin-left: 1rem;
   }
-
+}
+@media screen and (max-width: 1090px) {
   #logoFisheye {
     margin-left: 1em;
     margin-top: 2.5em;
@@ -630,10 +631,10 @@ footer {
   }
 
   #titre {
-    font-size: 0.85em;
+    font-size: 2em;
     text-align: right;
     position: absolute;
-    top: 4em;
+    top: 1em;
     right: 1em;
   }
 
@@ -651,6 +652,15 @@ footer {
     margin-top: 1em;
   }
 
+  #planchePhotos {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 900px) {
   #main {
     margin-top: 6.5em;
     justify-content: center;
@@ -658,8 +668,17 @@ footer {
     display: flex;
   }
 
-  #conteneurPage {
-    padding-bottom: 5rem;
+  #titre {
+    font-size: 1.5em;
+    text-align: right;
+    position: absolute;
+    top: 2em;
+    right: 1em;
+  }
+
+  #trier,
+footer {
+    display: none;
   }
 
   #modal-btn {
@@ -672,8 +691,12 @@ footer {
     position: fixed;
     top: unset;
     bottom: 0;
-    left: 15%;
+    left: calc((90% - 12rem) / 2);
     z-index: 1;
+  }
+
+  #conteneurPage {
+    padding-bottom: 5rem;
   }
 
   .cartePhotographe {
@@ -725,11 +748,6 @@ footer {
     width: 6.5rem;
   }
 
-  #planchePhotos {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
   .cartePhoto {
     transition: all 0.4s;
   }
@@ -757,17 +775,11 @@ footer {
     filter: drop-shadow(8px 8px 10px grey);
   }
 
-  #trier,
-footer {
-    display: none;
-  }
-
   /* Début modale contact */
   #modaleContact {
     display: none;
     position: absolute;
     top: 0;
-    right: 0;
     z-index: 2;
     /* Croix fermeture modale : début */
     /* Croix fermeture modale : fin */
@@ -872,7 +884,7 @@ footer {
   #modaleLightBox {
     display: none;
     background-color: white;
-    width: 375px;
+    width: 100%;
   }
   #modaleLightBox #lbxFermeture {
     cursor: pointer;
@@ -908,11 +920,24 @@ footer {
     margin-top: 60%;
     margin-left: 12%;
     object-fit: cover;
-    width: 289px;
-    height: 248px;
+    width: 77%;
+    height: 66%;
   }
 
   /* Fin modale lightbox */
+}
+@media screen and (max-width: 375px) {
+  header {
+    margin-bottom: 2rem;
+  }
+
+  #titre {
+    font-size: 0.85em;
+    text-align: right;
+    position: absolute;
+    top: 4em;
+    right: 1em;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
