@@ -642,7 +642,7 @@ function joueVideo () { // Permet de jouer ou de pauser la vidéo à la pression
 }
 
 function ouvertureDiaporama (e) {
-  if (window.screen.width < 400) {
+  if (window.screen.width < 900) {
     // Sinon le footer réapparaît...
     document.getElementById('monFooter').style.visibility = 'hidden'
     document.getElementById('monFooter').style.width = '0px'
