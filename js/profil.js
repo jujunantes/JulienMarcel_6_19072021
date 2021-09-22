@@ -84,7 +84,7 @@ fetch('js/FishEyeData.json')
         totalLikes += chaqueMedia.likes
       }
     }
-    if (window.screen.width > 375) {
+    if (window.screen.width >= 900) {
       afficheFooter()
     }
     triPhotos('Popularité') // Tri initial du tableau
@@ -629,7 +629,7 @@ function fermeLightBox () {
   document.querySelector('footer').style.display = 'flex'
   document.getElementById('modaleLightBox').setAttribute('aria-hidden', 'true')
   document.getElementById('modal-btn').style.visibility = 'visible'
-  if (window.screen.width > 375) {
+  if (window.screen.width >= 900) {
     document.getElementById('monFooter').style.visibility = 'visible'
   }
 }
