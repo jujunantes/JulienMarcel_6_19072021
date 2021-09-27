@@ -7,7 +7,7 @@
 *:focus {
     outline-color: black;
     outline-width: 1px;
-    outline-style: solid; }
+    outline-style: dotted; }
     
 body {
     align-items: center;
@@ -303,7 +303,7 @@ header {
     #blocBioContact {
         display: flex;
         flex-direction: row;
-
+        max-width: 43%;
         h2 {
             // Nom
             font-weight: 400;
@@ -446,15 +446,18 @@ footer {
     padding: 1rem;
     z-index: 1;
     width: 30%;
+    max-width: 376px;
 }
 
 
 /* Début modale contact */
 #modaleContact {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
+    bottom: 0;
+    left: 0;
     z-index: 2;
 
     form {
@@ -467,8 +470,9 @@ footer {
         padding: 2.2rem;
         padding-top: 1.5rem;
         position: absolute;
-        top: 115px;
-        right: 160px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
         border-radius: 5px;
         box-shadow: 4px 17px 20px 1px black;
 
@@ -521,8 +525,8 @@ footer {
 /* Début modale Lightbox */
 
 .icone {
-    height: 2rem;
-    width: 2rem;
+    height: 2%;
+    width: 2%;
     transition: transform .2s;
 
     &:hover {
@@ -530,56 +534,89 @@ footer {
     }
 }
 
-#modaleLightBox {
-    display: none;
-    background-color: white;
-    position: absolute;
-    width: 1253px;
-
-    #lbxFermeture {
-        cursor: pointer;
+#overlayLightbox {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -2;
+    #modaleLightBox {
+        max-width: 1250px;
+            max-height: 1100px;
+        display: none;
+        background-color: white;
+        width: 100%;
         position: absolute;
-        top: 120px;
-        right: 2rem;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
 
-        img {
-            height: 2.5rem;
-            width: 2.5rem;
+        #lbxFermeture {
+            cursor: pointer;
+            position: relative;
+            //top: -200px;
+            right: -90%;
+            top: 0px;
+            transform: translate(0, -850%);
+            img {
+                height: 120%;
+                width: 120%;
+            }
         }
-    }
 
-    #lbxPrecedent {
-        cursor: pointer;
-        position: absolute;
-        top: 550px;
-        left: 2rem;
-    }
+        #lbxPrecedent {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            left: 8%;
+        }
 
-    #lbxSuivant {
-        cursor: pointer;
-        position: absolute;
-        top: 550px;
-        right: 2rem;
-    }
+        #lbxSuivant {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            right: 8%;
+        }
 
-    p {
-        color: $couleurPrimaire;
-        margin-left: 100px;
-        margin-top: 1rem;
-        font-size: 1.45rem;
-        font-weight: 500;
-        width: 30rem;
-    }
-}
+        p {
+            color: $couleurPrimaire;
+            margin-top: 1rem;
+            position: absolute;
+            font-size: 1.45rem;
+            font-weight: 500;
+            width: 30rem;
+        }
+        
+        #diaporama {
+            max-width: 1050px;
+            max-height: 900px;
+            width: 77%; //289
+            //height: 66%; //248
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            .diapo {
+                //background-size: contain;
+                display: block;
+                border-radius: 5px;
+                box-shadow: rgba(0, 0, 0, 0.15) 5px 0 2.6px;
+                object-fit: cover;
+                max-width: 1050px;
+                max-height: 900px;
+                width: 100%;
+                //width: 84%; //289
+                //height: 72%; //248
+                //position: absolute;
+                //left: 50%;
+                //top: 50%;
+                //transform: translate(-50%, -50%);
+            }
+        }
 
-.diapo {
-    border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.15) 5px 0 2.6px;
-    margin-top: 100px;
-    margin-left: 100px;
-    object-fit: cover;
-    width: 1050px;
-    height: 900px;
+        
+    }
 }
 
 /* Fin modale lightbox */

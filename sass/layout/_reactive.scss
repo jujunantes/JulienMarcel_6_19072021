@@ -104,6 +104,7 @@
         #blocBioContact {
             display: flex;
             flex-direction: row;
+            max-width: 69%;
     
             h2 {
                 // Nom
@@ -180,29 +181,15 @@
 
     /* Début modale contact */
     #modaleContact {
-        display: none;
-        position: absolute;
-        top: 0;
-        z-index: 2;
-    
         form {
-            height: auto;
             width: 375px;
             height: 812px;
-            background-color: #DB8876;
-            display: flex;
-            flex-direction: column;
+            margin-right: unset;
             padding: 1rem;
             padding-top: 2rem;
-            position: absolute;
-            top: 0px;
-            right: 0px;
-            border-radius: 5px;
-            box-shadow: 4px 17px 20px 1px black;
     
             .titreContact {
                 font-size: 2.2rem;
-                margin-bottom: .7rem;
             }
     
             div {
@@ -247,30 +234,15 @@
     
           /* Croix fermeture modale : début */
         #close {
-        color: white;
-        position: absolute;
-        right: 1.5rem;
-        top: 2rem;
-        width: 1rem;
-        height: 1rem;
-        opacity: 1;
-        cursor: pointer;
-        transform: scale(.7);
-      }
+            position: relative;
+            right: unset;
+            top: -1rem;
+            left: 18rem;
+        }
         #close:before,
         #close:after {
-          position: absolute;
-          left: 15px;
-          content: "";
           height: 2rem;
           width: 4px;
-          background-color: white;
-        }
-        #close:before {
-          transform: rotate(45deg);
-        }
-        #close:after {
-          transform: rotate(-45deg);
         }
         /* Croix fermeture modale : fin */
     }
@@ -287,65 +259,27 @@
     }
     
     /* Fin modale contact */
-
-    /* Début modale Lightbox */
-
-.icone {
-    height: .5rem;
-    width: .5rem;
 }
 
-    #modaleLightBox {
-    display: none;
-    background-color: white;
-    width: 100%;
+@media screen and (max-width: 600px) {
+    #logoFisheye {
+        width: 50%;
+    }
 
-    #lbxFermeture {
-        cursor: pointer;
-        top: 230px;
-        right: 1.8rem;
+    *:focus {
+        outline-color: transparent;
+    }
 
-        img {
-            height: .7rem;
-            width: .7rem;
+    #overlayLightbox {
+        #modaleLightBox {
+            #lbxFermeture {
+                transform: translate(0, -650%);
+            }
         }
     }
-
-    #lbxPrecedent {
-        cursor: pointer;
-        top: 350px;
-        left: 1.8rem;
-    }
-
-    #lbxSuivant {
-        cursor: pointer;
-        top: 350px;
-        right: 1.8rem;
-    }
-
-    p {
-        color: $couleurPrimaire;
-        margin-left: 12%;
-        margin-top: .5rem;
-        font-size: .8rem;
-        font-weight: 500;
-        width: 20rem;
-    }
 }
 
-.diapo {
-    border-radius: 5px;
-    box-shadow: unset;
-    margin-top: 60%;
-    margin-left: 12%;
-    object-fit: cover;
-    width: 77%; //289
-    height: 66%; //248
-}
-/* Fin modale lightbox */
-}
-
-@media screen and (max-width: 375px) { // 375px prise sur le figma du projet
+@media screen and (max-width: 400px) {
     header {
         margin-bottom: 2rem;
     }
@@ -356,5 +290,13 @@
         position: absolute;
         top: 4em;
         right: 1em;
+    }
+
+    #overlayLightbox {
+        #modaleLightBox {
+            #lbxFermeture {
+                transform: translate(0, -550%);
+            }
+        }
     }
 }

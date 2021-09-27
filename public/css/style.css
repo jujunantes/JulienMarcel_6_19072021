@@ -100,7 +100,7 @@ html {
 *:focus {
   outline-color: black;
   outline-width: 1px;
-  outline-style: solid;
+  outline-style: dotted;
 }
 
 body {
@@ -371,6 +371,7 @@ header {
 #carteBiographie #blocBioContact {
   display: flex;
   flex-direction: row;
+  max-width: 43%;
 }
 #carteBiographie #blocBioContact h2 {
   font-weight: 400;
@@ -491,14 +492,17 @@ footer {
   padding: 1rem;
   z-index: 1;
   width: 30%;
+  max-width: 376px;
 }
 
 /* Début modale contact */
 #modaleContact {
   display: none;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
+  bottom: 0;
+  left: 0;
   z-index: 2;
 }
 #modaleContact form {
@@ -511,8 +515,9 @@ footer {
   padding: 2.2rem;
   padding-top: 1.5rem;
   position: absolute;
-  top: 115px;
-  right: 160px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   border-radius: 5px;
   box-shadow: 4px 17px 20px 1px black;
 }
@@ -556,59 +561,81 @@ footer {
 /* Fin modale contact */
 /* Début modale Lightbox */
 .icone {
-  height: 2rem;
-  width: 2rem;
+  height: 2%;
+  width: 2%;
   transition: transform 0.2s;
 }
 .icone:hover {
   transform: scale(1.2);
 }
 
-#modaleLightBox {
+#overlayLightbox {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -2;
+}
+#overlayLightbox #modaleLightBox {
+  max-width: 1250px;
+  max-height: 1100px;
   display: none;
   background-color: white;
+  width: 100%;
   position: absolute;
-  width: 1253px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
-#modaleLightBox #lbxFermeture {
+#overlayLightbox #modaleLightBox #lbxFermeture {
+  cursor: pointer;
+  position: relative;
+  right: -90%;
+  top: 0px;
+  transform: translate(0, -850%);
+}
+#overlayLightbox #modaleLightBox #lbxFermeture img {
+  height: 120%;
+  width: 120%;
+}
+#overlayLightbox #modaleLightBox #lbxPrecedent {
   cursor: pointer;
   position: absolute;
-  top: 120px;
-  right: 2rem;
+  top: 50%;
+  left: 8%;
 }
-#modaleLightBox #lbxFermeture img {
-  height: 2.5rem;
-  width: 2.5rem;
-}
-#modaleLightBox #lbxPrecedent {
+#overlayLightbox #modaleLightBox #lbxSuivant {
   cursor: pointer;
   position: absolute;
-  top: 550px;
-  left: 2rem;
+  top: 50%;
+  right: 8%;
 }
-#modaleLightBox #lbxSuivant {
-  cursor: pointer;
-  position: absolute;
-  top: 550px;
-  right: 2rem;
-}
-#modaleLightBox p {
+#overlayLightbox #modaleLightBox p {
   color: #901c1c;
-  margin-left: 100px;
   margin-top: 1rem;
+  position: absolute;
   font-size: 1.45rem;
   font-weight: 500;
   width: 30rem;
 }
-
-.diapo {
+#overlayLightbox #modaleLightBox #diaporama {
+  max-width: 1050px;
+  max-height: 900px;
+  width: 77%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+#overlayLightbox #modaleLightBox #diaporama .diapo {
+  display: block;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.15) 5px 0 2.6px;
-  margin-top: 100px;
-  margin-left: 100px;
   object-fit: cover;
-  width: 1050px;
-  height: 900px;
+  max-width: 1050px;
+  max-height: 900px;
+  width: 100%;
 }
 
 /* Fin modale lightbox */
@@ -716,6 +743,7 @@ footer {
   #carteBiographie #blocBioContact {
     display: flex;
     flex-direction: row;
+    max-width: 69%;
   }
   #carteBiographie #blocBioContact h2 {
     font-weight: 400;
@@ -777,31 +805,18 @@ footer {
 
   /* Début modale contact */
   #modaleContact {
-    display: none;
-    position: absolute;
-    top: 0;
-    z-index: 2;
     /* Croix fermeture modale : début */
     /* Croix fermeture modale : fin */
   }
   #modaleContact form {
-    height: auto;
     width: 375px;
     height: 812px;
-    background-color: #DB8876;
-    display: flex;
-    flex-direction: column;
+    margin-right: unset;
     padding: 1rem;
     padding-top: 2rem;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    border-radius: 5px;
-    box-shadow: 4px 17px 20px 1px black;
   }
   #modaleContact form .titreContact {
     font-size: 2.2rem;
-    margin-bottom: 0.7rem;
   }
   #modaleContact form div {
     color: white;
@@ -837,30 +852,15 @@ footer {
     margin-left: 25%;
   }
   #modaleContact #close {
-    color: white;
-    position: absolute;
-    right: 1.5rem;
-    top: 2rem;
-    width: 1rem;
-    height: 1rem;
-    opacity: 1;
-    cursor: pointer;
-    transform: scale(0.7);
+    position: relative;
+    right: unset;
+    top: -1rem;
+    left: 18rem;
   }
   #modaleContact #close:before,
 #modaleContact #close:after {
-    position: absolute;
-    left: 15px;
-    content: "";
     height: 2rem;
     width: 4px;
-    background-color: white;
-  }
-  #modaleContact #close:before {
-    transform: rotate(45deg);
-  }
-  #modaleContact #close:after {
-    transform: rotate(-45deg);
   }
 
   .centrage {
@@ -875,58 +875,21 @@ footer {
   }
 
   /* Fin modale contact */
-  /* Début modale Lightbox */
-  .icone {
-    height: 0.5rem;
-    width: 0.5rem;
-  }
-
-  #modaleLightBox {
-    display: none;
-    background-color: white;
-    width: 100%;
-  }
-  #modaleLightBox #lbxFermeture {
-    cursor: pointer;
-    top: 230px;
-    right: 1.8rem;
-  }
-  #modaleLightBox #lbxFermeture img {
-    height: 0.7rem;
-    width: 0.7rem;
-  }
-  #modaleLightBox #lbxPrecedent {
-    cursor: pointer;
-    top: 350px;
-    left: 1.8rem;
-  }
-  #modaleLightBox #lbxSuivant {
-    cursor: pointer;
-    top: 350px;
-    right: 1.8rem;
-  }
-  #modaleLightBox p {
-    color: #901c1c;
-    margin-left: 12%;
-    margin-top: 0.5rem;
-    font-size: 0.8rem;
-    font-weight: 500;
-    width: 20rem;
-  }
-
-  .diapo {
-    border-radius: 5px;
-    box-shadow: unset;
-    margin-top: 60%;
-    margin-left: 12%;
-    object-fit: cover;
-    width: 77%;
-    height: 66%;
-  }
-
-  /* Fin modale lightbox */
 }
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 600px) {
+  #logoFisheye {
+    width: 50%;
+  }
+
+  *:focus {
+    outline-color: transparent;
+  }
+
+  #overlayLightbox #modaleLightBox #lbxFermeture {
+    transform: translate(0, -650%);
+  }
+}
+@media screen and (max-width: 400px) {
   header {
     margin-bottom: 2rem;
   }
@@ -937,6 +900,10 @@ footer {
     position: absolute;
     top: 4em;
     right: 1em;
+  }
+
+  #overlayLightbox #modaleLightBox #lbxFermeture {
+    transform: translate(0, -550%);
   }
 }
 

@@ -4,7 +4,7 @@
         <title id="titreOnglet">FishEye! - Profil</title> <!-- Changer le titre en fonction de l'ID -->
     
         <meta charset="utf-8" />
-        <meta name='theme-color' content='#9356DC' />
+        <meta name='theme-color' content='#901c1c' />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
         <meta name="description" content="FishEye, la meilleure plateforme photographique accessible" />
@@ -24,26 +24,27 @@
         <div id="conteneurPage">
             
             <!-- Modale Contactez-moi -->
-            <div id="modaleContact" aria-hidden="true">
-                <form tabindex="31" id="formulaireContact" action="index.html" role="dialog" aria-label="formulaire permettant de contacter le photographe" aria-labelledby="formulaireContact" aria-describedby="formulaireContact">
-                    <span tabindex="32" id="close" aria-label="cliquez ici pour fermer le dialogue"></span>
-                    <p class="titreContact">Contactez-moi</p>
-                    <p class="titreContact" id="nomContact"></p>
-                    <label for="prenom">Prénom </label><div class="erreur" id="erreurPrenom" role="alert" tabindex="33" aria-hidden="true"></div>
-                    <input tabindex="34" required="required" aria-required="true" type="text" id="prenom" name="prenom" aria-label="Entrez votre prénom">
+                <div id="modaleContact" aria-hidden="true">
+                    <form tabindex="31" id="formulaireContact" action="index.html" role="dialog" aria-label="formulaire permettant de contacter le photographe" aria-labelledby="formulaireContact" aria-describedby="formulaireContact">
+                        <span tabindex="32" id="close" aria-label="cliquez ici pour fermer le dialogue"></span>
+                        <p class="titreContact">Contactez-moi</p>
+                        <p class="titreContact" id="nomContact"></p>
+                        <label for="prenom">Prénom </label><div class="erreur" id="erreurPrenom" role="alert" tabindex="33" aria-hidden="true"></div>
+                        <input tabindex="34" required="required" aria-required="true" type="text" id="prenom" name="prenom" aria-label="Entrez votre prénom">
                     
-                    <label for="nom">Nom  </label><div class="erreur" id="erreurNom" role="alert" tabindex="35" aria-hidden="true"></div>                                                                                    
-                    <input tabindex="36" required="required" aria-required="true" type="text" id="nom" name="nom" aria-label="Entrez votre nom">
+                        <label for="nom">Nom  </label><div class="erreur" id="erreurNom" role="alert" tabindex="35" aria-hidden="true"></div>                                                                                    
+                        <input tabindex="36" required="required" aria-required="true" type="text" id="nom" name="nom" aria-label="Entrez votre nom">
                     
-                    <label for="email">Email  </label><div class="erreur" id="erreurEmail" role="alert" tabindex="37" aria-hidden="true"></div>
-                    <input tabindex="38" required="required" aria-required="true" type="email" id="email" name="email" aria-label="Entrez votre email">
+                        <label for="email">Email  </label><div class="erreur" id="erreurEmail" role="alert" tabindex="37" aria-hidden="true"></div>
+                        <input tabindex="38" required="required" aria-required="true" type="email" id="email" name="email" aria-label="Entrez votre email">
 
-                    <label for="texteMessage"> Votre message  </label><div class="erreur" id="erreurTexteMessage" role="alert" tabindex="39" aria-hidden="true"></div>
-                    <textarea tabindex="40" required="required" aria-required="true" name="texteMessage" id="texteMessage" rows=4 aria-label="Entrez votre message"></textarea>
+                        <label for="texteMessage"> Votre message  </label><div class="erreur" id="erreurTexteMessage" role="alert" tabindex="39" aria-hidden="true"></div>
+                        <textarea tabindex="40" required="required" aria-required="true" name="texteMessage" id="texteMessage" rows=4 aria-label="Entrez votre message"></textarea>
 
-                    <button tabindex="41" class="btn-submit" type ="submit" aria-label="Envoyez votre message">Envoyer</button>
-                </form>
-            </div>
+                        <button tabindex="41" class="btn-submit" type ="submit" aria-label="Envoyez votre message">Envoyer</button>
+                    </form>
+                </div>
+            
 
             <header>
                 <a href="./index.html" tabindex="1">
@@ -87,12 +88,15 @@
             </main>
         </div>
         
-        <div id="modaleLightBox" tabindex="50" aria-hidden="true">
-            <div id="lbxFermeture" class="icone" tabindex="51" aria-label="quittez le diaporama (entrée ou escape)"><img src="img/icones/close-cross.svg" alt="quitter le diaporama"/></div>
-            <div id="lbxPrecedent" class="icone" tabindex="52" aria-label="passer à la photo précédente (entrée ou flèche gauche)"><img src="img/icones/chevron-left-solid.svg" alt="revenir à la photo précedente"/></div>
-            <div id="lbxSuivant" class="icone" tabindex="53" aria-label="passez à la photo suivante (entrée ou flèche droite)"><img src="img/icones/chevron-right-solid.svg" alt="passer à la photo suivante"/></div>
-            <div id="diaporama"></div>
+        <div id="overlayLightbox">
+            <div id="modaleLightBox" tabindex="50" aria-hidden="true">
+                <div id="lbxFermeture" class="icone" tabindex="51" aria-label="quittez le diaporama (entrée ou escape)"><img src="img/icones/close-cross.svg" alt="quitter le diaporama"/></div>
+                <div id="lbxPrecedent" class="icone" tabindex="52" aria-label="passer à la photo précédente (entrée ou flèche gauche)"><img src="img/icones/chevron-left-solid.svg" alt="revenir à la photo précedente"/></div>
+                <div id="lbxSuivant" class="icone" tabindex="53" aria-label="passez à la photo suivante (entrée ou flèche droite)"><img src="img/icones/chevron-right-solid.svg" alt="passer à la photo suivante"/></div>
+                <div id="diaporama"></div>
+            </div>
         </div>
+        
         
         <footer id ="monFooter"></footer>
         <script type="module" src="js/profil.js"></script>

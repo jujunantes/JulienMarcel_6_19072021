@@ -17,6 +17,11 @@ function afficheTousPhotographes () {
 }
 
 document.getElementById('titre').addEventListener('click', afficheTousPhotographes)
+document.getElementById('titre').onkeydown = (event) => {
+  if (event.key === 'Enter') {
+    afficheTousPhotographes()
+  }
+}
 let tabIndexDepart = document.getElementById('titre').tabIndex
 
 fetch('js/FishEyeData.json')
@@ -76,7 +81,8 @@ window.onscroll = () => {
 
 // Gestion des filtres
 let filtrePrecedent = ''
-document.getElementById('filtres').onclick = (event) => {
+
+function actionFiltres (event) {
   if (event.target !== event.currentTarget) {
     /*
             Fonctionnement :
@@ -113,5 +119,12 @@ document.getElementById('filtres').onclick = (event) => {
     document.getElementById('nosPhotographes').innerHTML = monHTML
   } else {
     event.preventDefault()
+  }
+}
+
+document.getElementById('filtres').addEventListener('click', actionFiltres)
+document.getElementById('filtres').onkeydown = (event) => {
+  if (event.key === 'Enter') {
+    actionFiltres(event)
   }
 }

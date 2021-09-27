@@ -432,6 +432,7 @@ fermeModalBtn[0].addEventListener('click', function (event) { // ferme la modale
   document.getElementById('modaleContact').setAttribute('aria-hidden', 'true')
   if (event.target.matches('#close')) maModale.style.display = 'none'
   window.removeEventListener('keydown', handleKey)
+  document.getElementById('modal-btn').focus()
 },
 false
 )
@@ -440,6 +441,7 @@ fermeModalBtn[0].addEventListener('keydown', function (event) { // ferme la moda
   document.getElementById('modaleContact').setAttribute('aria-hidden', 'true')
   if ((event.target.matches('#close')) && (event.key !== 'Tab')) maModale.style.display = 'none'
   window.removeEventListener('keydown', handleKey)
+  document.getElementById('modal-btn').focus()
 },
 false
 )
@@ -447,6 +449,7 @@ maModale.addEventListener('keydown', function (event) { // ferme la modale si l'
   document.getElementById('modaleContact').setAttribute('aria-hidden', 'true')
   if (event.key === 'Escape') maModale.style.display = 'none'
   window.removeEventListener('keydown', handleKey)
+  document.getElementById('modal-btn').focus()
 },
 false)
 
