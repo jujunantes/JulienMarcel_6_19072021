@@ -637,8 +637,16 @@ footer {
   max-width: 1050px;
   max-height: 900px;
   width: 100%;
-  height: auto;
-  aspect-ratio: 1/1;
+  height: 150%;
+  animation: animImages 500ms;
+}
+@keyframes animImages {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Fin modale lightbox */

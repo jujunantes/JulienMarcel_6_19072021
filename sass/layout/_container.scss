@@ -547,7 +547,7 @@ footer {
     z-index: -2;
     #modaleLightBox {
         max-width: 1250px;
-            max-height: 1100px;
+        max-height: 1100px;
         display: none;
         background-color: white;
         width: 100%;
@@ -598,16 +598,28 @@ footer {
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
+            //padding-bottom: 100%;
             .diapo {
                 display: block;
                 border-radius: 5px;
                 box-shadow: rgba(0, 0, 0, 0.15) 5px 0 2.6px;
                 object-fit: cover;
-                max-width: 1050px;
-                max-height: 900px;
+                max-width: 1050px; //1050
+                max-height: 900px; //900
                 width: 100%;
-                height: auto;
-                aspect-ratio: 1 / 1;
+                height: 150%;
+                animation: animImages 500ms;
+                //aspect-ratio: 1 / 1; // Expérimental : ne fonctionne pas sur bcp de navigateurs mobiles
+            }
+        }
+
+        @keyframes animImages {
+            from {
+                opacity: 0;
+            }
+        
+            to {
+                opacity: 1;
             }
         }
 
