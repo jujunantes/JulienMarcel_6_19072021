@@ -747,9 +747,11 @@ function reportWindowSize () {
   if (window.innerWidth < 1250) {
     document.getElementById('diapo').style.width = window.innerWidth * 21 / 25 + 'px'
     document.getElementById('diapo').style.height = window.innerWidth * 18 / 25 + 'px'
+    document.getElementById('lbxFermeture').style.transform = 'translate(0, -35vw)'
   } else {
     document.getElementById('diapo').style.width = '1050px'
     document.getElementById('diapo').style.height = '900px'
+    document.getElementById('lbxFermeture').style.transform = 'translate(0, -1350%)'
   }
   document.getElementById('diapo').style.objectFit = 'cover'
   document.getElementById('diapo').style.display = 'block'

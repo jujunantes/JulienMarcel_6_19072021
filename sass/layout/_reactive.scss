@@ -269,7 +269,7 @@
     *:focus {
         outline-color: transparent;
     }
-
+    /*
     #overlayLightbox {
         #modaleLightBox {
             #lbxFermeture {
@@ -277,9 +277,11 @@
             }
         }
     }
+    */
 }
 
 @media screen and (max-width: 500px) {
+    /*
     #overlayLightbox {
         #modaleLightBox {
             #lbxFermeture {
@@ -287,6 +289,7 @@
             }
         }
     }
+    */
 }
 
 @media screen and (max-width: 400px) {
@@ -301,7 +304,7 @@
         top: 4em;
         right: 1em;
     }
-
+    /*
     #overlayLightbox {
         #modaleLightBox {
             #lbxFermeture {
@@ -309,4 +312,5 @@
             }
         }
     }
+    */
 }

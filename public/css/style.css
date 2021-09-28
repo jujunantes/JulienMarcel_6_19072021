@@ -897,14 +897,26 @@ footer {
     outline-color: transparent;
   }
 
-  #overlayLightbox #modaleLightBox #lbxFermeture {
-    transform: translate(0, -1350%);
+  /*
+  #overlayLightbox {
+      #modaleLightBox {
+          #lbxFermeture {
+              transform: translate(0, -1350%);
+          }
+      }
   }
+  */
 }
 @media screen and (max-width: 500px) {
-  #overlayLightbox #modaleLightBox #lbxFermeture {
-    transform: translate(0, -1150%);
+  /*
+  #overlayLightbox {
+      #modaleLightBox {
+          #lbxFermeture {
+              transform: translate(0, -1150%);
+          }
+      }
   }
+  */
 }
 @media screen and (max-width: 400px) {
   header {
@@ -919,9 +931,15 @@ footer {
     right: 1em;
   }
 
-  #overlayLightbox #modaleLightBox #lbxFermeture {
-    transform: translate(0, -850%);
+  /*
+  #overlayLightbox {
+      #modaleLightBox {
+          #lbxFermeture {
+              transform: translate(0, -850%);
+          }
+      }
   }
+  */
 }
 
 /*# sourceMappingURL=style.css.map */
