@@ -744,15 +744,17 @@ function diapoSuivante () {
 }
 
 function reportWindowSize () {
-  // console.log('innerWidth : ' + window.innerWidth + ', innerHeight : ' + window.innerHeight)
   if (window.innerWidth < 1250) {
-    document.getElementById('diapo').style.width = window.innerWidth * 16 / 25 + 'px'
-    document.getElementById('diapo').style.height = (96 * window.innerWidth / 175) + 'px'
+    document.getElementById('diapo').style.width = window.innerWidth * 21 / 25 + 'px'
+    document.getElementById('diapo').style.height = window.innerWidth * 18 / 25 + 'px'
   } else {
     document.getElementById('diapo').style.width = '1050px'
     document.getElementById('diapo').style.height = '900px'
   }
   document.getElementById('diapo').style.objectFit = 'cover'
+  document.getElementById('diapo').style.display = 'block'
+  document.getElementById('diapo').style.margin = 'auto'
+  document.getElementById('diapo').style.boxShadow = 'rgba(0, 0, 0, 0.15) 5px 0 2.6px'
 }
 
 window.addEventListener('resize', reportWindowSize)
