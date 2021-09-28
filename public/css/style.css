@@ -568,6 +568,9 @@ footer {
 .icone:hover {
   transform: scale(1.2);
 }
+.icone:focus {
+  outline-offset: 10px;
+}
 
 #overlayLightbox {
   position: fixed;
@@ -593,7 +596,7 @@ footer {
   position: relative;
   right: -90%;
   top: 0px;
-  transform: translate(0, -850%);
+  transform: translate(0, -1350%);
 }
 #overlayLightbox #modaleLightBox #lbxFermeture img {
   height: 120%;
@@ -620,8 +623,6 @@ footer {
   width: 30rem;
 }
 #overlayLightbox #modaleLightBox #diaporama {
-  max-width: 1050px;
-  max-height: 900px;
   width: 77%;
   position: absolute;
   left: 50%;
@@ -636,6 +637,8 @@ footer {
   max-width: 1050px;
   max-height: 900px;
   width: 100%;
+  height: auto;
+  aspect-ratio: 1/1;
 }
 
 /* Fin modale lightbox */
@@ -886,7 +889,12 @@ footer {
   }
 
   #overlayLightbox #modaleLightBox #lbxFermeture {
-    transform: translate(0, -650%);
+    transform: translate(0, -1350%);
+  }
+}
+@media screen and (max-width: 500px) {
+  #overlayLightbox #modaleLightBox #lbxFermeture {
+    transform: translate(0, -1150%);
   }
 }
 @media screen and (max-width: 400px) {
@@ -903,7 +911,7 @@ footer {
   }
 
   #overlayLightbox #modaleLightBox #lbxFermeture {
-    transform: translate(0, -550%);
+    transform: translate(0, -850%);
   }
 }
 

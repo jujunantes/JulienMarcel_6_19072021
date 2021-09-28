@@ -2,11 +2,11 @@
   profil.js : contient toute la logique de contrôle des profils individuels des photographes
 
   ligne 028 : Récupération des données du photographe et de ses médias (fetch)
-  ligne 119 : gestion des likes
-  ligne 147 : gestion du tri et du faux select
-  ligne 424 : modale de contact
-  ligne 583 : fenêtre flottante avec le nombre de likes
-  ligne 596 : lightbox
+  ligne 122 : gestion des likes
+  ligne 176 : gestion du tri et du faux select
+  ligne 457 : modale de contact
+  ligne 619 : fenêtre flottante avec le nombre de likes
+  ligne 632 : lightbox
 */
 
 import { creeMedia } from './mediaFactory.js'
@@ -75,7 +75,7 @@ fetch('js/FishEyeData.json')
                     <p class="titrePhoto" aria-label="ce média est intitulé ${chaqueMedia.title}"">${chaqueMedia.title}</p>
                     <div class="likes">
                       <p class="pLikes" id="nombreLikes-${chaqueMedia.id}" aria-label="Ce média a déjà été liké ${chaqueMedia.likes} fois">${chaqueMedia.likes}</p>
-                      <p class="coeurLikes" id="iconeLikes-${chaqueMedia.id}" aria-label="Cliquez pour liker ce média, déjà liké ${chaqueMedia.likes} fois">❤</p>
+                      <p tabindex="" class="coeurLikes" id="iconeLikes-${chaqueMedia.id}" aria-label="Cliquez pour liker ce média, déjà liké ${chaqueMedia.likes} fois">❤</p>
                     </div>
                 </figcaption>
             </figure>`
@@ -95,10 +95,13 @@ fetch('js/FishEyeData.json')
     // Et maintenant, on numérote correctement les tabindex
     let tabIndexDepart = document.getElementById('troisiemeChoix').tabIndex
     const mesPhotoPlanche = document.getElementsByClassName('photoPlanche')
+    const mesTitresPhotos = document.getElementsByClassName('titrePhoto')
+    const mesLikes = document.getElementsByClassName('coeurLikes')
     for (let i = 0, max = mesPhotoPlanche.length; i < max; i++) {
       mesPhotoPlanche[i].tabIndex = ++tabIndexDepart
+      mesTitresPhotos[i].tabIndex = ++tabIndexDepart
+      mesLikes[i].tabIndex = ++tabIndexDepart
     }
-    document.getElementById('modaleLightBox').tabIndex = ++tabIndexDepart
     document.getElementById('lbxFermeture').tabIndex = ++tabIndexDepart
     document.getElementById('lbxPrecedent').tabIndex = ++tabIndexDepart
     document.getElementById('lbxSuivant').tabIndex = ++tabIndexDepart
@@ -139,6 +142,32 @@ document.getElementById('planchePhotos').onclick = (event) => {
       tableauPhotos[indexPhoto].dejaLike = 1
       totalLikes += 1
       document.getElementById('affTotalLikes').innerHTML = totalLikes + ' ❤' // Affiche nb total de likes
+    }
+  }
+}
+
+document.getElementById('planchePhotos').onkeydown = (event) => {
+  if (event.key === 'Enter') {
+    let monElement = event.target.id
+    if (monElement.includes('iconeLikes-')) {
+      monElement = monElement.slice(11)
+      // Cette photo a-t-elle déjà été likée ?
+      const indexPhoto = tableauPhotos.findIndex(el => el.id === parseInt(monElement))
+      if (tableauPhotos[indexPhoto].dejaLike > 0) { // Oui : on délike
+        tableauPhotos[indexPhoto].likes -= 1
+        document.getElementById('nombreLikes-' + monElement).innerHTML = tableauPhotos[indexPhoto].likes
+        event.target.style.color = '#901c1c'
+        tableauPhotos[indexPhoto].dejaLike = 0
+        totalLikes -= 1
+        document.getElementById('affTotalLikes').innerHTML = totalLikes + ' ❤' // Affiche nb total de likes
+      } else { // non : on like
+        tableauPhotos[indexPhoto].likes += 1
+        document.getElementById('nombreLikes-' + monElement).innerHTML = tableauPhotos[indexPhoto].likes
+        event.target.style.color = 'deeppink'
+        tableauPhotos[indexPhoto].dejaLike = 1
+        totalLikes += 1
+        document.getElementById('affTotalLikes').innerHTML = totalLikes + ' ❤' // Affiche nb total de likes
+      }
     }
   }
 }
@@ -304,8 +333,12 @@ function lanceTri (ordreTri) {
   // Et maintenant, on numérote correctement les tabindex
   let tabIndexDepart = document.getElementById('troisiemeChoix').tabIndex
   const mesPhotoPlanche = document.getElementsByClassName('photoPlanche')
+  const mesTitresPhotos = document.getElementsByClassName('titrePhoto')
+  const mesLikes = document.getElementsByClassName('coeurLikes')
   for (let i = 0, max = mesPhotoPlanche.length; i < max; i++) {
     mesPhotoPlanche[i].tabIndex = ++tabIndexDepart
+    mesTitresPhotos[i].tabIndex = ++tabIndexDepart
+    mesLikes[i].tabIndex = ++tabIndexDepart
   }
   // Et, si il est encore ouvert (se produit lors d'un choix par clavier), on ferme le faux-select
   if (document.getElementById('monFauxSelect').getAttribute('aria-expanded') === 'true') {

@@ -273,7 +273,17 @@
     #overlayLightbox {
         #modaleLightBox {
             #lbxFermeture {
-                transform: translate(0, -650%);
+                transform: translate(0, -1350%);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #overlayLightbox {
+        #modaleLightBox {
+            #lbxFermeture {
+                transform: translate(0, -1150%);
             }
         }
     }
@@ -295,7 +305,7 @@
     #overlayLightbox {
         #modaleLightBox {
             #lbxFermeture {
-                transform: translate(0, -550%);
+                transform: translate(0, -850%);
             }
         }
     }
