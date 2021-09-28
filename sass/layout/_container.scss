@@ -528,6 +528,7 @@ footer {
     height: 2%;
     width: 2%;
     transition: transform .2s;
+    z-index: 2;
 
     &:hover {
         transform: scale(1.2);
@@ -560,7 +561,7 @@ footer {
             cursor: pointer;
             position: relative;
             //top: -200px;
-            right: -90%;
+            right: -93%;
             top: 0px;
             transform: translate(0, -1350%);
             img {
@@ -573,27 +574,29 @@ footer {
             cursor: pointer;
             position: absolute;
             top: 50%;
-            left: 8%;
+            left: 5%;
         }
 
         #lbxSuivant {
             cursor: pointer;
             position: absolute;
             top: 50%;
-            right: 8%;
+            right: 5%;
         }
 
         p {
             color: $couleurPrimaire;
+            //margin: auto;
+            margin-left: 8%;
             margin-top: 1rem;
-            position: absolute;
+            position: relative;
             font-size: 1.45rem;
             font-weight: 500;
             width: 30rem;
         }
         
         #diaporama {
-            width: 77%;
+            width: 100%;
             position: absolute;
             left: 50%;
             top: 50%;
@@ -604,10 +607,11 @@ footer {
                 border-radius: 5px;
                 box-shadow: rgba(0, 0, 0, 0.15) 5px 0 2.6px;
                 object-fit: cover;
-                max-width: 1050px; //1050
-                max-height: 900px; //900
-                width: 100%;
-                height: 150%;
+                //max-width: 1050px; //1050
+                //max-height: 900px; //900
+                width: 1050px;
+                height: 900px;
+                margin: auto;
                 animation: animImages 500ms;
                 //aspect-ratio: 1 / 1; // Expérimental : ne fonctionne pas sur bcp de navigateurs mobiles
             }

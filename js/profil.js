@@ -699,12 +699,13 @@ function ouvertureDiaporama (e) {
     // on remplace "jpg" par "mp4"
     nomImage = nomImage.replace(/jpg/g, 'mp4')
     indexPhoto = tableauPhotos.findIndex(imageCherchee => imageCherchee.video === nomImage)
-    htmlDiapo = `<video controls class='diapo' id="maVideo" src='img/Sample_Photos/${id}/${nomImage.replace(/jpg/g, 'mp4')}' alt=''></video>`
+    htmlDiapo = `<video controls id='diapo' id="maVideo" src='img/Sample_Photos/${id}/${nomImage.replace(/jpg/g, 'mp4')}' alt=''></video>`
   } else {
-    htmlDiapo = `<img class="diapo" src='img/vignettesLightbox/${id}/${nomImage}' alt='${tableauPhotos[indexPhoto].alt_text}'/>`
+    htmlDiapo = `<img id="diapo" src='img/vignettesLightbox/${id}/${nomImage}' alt='${tableauPhotos[indexPhoto].alt_text}'/>`
   }
   htmlDiapo += `<p tabindex="54">${tableauPhotos[indexPhoto].title}</p>`
   document.getElementById('diaporama').innerHTML = htmlDiapo
+  reportWindowSize()
 
   maLightbox.style.display = 'block'
   document.getElementById('modaleLightBox').setAttribute('aria-hidden', 'false')
@@ -717,12 +718,13 @@ function diapoPrecedente () {
   let htmlDiapo = ''
   if (mediaPrecedent === '') { // c'est une vidéo
     mediaPrecedent = tableauPhotos[indexPhoto].video
-    htmlDiapo = `<video controls class='diapo' id="maVideo" src='img/Sample_Photos/${id}/${mediaPrecedent}' alt='${tableauPhotos[indexPhoto].alt_text}'></video>`
+    htmlDiapo = `<video controls id='diapo' id="maVideo" src='img/Sample_Photos/${id}/${mediaPrecedent}' alt='${tableauPhotos[indexPhoto].alt_text}'></video>`
   } else {
-    htmlDiapo = `<img class="diapo" src='img/vignettesLightbox/${id}/${mediaPrecedent}' alt='${tableauPhotos[indexPhoto].alt_text}'/>`
+    htmlDiapo = `<img id="diapo" src='img/vignettesLightbox/${id}/${mediaPrecedent}' alt='${tableauPhotos[indexPhoto].alt_text}'/>`
   }
   htmlDiapo += `<p>${tableauPhotos[indexPhoto].title}</p>`
   document.getElementById('diaporama').innerHTML = htmlDiapo
+  reportWindowSize()
 }
 
 function diapoSuivante () {
@@ -732,12 +734,26 @@ function diapoSuivante () {
   let htmlDiapo = ''
   if (mediaSuivant === '') { // c'est une vidéo
     mediaSuivant = tableauPhotos[indexPhoto].video
-    htmlDiapo = `<video controls class='diapo' id="maVideo" src='img/Sample_Photos/${id}/${mediaSuivant}' alt='${tableauPhotos[indexPhoto].alt_text}'></video>`
+    htmlDiapo = `<video controls id='diapo' id="maVideo" src='img/Sample_Photos/${id}/${mediaSuivant}' alt='${tableauPhotos[indexPhoto].alt_text}'></video>`
   } else {
-    htmlDiapo = `<img class="diapo" src='img/vignettesLightbox/${id}/${mediaSuivant}' alt='${tableauPhotos[indexPhoto].alt_text}'/>`
+    htmlDiapo = `<img id="diapo" src='img/vignettesLightbox/${id}/${mediaSuivant}' alt='${tableauPhotos[indexPhoto].alt_text}'/>`
   }
   htmlDiapo += `<p>${tableauPhotos[indexPhoto].title}</p>`
   document.getElementById('diaporama').innerHTML = htmlDiapo
+  reportWindowSize()
 }
 
+function reportWindowSize () {
+  // console.log('innerWidth : ' + window.innerWidth + ', innerHeight : ' + window.innerHeight)
+  if (window.innerWidth < 1250) {
+    document.getElementById('diapo').style.width = window.innerWidth * 16 / 25 + 'px'
+    document.getElementById('diapo').style.height = (96 * window.innerWidth / 175) + 'px'
+  } else {
+    document.getElementById('diapo').style.width = '1050px'
+    document.getElementById('diapo').style.height = '900px'
+  }
+  document.getElementById('diapo').style.objectFit = 'cover'
+}
+
+window.addEventListener('resize', reportWindowSize)
 // Fin de la gestion de la lightbox
