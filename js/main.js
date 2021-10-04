@@ -34,13 +34,13 @@ fetch('js/FishEyeData.json')
       const photographe = creePhotographe(chaquePhotographe)
       // On peut maintenant ajouter la carte de chaque photographe
       monHTML += `<a href="profil.html?id=${photographe.id}" aria-label="Affichez le profil de ${photographe.name}">
-          <figure class="cartePhotographe" tabindex="${++tabIndexDepart}">
-              <img class="photoProfil" src="img/vignettes400/Photographers_ID_Photos/${photographe.portrait}" alt="${photographe.alt_text}" />
+          <figure class="cartePhotographe">
+           <a href="profil.html?id=${photographe.id}"><img class="photoProfil" src="img/vignettes400/Photographers_ID_Photos/${photographe.portrait}" tabindex="${++tabIndexDepart}" alt="${photographe.alt_text}" /></a>
               <figcaption>
-                <h2 aria-label="Ce photographe s'appelle ${photographe.name} ">${photographe.name}</h2>
-                <h3 aria-label="Ce photographe habite à ${photographe.city}, ${photographe.country}">${photographe.city}, ${photographe.country}</h3>
-                <blockquote aria-label="Sa devise est :${photographe.tagline}">${photographe.tagline}</blockquote>
-                <p aria-label="Son tarif est de ${photographe.price}€ par jour">${photographe.price}€ /jour</p>
+              <a href="profil.html?id=${photographe.id}"><h2 aria-label="Ce photographe s'appelle ${photographe.name} " tabindex="${++tabIndexDepart}">${photographe.name}</h2></a>
+              <a href="profil.html?id=${photographe.id}"><h3 aria-label="Ce photographe habite à ${photographe.city}, ${photographe.country}" tabindex="${++tabIndexDepart}">${photographe.city}, ${photographe.country}</h3></a>
+              <a href="profil.html?id=${photographe.id}"><blockquote aria-label="Sa devise est :${photographe.tagline}" tabindex="${++tabIndexDepart}">${photographe.tagline}</blockquote></a>
+              <a href="profil.html?id=${photographe.id}"><p aria-label="Son tarif est de ${photographe.price}€ par jour" tabindex="${++tabIndexDepart}">${photographe.price}€ /jour</p></a>
                 <div class="filtresPhotographes">`
       for (const tag of chaquePhotographe.tags) monHTML += `<span class="spanFiltres">#${tag}</span>`
       monHTML += `

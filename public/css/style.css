@@ -503,7 +503,7 @@ footer {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 2;
+  z-index: 3;
 }
 #modaleContact form {
   height: auto;
@@ -908,15 +908,17 @@ footer {
   */
 }
 @media screen and (max-width: 500px) {
-  /*
-  #overlayLightbox {
-      #modaleLightBox {
-          #lbxFermeture {
-              transform: translate(0, -1150%);
-          }
-      }
+  .icone {
+    height: 3%;
+    width: 3%;
   }
-  */
+
+  #overlayLightbox #modaleLightBox #lbxPrecedent {
+    left: 3%;
+  }
+  #overlayLightbox #modaleLightBox #lbxSuivant {
+    right: 3%;
+  }
 }
 @media screen and (max-width: 400px) {
   header {
@@ -931,15 +933,17 @@ footer {
     right: 1em;
   }
 
-  /*
-  #overlayLightbox {
-      #modaleLightBox {
-          #lbxFermeture {
-              transform: translate(0, -850%);
-          }
-      }
+  .icone {
+    height: 4%;
+    width: 4%;
   }
-  */
+
+  #overlayLightbox #modaleLightBox #lbxPrecedent {
+    left: 3%;
+  }
+  #overlayLightbox #modaleLightBox #lbxSuivant {
+    right: 3%;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

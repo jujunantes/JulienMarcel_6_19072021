@@ -281,15 +281,22 @@
 }
 
 @media screen and (max-width: 500px) {
-    /*
+    .icone {
+        height: 3%;
+        width: 3%;
+    }
+    
     #overlayLightbox {
         #modaleLightBox {
-            #lbxFermeture {
-                transform: translate(0, -1150%);
+            #lbxPrecedent {
+                left: 3%;
+            }
+    
+            #lbxSuivant {
+                right: 3%;
             }
         }
     }
-    */
 }
 
 @media screen and (max-width: 400px) {
@@ -304,13 +311,22 @@
         top: 4em;
         right: 1em;
     }
-    /*
+
+    .icone {
+        height: 4%;
+        width: 4%;
+    }
+    
     #overlayLightbox {
         #modaleLightBox {
-            #lbxFermeture {
-                transform: translate(0, -850%);
+            #lbxPrecedent {
+                left: 3%;
+            }
+    
+            #lbxSuivant {
+                right: 3%;
             }
         }
     }
-    */
+    
 }

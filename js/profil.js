@@ -213,12 +213,12 @@ document.getElementById('monFauxSelect').onfocus = (event) => {
 // permet de connaître l'état de la touche shift, même lors d'un événement onblur
 let shiftPresse = false
 document.onkeydown = function (e) {
-  if (e.location === KeyboardEvent.DOM_KEY_LOCATION_LEFT) {
+  if (e.shiftKey) {
     shiftPresse = true
   }
 }
 document.onkeyup = function (e) {
-  if (e.location === KeyboardEvent.DOM_KEY_LOCATION_LEFT) {
+  if (e.shiftKey) {
     shiftPresse = false
   }
 }
@@ -463,35 +463,32 @@ const maModale = document.getElementById('modaleContact')
 const fermeModalBtn = document.querySelectorAll('#close')
 
 fermeModalBtn[0].addEventListener('click', function (event) { // ferme la modale si l'utilisateur clique sur sa croix de fermeture
-  document.getElementById('modaleContact').setAttribute('aria-hidden', 'true')
-  if (event.target.matches('#close')) maModale.style.display = 'none'
-  window.removeEventListener('keydown', handleKey)
-  document.getElementById('modal-btn').focus()
+  if (event.target.matches('#close')) {
+    document.getElementById('modaleContact').setAttribute('aria-hidden', 'true')
+    maModale.style.display = 'none'
+    maModale.removeEventListener('keydown', handleKey)
+    document.getElementById('modal-btn').focus()
+  }
 },
 false
 )
 
 fermeModalBtn[0].addEventListener('keydown', function (event) { // ferme la modale si l'utilisateur active la croix au clavier
-  document.getElementById('modaleContact').setAttribute('aria-hidden', 'true')
-  if ((event.target.matches('#close')) && (event.key !== 'Tab')) maModale.style.display = 'none'
-  window.removeEventListener('keydown', handleKey)
-  document.getElementById('modal-btn').focus()
+  if ((event.target.matches('#close')) && (event.key !== 'Tab')) {
+    document.getElementById('modaleContact').setAttribute('aria-hidden', 'true')
+    maModale.style.display = 'none'
+    maModale.removeEventListener('keydown', handleKey)
+    document.getElementById('modal-btn').focus()
+  }
 },
 false
 )
-maModale.addEventListener('keydown', function (event) { // ferme la modale si l'utilisateur appuie sur escape
-  document.getElementById('modaleContact').setAttribute('aria-hidden', 'true')
-  if (event.key === 'Escape') maModale.style.display = 'none'
-  window.removeEventListener('keydown', handleKey)
-  document.getElementById('modal-btn').focus()
-},
-false)
 
 // Piège le focus sur la modale ouverte
 // Idée et code trouvés sur https://stackoverflow.com/questions/50178419/how-can-restrict-the-tab-key-press-only-within-the-modal-popup-when-its-open
 function handleKey (e) {
   if (e.key === 'Tab') {
-    const focusable = document.querySelector('#formulaireContact').querySelectorAll('span, div,input,button,select,textarea')
+    const focusable = document.getElementById('formulaireContact').querySelectorAll('span, div,input,button,select,textarea')
     if (focusable.length) {
       const first = focusable[0]
       const last = focusable[focusable.length - 1]
@@ -515,8 +512,20 @@ function handleKey (e) {
 function launchModal () {
   document.getElementById('modaleContact').setAttribute('aria-hidden', 'false')
   maModale.style.display = 'block'
-  document.getElementById('formulaireContact').focus()
   maModale.addEventListener('keydown', handleKey) // Piège le focus sur la modale ouverte
+  maModale.addEventListener('keydown', function (event) { // ferme la modale si l'utilisateur appuie sur escape
+    if (event.key === 'Escape') {
+      document.getElementById('modaleContact').setAttribute('aria-hidden', 'true')
+      maModale.style.display = 'none'
+      maModale.removeEventListener('keydown', handleKey)
+      document.getElementById('modal-btn').focus()
+    } else if (event.key === 'Tab') {
+      handleKey()
+    }
+  },
+  false)
+
+  document.getElementById('nomPrenom').focus()
 }
 
 /*
@@ -525,42 +534,26 @@ function launchModal () {
 
 // constantes
 const formulaire = document.getElementById('formulaireContact')
-const prenom = document.getElementById('prenom')
-const nom = document.getElementById('nom')
+const nomPrenom = document.getElementById('nomPrenom')
 const email = document.getElementById('email')
 const texteMessage = document.getElementById('texteMessage')
 
 function validate () {
   let validiteFormulaire = true
 
-  // Validation du prénom (min 2 chars, pas vide)
-  const prenomEntre = prenom.value.trim()
+  // Validation du nom et du prénom (min 2 chars, pas vide)
+  const prenomEntre = nomPrenom.value.trim()
   if (prenomEntre === '') {
-    document.getElementById('erreurPrenom').innerHTML = "Merci d'entrer un prénom"
-    document.getElementById('erreurPrenom').setAttribute('aria-hidden', 'false')
+    document.getElementById('erreurNomPrenom').innerHTML = "Merci d'entrer un nom et un prénom"
+    document.getElementById('erreurNomPrenom').setAttribute('aria-hidden', 'false')
     validiteFormulaire = false
   } else if (prenomEntre.length < 2) {
-    document.getElementById('erreurPrenom').innerHTML = 'Le prénom doit comporter au moins 2 lettres'
-    document.getElementById('erreurPrenom').setAttribute('aria-hidden', 'false')
+    document.getElementById('erreurNomPrenom').innerHTML = 'Le nom doit comporter au moins 2 lettres'
+    document.getElementById('erreurNomPrenom').setAttribute('aria-hidden', 'false')
     validiteFormulaire = false
   } else {
-    document.getElementById('erreurPrenom').innerHTML = ''
-    document.getElementById('erreurPrenom').setAttribute('aria-hidden', 'true')
-  }
-
-  // Validation du Nom (min 2 chars, pas vide)
-  const nomEntre = nom.value.trim()
-  if (nomEntre === '') {
-    document.getElementById('erreurNom').innerHTML = "Merci d'entrer un nom"
-    document.getElementById('erreurNom').setAttribute('aria-hidden', 'false')
-    validiteFormulaire = false
-  } else if (nomEntre.length < 2) {
-    document.getElementById('erreurNom').innerHTML = 'Le nom doit comporter au moins 2 lettres'
-    document.getElementById('erreurNom').setAttribute('aria-hidden', 'false')
-    validiteFormulaire = false
-  } else {
-    document.getElementById('erreurNom').innerHTML = ''
-    document.getElementById('erreurNom').setAttribute('aria-hidden', 'true')
+    document.getElementById('erreurNomPrenom').innerHTML = ''
+    document.getElementById('erreurNomPrenom').setAttribute('aria-hidden', 'true')
   }
 
   // Validation de l'email
@@ -596,6 +589,11 @@ function validate () {
 
 function validerFormulaire (event) {
   if (validate()) {
+    // On envoie les trois champs dans la console
+    console.log('Nom : ' + nomPrenom.value)
+    console.log('Email : ' + email.value)
+    console.log('Message : ' + texteMessage.value)
+    // Puis on affiche le remerciement
     formulaire.style.minHeight = formulaire.clientHeight + 'px' // Pour que la modale conserve la même hauteur
     formulaire.className = 'centrage'
     formulaire.innerHTML = '<p id="pFinal">Merci, votre message a été envoyé !</p>'
@@ -646,27 +644,32 @@ lbxFermeture.addEventListener('click', fermeLightBox)
 lbxFermeture.addEventListener('keydown', (event) => {
   if ((event.key === 'Escape') || (event.key === 'Enter')) fermeLightBox()
 })
-window.addEventListener('keydown', (event) => { if (event.key === 'Escape') fermeLightBox() })
+monDiaporama.addEventListener('keydown', (event) => { if (event.key === 'Escape') fermeLightBox() })
+maLightbox.addEventListener('keydown', (event) => { if (event.key === 'Escape') fermeLightBox() })
+
 lbxPrecedent.addEventListener('click', diapoPrecedente)
 lbxPrecedent.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') diapoPrecedente()
 })
-window.addEventListener('keydown', (event) => { if (event.key === 'ArrowLeft') diapoPrecedente() })
-document.getElementById('modaleLightBox').addEventListener('swiped-left', diapoPrecedente)
+monDiaporama.addEventListener('keydown', (event) => { if (event.key === 'ArrowLeft') diapoPrecedente() })
+maLightbox.addEventListener('keydown', (event) => { if (event.key === 'ArrowLeft') diapoPrecedente() })
+maLightbox.addEventListener('swiped-left', diapoPrecedente)
+
 lbxSuivant.addEventListener('click', diapoSuivante)
-document.getElementById('modaleLightBox').addEventListener('swiped-right', diapoSuivante)
 lbxSuivant.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') diapoSuivante()
 })
-window.addEventListener('keydown', (event) => { if (event.key === 'ArrowRight') diapoSuivante() })
-window.addEventListener('keydown', (event) => { if (event.code === 'Space') joueVideo() })
+maLightbox.addEventListener('swiped-right', diapoSuivante)
+monDiaporama.addEventListener('keydown', (event) => { if (event.key === 'ArrowRight') diapoSuivante() })
+maLightbox.addEventListener('keydown', (event) => { if (event.key === 'ArrowRight') diapoSuivante() })
+maLightbox.addEventListener('keydown', (event) => { if (event.code === 'Space') joueVideo() })
 
 function fermeLightBox () {
   maLightbox.style.display = 'none'
   monDiaporama.innerHTML = ''
   document.getElementById('conteneurPage').style.display = 'block'
   document.querySelector('footer').style.display = 'flex'
-  document.getElementById('modaleLightBox').setAttribute('aria-hidden', 'true')
+  maLightbox.setAttribute('aria-hidden', 'true')
   document.getElementById('modal-btn').style.visibility = 'visible'
   if (window.screen.width >= 900) {
     document.getElementById('monFooter').style.visibility = 'visible'
@@ -712,6 +715,7 @@ function ouvertureDiaporama (e) {
 
   maLightbox.style.display = 'block'
   document.getElementById('modaleLightBox').setAttribute('aria-hidden', 'false')
+  monDiaporama.focus()
 }
 
 function diapoPrecedente () {
