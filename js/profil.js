@@ -652,7 +652,7 @@ lbxPrecedent.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') diapoPrecedente()
 })
 window.addEventListener('keydown', (event) => { if (event.key === 'ArrowLeft') diapoPrecedente() })
-document.getElementById('modaleLightBox').addEventListener('swiped-left', diapoSuivante)
+document.getElementById('modaleLightBox').addEventListener('swiped-left', diapoPrecedente)
 lbxSuivant.addEventListener('click', diapoSuivante)
 document.getElementById('modaleLightBox').addEventListener('swiped-right', diapoSuivante)
 lbxSuivant.addEventListener('keydown', (event) => {
