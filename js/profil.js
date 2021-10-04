@@ -10,6 +10,7 @@
 */
 
 import { creeMedia } from './mediaFactory.js'
+import './swiped-events.js'
 
 const tableauPhotos = []
 let totalLikes = 0
@@ -651,7 +652,9 @@ lbxPrecedent.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') diapoPrecedente()
 })
 window.addEventListener('keydown', (event) => { if (event.key === 'ArrowLeft') diapoPrecedente() })
+document.getElementById('modaleLightBox').addEventListener('swiped-left', diapoSuivante)
 lbxSuivant.addEventListener('click', diapoSuivante)
+document.getElementById('modaleLightBox').addEventListener('swiped-right', diapoSuivante)
 lbxSuivant.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') diapoSuivante()
 })
