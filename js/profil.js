@@ -651,7 +651,6 @@ lbxPrecedent.addEventListener('click', diapoPrecedente)
 lbxPrecedent.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') diapoPrecedente()
 })
-monDiaporama.addEventListener('keydown', (event) => { if (event.key === 'ArrowLeft') diapoPrecedente() })
 maLightbox.addEventListener('keydown', (event) => { if (event.key === 'ArrowLeft') diapoPrecedente() })
 maLightbox.addEventListener('swiped-left', diapoPrecedente)
 
@@ -660,7 +659,6 @@ lbxSuivant.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') diapoSuivante()
 })
 maLightbox.addEventListener('swiped-right', diapoSuivante)
-monDiaporama.addEventListener('keydown', (event) => { if (event.key === 'ArrowRight') diapoSuivante() })
 maLightbox.addEventListener('keydown', (event) => { if (event.key === 'ArrowRight') diapoSuivante() })
 maLightbox.addEventListener('keydown', (event) => { if (event.code === 'Space') joueVideo() })
 
@@ -709,7 +707,7 @@ function ouvertureDiaporama (e) {
   } else {
     htmlDiapo = `<img id="diapo" src='img/vignettesLightbox/${id}/${nomImage}' alt='${tableauPhotos[indexPhoto].alt_text}'/>`
   }
-  htmlDiapo += `<p tabindex="54">${tableauPhotos[indexPhoto].title}</p>`
+  htmlDiapo += `<p tabindex="254">${tableauPhotos[indexPhoto].title}</p>`
   document.getElementById('diaporama').innerHTML = htmlDiapo
   reportWindowSize()
 
@@ -729,7 +727,7 @@ function diapoPrecedente () {
   } else {
     htmlDiapo = `<img id="diapo" src='img/vignettesLightbox/${id}/${mediaPrecedent}' alt='${tableauPhotos[indexPhoto].alt_text}'/>`
   }
-  htmlDiapo += `<p>${tableauPhotos[indexPhoto].title}</p>`
+  htmlDiapo += `<p tabindex="254">${tableauPhotos[indexPhoto].title}</p>`
   document.getElementById('diaporama').innerHTML = htmlDiapo
   reportWindowSize()
 }
@@ -745,7 +743,7 @@ function diapoSuivante () {
   } else {
     htmlDiapo = `<img id="diapo" src='img/vignettesLightbox/${id}/${mediaSuivant}' alt='${tableauPhotos[indexPhoto].alt_text}'/>`
   }
-  htmlDiapo += `<p>${tableauPhotos[indexPhoto].title}</p>`
+  htmlDiapo += `<p tabindex="254">${tableauPhotos[indexPhoto].title}</p>`
   document.getElementById('diaporama').innerHTML = htmlDiapo
   reportWindowSize()
 }
