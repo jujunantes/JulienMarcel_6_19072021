@@ -9,7 +9,8 @@
   ligne 632 : lightbox
 */
 
-import { creeMedia } from './mediaFactory.js'
+// import { creeMedia } from './mediaFactory.js'
+import { MonImage, MaVideo } from './media.js'
 import './swiped-events.js'
 
 const tableauPhotos = []
@@ -25,6 +26,14 @@ let directionTri = [1, 0, 0] // popularité, date, titre (0 : du moins au plus, 
 // On récupère l'URL pour obtenir l'ID
 const url = new URL(window.location)
 const id = url.searchParams.get('id')
+
+function creeMedia (donnees) {
+  if (donnees.image) {
+    return new MonImage(donnees)
+  } else if (donnees.video) {
+    return new MaVideo(donnees)
+  }
+}
 
 fetch('js/FishEyeData.json')
   .then((reponse) => reponse.json())
@@ -65,7 +74,10 @@ fetch('js/FishEyeData.json')
         let htmlCarte = ''
         htmlCarte += `
             <figure class="cartePhoto">`
-        if (monMedia.image !== '') { htmlCarte += `<img class="photoPlanche" src="img/vignettes400/${id}/${chaqueMedia.image}" alt="${chaqueMedia.alt_text}" />` } else {
+        if (monMedia.image) {
+          htmlCarte += `<img class="photoPlanche" src="img/vignettes400/${id}/${chaqueMedia.image}" alt="${chaqueMedia.alt_text}" />`
+        } else {
+          console.log('video')
           const nomCapture = chaqueMedia.video.slice(0, -4) + '.jpg'
           htmlCarte += `<img tabindex="" class="photoPlanche" src="img/vignettes400/${id}/${nomCapture}" alt="${chaqueMedia.alt_text}" />
               <img class="play-icon" src="img/icones/video-solid.svg" alt="${chaqueMedia.alt_text}" />`
@@ -123,7 +135,7 @@ fetch('js/FishEyeData.json')
 /*
   Gestion des likes
 */
-document.getElementById('planchePhotos').onclick = (event) => {
+function faitLike (event) {
   let monElement = event.target.id
   if (monElement.includes('iconeLikes-')) {
     monElement = monElement.slice(11)
@@ -147,29 +159,13 @@ document.getElementById('planchePhotos').onclick = (event) => {
   }
 }
 
+document.getElementById('planchePhotos').onclick = (event) => {
+  faitLike(event)
+}
+
 document.getElementById('planchePhotos').onkeydown = (event) => {
   if (event.key === 'Enter') {
-    let monElement = event.target.id
-    if (monElement.includes('iconeLikes-')) {
-      monElement = monElement.slice(11)
-      // Cette photo a-t-elle déjà été likée ?
-      const indexPhoto = tableauPhotos.findIndex(el => el.id === parseInt(monElement))
-      if (tableauPhotos[indexPhoto].dejaLike > 0) { // Oui : on délike
-        tableauPhotos[indexPhoto].likes -= 1
-        document.getElementById('nombreLikes-' + monElement).innerHTML = tableauPhotos[indexPhoto].likes
-        event.target.style.color = '#901c1c'
-        tableauPhotos[indexPhoto].dejaLike = 0
-        totalLikes -= 1
-        document.getElementById('affTotalLikes').innerHTML = totalLikes + ' ❤' // Affiche nb total de likes
-      } else { // non : on like
-        tableauPhotos[indexPhoto].likes += 1
-        document.getElementById('nombreLikes-' + monElement).innerHTML = tableauPhotos[indexPhoto].likes
-        event.target.style.color = 'deeppink'
-        tableauPhotos[indexPhoto].dejaLike = 1
-        totalLikes += 1
-        document.getElementById('affTotalLikes').innerHTML = totalLikes + ' ❤' // Affiche nb total de likes
-      }
-    }
+    faitLike(event)
   }
 }
 // Fin de la gestion des likes
@@ -269,13 +265,9 @@ function triPhotos (ordreTri) {
       break
     case 'Date': // tableauPhotos.date
       if (directionTri[1] === 1) {
-        tableauPhotos.sort(function (a, b) {
-          if (a.date > b.date) { return -1 } else { return 1 }
-        })
+        tableauPhotos.sort(function (a, b) { if (a.date > b.date) { return -1 } else { return 1 } })
       } else {
-        tableauPhotos.sort(function (a, b) {
-          if (a.date < b.date) { return -1 } else { return 1 }
-        })
+        tableauPhotos.sort(function (a, b) { if (a.date < b.date) { return -1 } else { return 1 } })
       }
       break
     case 'Titre': // tableauPhotos.title

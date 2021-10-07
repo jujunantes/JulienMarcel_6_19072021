@@ -34,8 +34,6 @@ class Media {
     this.id = attributs.id || 0
     this.photographerId = attributs.photographerId || 0
     this.title = attributs.title || ''
-    this.image = attributs.image || ''
-    this.video = attributs.video || ''
     this.tags = attributs.tags || ''
     this.likes = attributs.likes || 0
     this.dejaLike = 0
@@ -46,4 +44,19 @@ class Media {
   }
 }
 
-export default Media
+class MonImage extends Media {
+  constructor (donnees) {
+    super(donnees)
+    this.image = donnees.image || ''
+  }
+}
+
+class MaVideo extends Media {
+  constructor (donnees) {
+    super(donnees)
+    this.video = donnees.video || ''
+  }
+}
+
+// export default Media
+export { Media, MonImage, MaVideo }
