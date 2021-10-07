@@ -53,8 +53,8 @@ class MonImage extends Media {
 
 class MaVideo extends Media {
   constructor (donnees) {
-    super(donnees)
-    this.video = donnees.video || ''
+    super()
+    this.video = donnees.image || ''
   }
 }
 
